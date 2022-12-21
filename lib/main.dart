@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:picstate/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:picstate/screens/home_screen.dart';
 import 'supabase_settings.dart';
 
 //!UNCOMMENT THE BELOW AND INSERT YOUR SUPABASE DETAILS
@@ -22,7 +22,7 @@ class PicState extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

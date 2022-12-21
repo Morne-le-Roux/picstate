@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/task.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: Padding(
             padding: const EdgeInsets.all(8.0),
