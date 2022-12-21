@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
+import 'package:picstate/screens/registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,9 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               //Main Heading
               Center(
-                child: Text(
-                  "PICstate",
-                  style: kHeadingTextStyle,
+                child: Hero(
+                  tag: "name",
+                  child: Text(
+                    "PICstate",
+                    style: kHeadingTextStyle,
+                  ),
                 ),
               ),
 
@@ -39,12 +43,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               //Email field
-              BasicTextField(
-                  hintText: "Email Address",
-                  obscureText: false,
-                  onChanged: (value) {
-                    email = value;
-                  }),
+              Hero(
+                tag: "email",
+                child: BasicTextField(
+                    hintText: "Email Address",
+                    obscureText: false,
+                    onChanged: (value) {
+                      email = value;
+                    }),
+              ),
 
               //Spacing between fields
               const SizedBox(
@@ -52,12 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               //Password Field
-              BasicTextField(
-                  hintText: "Password",
-                  obscureText: true,
-                  onChanged: (value) {
-                    password = value;
-                  }),
+              Hero(
+                tag: "password",
+                child: BasicTextField(
+                    hintText: "Password",
+                    obscureText: true,
+                    onChanged: (value) {
+                      password = value;
+                    }),
+              ),
 
               //spacing
 
@@ -65,9 +75,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 20,
               ),
 
-              const RoundedButton(
-                text: "Login",
-              )
+              Hero(
+                tag: "login",
+                child: RoundedButton(
+                  text: "Login",
+                  onTap: () {},
+                ),
+              ),
+
+              const SizedBox(
+                height: 40,
+              ),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegistrationScreen(),
+                      ));
+                },
+                child: Text(
+                  "Not a Member? Subscribe instead.",
+                  style: kButtonTextStyle.copyWith(color: Colors.black45),
+                ),
+              ),
             ],
           ),
         ),
