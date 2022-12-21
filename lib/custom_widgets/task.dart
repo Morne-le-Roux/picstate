@@ -49,8 +49,7 @@ class _TaskState extends State<Task> {
             ),
           ),
 
-//ICON X
-//TODO: Implement X Button
+//X Button
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(
@@ -58,6 +57,8 @@ class _TaskState extends State<Task> {
               color: Colors.white,
             ),
           )
+
+//Calendar
         ],
       ),
     );
