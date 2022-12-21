@@ -30,6 +30,13 @@
             {
               "client_id": "426241944264-hmlkji6erholssu59140i711vihjs712.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "426241944264-ascpgv6evkb0cvhit8kjd3rvjuk19jhm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.picstate"
+              }
             }
           ]
         }

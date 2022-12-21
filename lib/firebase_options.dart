@@ -27,15 +27,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return linux;
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -83,5 +77,27 @@ class DefaultFirebaseOptions {
     storageBucket: 'picstate-859a6.appspot.com',
     iosClientId: '426241944264-ascpgv6evkb0cvhit8kjd3rvjuk19jhm.apps.googleusercontent.com',
     iosBundleId: 'com.example.picstate',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyC6rJZiNRwSCruf1YOLVYKgcwelnbRNArs',
+    appId: '1:426241944264:web:945670fa2493dcf12993fd',
+    messagingSenderId: '426241944264',
+    projectId: 'picstate-859a6',
+    authDomain: 'picstate-859a6.firebaseapp.com',
+    databaseURL: 'https://picstate-859a6-default-rtdb.firebaseio.com',
+    storageBucket: 'picstate-859a6.appspot.com',
+    measurementId: 'G-0D3SPMH7G1',
+  );
+
+  static const FirebaseOptions linux = FirebaseOptions(
+    apiKey: 'AIzaSyC6rJZiNRwSCruf1YOLVYKgcwelnbRNArs',
+    appId: '1:426241944264:web:318fec2c60c690922993fd',
+    messagingSenderId: '426241944264',
+    projectId: 'picstate-859a6',
+    authDomain: 'picstate-859a6.firebaseapp.com',
+    databaseURL: 'https://picstate-859a6-default-rtdb.firebaseio.com',
+    storageBucket: 'picstate-859a6.appspot.com',
+    measurementId: 'G-4XQYJS64WZ',
   );
 }
