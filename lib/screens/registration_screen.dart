@@ -29,9 +29,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Center(
                 child: Hero(
                   tag: "name",
-                  child: Text(
-                    "PICstate",
-                    style: kHeadingTextStyle,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Text(
+                      "PICstate",
+                      style: kHeadingTextStyle,
+                    ),
                   ),
                 ),
               ),
@@ -91,9 +94,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
               Hero(
                 tag: "login",
-                child: RoundedButton(
-                  text: "Register",
-                  onTap: () => Navigator.pop(context),
+                child: Material(
+                  color: Colors.transparent,
+                  child: RoundedButton(
+                    text: "Register",
+                    onTap: () => Navigator.pop(context),
+                  ),
                 ),
               ),
 

@@ -29,9 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
               Center(
                 child: Hero(
                   tag: "name",
-                  child: Text(
-                    "PICstate",
-                    style: kHeadingTextStyle,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Text(
+                      "PICstate",
+                      style: kHeadingTextStyle,
+                    ),
                   ),
                 ),
               ),
@@ -77,9 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
               Hero(
                 tag: "login",
-                child: RoundedButton(
-                  text: "Login",
-                  onTap: () {},
+                child: Material(
+                  color: Colors.transparent,
+                  child: RoundedButton(
+                    text: "Login",
+                    onTap: () {},
+                  ),
                 ),
               ),
 
