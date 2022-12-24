@@ -7,6 +7,8 @@ import 'supabase_settings.dart';
 // String supabaseUrl = 'yourSupaBaseUrl';
 // String supabaseKey = 'yourSupabaseKey';
 
+//
+
 Future<void> main() async {
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
   runApp(const PicState());
