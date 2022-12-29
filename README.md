@@ -1,16 +1,5 @@
-# picstate
+# PICState
 
-A new Flutter project.
+App built with Flutter/Dart. Still in very early development and in a non-working state.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+It's aim is to keep track of Job Cards or Tickets created at my current job. More features will be added as required.
