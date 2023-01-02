@@ -13,10 +13,10 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  String password = "";
-  String password2 = "";
-  String email = "";
-  String username = "";
+  String _password = "";
+  String _password2 = "";
+  String _email = "";
+  String _username = "";
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     hintText: "Email Address",
                     obscureText: false,
                     onChanged: (value) {
-                      email = value;
+                      _email = value;
                     }),
               ),
 
@@ -69,7 +69,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: "Username",
                   obscureText: false,
                   onChanged: (value) {
-                    username = value;
+                    _username = value;
                   }),
 
 //Spacing between fields
@@ -84,7 +84,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     hintText: "Password",
                     obscureText: true,
                     onChanged: (value) {
-                      password = value;
+                      _password = value;
                     }),
               ),
 
@@ -99,7 +99,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: "Confirm Password",
                   obscureText: true,
                   onChanged: (value) {
-                    password2 = value;
+                    _password2 = value;
                   }),
 
 //spacing
@@ -115,18 +115,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   child: RoundedButton(
                     text: "Register",
                     onTap: () {
-                      try {
-                        SupaBaseDoStuff()
-                            .userRegister(email, password, username);
-                      } catch (e) {
+                      if (_password == _password2) {
+                        try {
+                          SupaBaseDoStuff()
+                              .userRegister(_email, _password, _username);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(e.toString())));
+                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ));
+                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(e.toString())));
+                            const SnackBar(
+                                content: Text("Passwords do not match!")));
                       }
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ));
                     },
                   ),
                 ),
