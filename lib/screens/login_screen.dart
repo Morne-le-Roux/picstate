@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
+import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/registration_screen.dart';
+import 'package:picstate/supabase_stuff.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -84,7 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.transparent,
                   child: RoundedButton(
                     text: "Login",
-                    onTap: () {},
+                    onTap: () {
+                      SupaBaseDoStuff().userLogin(password, email);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()));
+                    },
                   ),
                 ),
               ),
