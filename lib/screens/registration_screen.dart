@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
+import 'package:picstate/screens/home_screen.dart';
+import 'package:picstate/supabase_stuff.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -14,6 +16,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String password = "";
   String password2 = "";
   String email = "";
+  String username = "";
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //Main Heading
+//Main Heading
               Center(
                 child: Hero(
                   tag: "name",
@@ -39,13 +42,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
 
-              //Spacing
+//Spacing
 
               const SizedBox(
                 height: 50,
               ),
 
-              //Email field
+//Email field
               Hero(
                 tag: "email",
                 child: BasicTextField(
@@ -56,12 +59,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     }),
               ),
 
-              //Spacing between fields
+//Spacing between fields
+              const SizedBox(
+                height: 10,
+              ),
+
+//USERNAME
+              BasicTextField(
+                  hintText: "Username",
+                  obscureText: false,
+                  onChanged: (value) {
+                    username = value;
+                  }),
+
+//Spacing between fields
               const SizedBox(
                 height: 20,
               ),
 
-              //Password Field
+//Password Field
               Hero(
                 tag: "password",
                 child: BasicTextField(
@@ -72,12 +88,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     }),
               ),
 
-              //Spacing between fields
+//Spacing between fields
               const SizedBox(
                 height: 10,
               ),
 
-              //confirm password
+//confirm password
 
               BasicTextField(
                   hintText: "Confirm Password",
@@ -86,7 +102,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     password2 = value;
                   }),
 
-              //spacing
+//spacing
 
               const SizedBox(
                 height: 20,
@@ -98,13 +114,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   color: Colors.transparent,
                   child: RoundedButton(
                     text: "Register",
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      try {
+                        SupaBaseDoStuff()
+                            .userRegister(email, password, username);
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e.toString())));
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ));
+                    },
                   ),
                 ),
-              ),
-
-              const SizedBox(
-                height: 40,
               ),
             ],
           ),

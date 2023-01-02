@@ -23,4 +23,15 @@ class SupaBaseDoStuff {
   deleteData(int id) {
     client.from("tasktable").delete().eq("id", id);
   }
+
+  userLogin() {}
+
+  userRegister(
+    String email,
+    String password,
+    String username,
+  ) async {
+    await client.auth
+        .signUp(password: password, email: email, data: {"Username": username});
+  }
 }
