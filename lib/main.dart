@@ -3,7 +3,7 @@ import 'package:picstate/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'supabase_settings.dart';
 
-//! create a supabase_settings.dart in your lib folder, add your details there with the below variables, and import the file.
+//! create a supabase_settings.dart in your lib folder, add your details there with the below variables, and import the file if its not already imported.
 // String supabaseUrl = 'yourSupaBaseUrl';
 // String supabaseKey = 'yourSupabaseKey';
 
