@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
+import 'package:picstate/custom_widgets/task.dart';
+import 'package:picstate/supabase_stuff.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,6 +13,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<TaskWidget> tasks = [];
+  final SupaBaseDoStuff _supaBaseDoStuff = SupaBaseDoStuff();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +23,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: FutureBuilder(
+            child: StreamBuilder(
+              stream: _supaBaseDoStuff.listenToTasks(),
               builder: (context, snapshot) {
-                if (snapshot.hasData == null &&
-                    snapshot.connectionState == ConnectionState.none) {}
-                return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {},
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
+
+//DECODE JSON DATA
+                var taskData = jsonDecode(snapshot.data.toString());
+                print(taskData);
+
+                return ListView(
+                  children: const [],
                 );
               },
             )),

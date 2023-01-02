@@ -1,31 +1,28 @@
-import 'package:picstate/supabase_settings.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupaBaseDoStuff {
-  final client = SupabaseClient(supabaseUrl, supabaseKey);
+  final _supabase = Supabase.instance.client;
 
   addData(String taskValue, bool statusValue) {
-    client.from("tasktable").insert({"task": taskValue, "status": statusValue});
+    _supabase
+        .from("tasktable")
+        .insert({"task": taskValue, "status": statusValue});
   }
 
-  readData() async {
-    final dataList = await client
-        .from("tasktable")
-        .select()
-        .order("task", ascending: true) as List;
-    return dataList;
+  Stream listenToTasks() {
+    return _supabase.from("tasktable").stream(primaryKey: ["id"]);
   }
 
   updateData(int id, bool statusValue) async {
-    client.from("tasktable").update({"status": statusValue}).eq("id", id);
+    _supabase.from("tasktable").update({"status": statusValue}).eq("id", id);
   }
 
   deleteData(int id) {
-    client.from("tasktable").delete().eq("id", id);
+    _supabase.from("tasktable").delete().eq("id", id);
   }
 
-  userLogin(String email, String password) async {
-    await client.auth.signInWithPassword(password: password, email: email);
+  userLogin(String password, String email) async {
+    await _supabase.auth.signInWithPassword(password: password, email: email);
   }
 
   userRegister(
@@ -33,7 +30,7 @@ class SupaBaseDoStuff {
     String password,
     String username,
   ) async {
-    await client.auth
+    await _supabase.auth
         .signUp(password: password, email: email, data: {"Username": username});
   }
 }

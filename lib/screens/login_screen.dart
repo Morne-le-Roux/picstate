@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
@@ -5,6 +7,8 @@ import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/registration_screen.dart';
 import 'package:picstate/supabase_stuff.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'dart:async';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,8 +18,37 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String password = "";
-  String email = "";
+  final SupaBaseDoStuff _supaBaseDoStuff = SupaBaseDoStuff();
+  String _password = "";
+  String _email = "";
+
+  // String _password = "123456";
+  // String _email = "mornelerx@gmail.com";
+
+  ///
+  ///
+
+  final supabase = Supabase.instance.client;
+
+  late final StreamSubscription<AuthState> _authSubscription;
+  User? user;
+
+  @override
+  void initState() {
+    _authSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      final Session? session = data.session;
+      setState(() {
+        user = session?.user;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _authSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "Email Address",
                     obscureText: false,
                     onChanged: (value) {
-                      email = value;
+                      _email = value;
                     }),
               ),
 
@@ -70,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "Password",
                     obscureText: true,
                     onChanged: (value) {
-                      password = value;
+                      _password = value;
                     }),
               ),
 
@@ -86,12 +119,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.transparent,
                   child: RoundedButton(
                     text: "Login",
-                    onTap: () {
-                      SupaBaseDoStuff().userLogin(password, email);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen()));
+                    onTap: () async {
+                      await _supaBaseDoStuff.userLogin(_password, _email);
+                      try {
+                        if (user != null) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomeScreen()));
+                        }
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e.toString())));
+                      }
                     },
                   ),
                 ),

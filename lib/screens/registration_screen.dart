@@ -13,6 +13,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final SupaBaseDoStuff _supaBaseDoStuff = SupaBaseDoStuff();
   String _password = "";
   String _password2 = "";
   String _email = "";
@@ -117,8 +118,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     onTap: () {
                       if (_password == _password2) {
                         try {
-                          SupaBaseDoStuff()
-                              .userRegister(_email, _password, _username);
+                          _supaBaseDoStuff.userRegister(
+                              _email, _password, _username);
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));

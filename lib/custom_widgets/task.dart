@@ -3,17 +3,25 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
-class Task extends StatefulWidget {
-  const Task({super.key, required this.textData});
+class TaskWidget extends StatefulWidget {
+  const TaskWidget(
+      {super.key,
+      required this.id,
+      required this.taskName,
+      required this.createdBy,
+      required this.createdAt});
 
 //The tasks name
-  final String textData;
+  final String id;
+  final String createdBy;
+  final String taskName;
+  final String createdAt;
 
   @override
-  State<Task> createState() => _TaskState();
+  State<TaskWidget> createState() => _TaskWidgetState();
 }
 
-class _TaskState extends State<Task> {
+class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +52,7 @@ class _TaskState extends State<Task> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              widget.textData,
+              widget.taskName,
               style: GoogleFonts.robotoCondensed(color: Colors.white),
             ),
           ),
