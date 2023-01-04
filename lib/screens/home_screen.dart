@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/task.dart';
@@ -26,16 +24,27 @@ class _HomeScreenState extends State<HomeScreen> {
             child: StreamBuilder(
               stream: _supaBaseDoStuff.listenToTasks(),
               builder: (context, snapshot) {
+//clears task list before building new list
+                tasks = [];
                 if (!snapshot.hasData) {
                   return const CircularProgressIndicator();
                 }
 
-//DECODE JSON DATA
-                var taskData = jsonDecode(snapshot.data.toString());
-                print(taskData);
+//DECODE JSON DATA //wait... its not JSON!!!
 
+//task list builder:
+
+                for (var task in snapshot.data) {
+                  tasks.add(TaskWidget(
+                      id: task["id"].toString(),
+                      taskName: task["task_name"],
+                      createdBy: "Person",
+                      createdAt: task["created_at"]));
+                }
+
+//return
                 return ListView(
-                  children: const [],
+                  children: tasks,
                 );
               },
             )),

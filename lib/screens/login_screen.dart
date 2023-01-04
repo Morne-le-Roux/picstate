@@ -19,11 +19,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final SupaBaseDoStuff _supaBaseDoStuff = SupaBaseDoStuff();
-  String _password = "";
-  String _email = "";
+  // String _password = "";
+  // String _email = "";
 
-  // String _password = "123456";
-  // String _email = "mornelerx@gmail.com";
+  String _password = "123456";
+  String _email = "mornelerx@gmail.com";
 
   ///
   ///
