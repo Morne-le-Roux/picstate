@@ -21,6 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Padding(
             padding: const EdgeInsets.all(8.0),
+
+//stream builder
+
             child: StreamBuilder(
               stream: _supaBaseDoStuff.listenToTasks(),
               builder: (context, snapshot) {
