@@ -23,47 +23,54 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+
+                  //stream builder
+
+                  child: StreamBuilder(
+                    stream: _supaBaseStuff.listenToTasks(),
+                    builder: (context, snapshot) {
+                      //clears task list before building new list
+                      tasks = [];
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      //DECODE JSON DATA //wait... its not JSON!!!
+
+                      //task list builder:
+
+                      for (var task in snapshot.data) {
+                        tasks.add(TaskWidget(
+                            id: task["id"],
+                            taskName: task["task_name"],
+                            createdBy: "Person",
+                            createdAt: task["created_at"]));
+                      }
+
+                      //return
+                      return ListView(
+                        children: tasks,
+                      );
+                    },
+                  )),
+            ),
+
+//add task button
             Padding(
-                padding: const EdgeInsets.all(8.0),
-
-//stream builder
-
-                child: StreamBuilder(
-                  stream: _supaBaseStuff.listenToTasks(),
-                  builder: (context, snapshot) {
-//clears task list before building new list
-                    tasks = [];
-                    if (!snapshot.hasData) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-//DECODE JSON DATA //wait... its not JSON!!!
-
-//task list builder:
-
-                    for (var task in snapshot.data) {
-                      tasks.add(TaskWidget(
-                          id: task["id"],
-                          taskName: task["task_name"],
-                          createdBy: "Person",
-                          createdAt: task["created_at"]));
-                    }
-
-//return
-                    return ListView(
-                      children: tasks,
-                    );
-                  },
-                )),
-            RoundedButton(
-              text: "Add Task",
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const NewTask();
-                    });
-              },
+              padding: const EdgeInsets.all(8.0),
+              child: RoundedButton(
+                text: "Add Task",
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const NewTask();
+                      });
+                },
+              ),
             )
           ],
         ),
