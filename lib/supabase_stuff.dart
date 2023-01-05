@@ -3,10 +3,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupaBaseStuff {
   final _supabase = Supabase.instance.client;
 
-  addData(String taskValue, bool statusValue) {
-    _supabase
-        .from("tasktable")
-        .insert({"task": taskValue, "status": statusValue});
+  addData(String newTaskName) async {
+    await _supabase.from("tasktable").insert({"task_name": newTaskName});
   }
 
   Stream listenToTasks() {
