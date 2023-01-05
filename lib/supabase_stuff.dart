@@ -1,6 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupaBaseDoStuff {
+class SupaBaseStuff {
   final _supabase = Supabase.instance.client;
 
   addData(String taskValue, bool statusValue) {
@@ -17,8 +17,8 @@ class SupaBaseDoStuff {
     _supabase.from("tasktable").update({"status": statusValue}).eq("id", id);
   }
 
-  deleteData(int id) {
-    _supabase.from("tasktable").delete().eq("id", id);
+  deleteData(int id) async {
+    await _supabase.from("tasktable").delete().eq("id", id);
   }
 
   userLogin(String password, String email) async {

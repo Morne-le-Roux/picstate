@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final SupaBaseDoStuff _supaBaseDoStuff = SupaBaseDoStuff();
+  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
   // String _password = "";
   // String _email = "";
 
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: RoundedButton(
                     text: "Login",
                     onTap: () async {
-                      await _supaBaseDoStuff.userLogin(_password, _email);
+                      await _supaBaseStuff.userLogin(_password, _email);
                       try {
                         if (user != null) {
                           Navigator.push(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:picstate/supabase_stuff.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
@@ -12,7 +13,7 @@ class TaskWidget extends StatefulWidget {
       required this.createdAt});
 
 //The tasks name
-  final String id;
+  final int id;
   final String createdBy;
   final String taskName;
   final String createdAt;
@@ -31,15 +32,15 @@ class _TaskWidgetState extends State<TaskWidget> {
         height: 50,
         decoration: BoxDecoration(
 //color of the widget
-          color: Colors.amber.shade700,
+          color: Colors.amber.shade400,
 
 //shadow cast
           boxShadow: const [
             BoxShadow(
                 color: Colors.black12,
-                blurRadius: 5,
-                spreadRadius: 2,
-                offset: Offset(3, 3))
+                blurRadius: 2,
+                spreadRadius: 1,
+                offset: Offset(2, 2))
           ],
 //border of the widget
           border: Border.all(color: Colors.white),
@@ -53,18 +54,40 @@ class _TaskWidgetState extends State<TaskWidget> {
 //TASK NAME
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                widget.taskName,
-                style: GoogleFonts.robotoCondensed(color: Colors.white),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    widget.taskName,
+                    style: GoogleFonts.robotoCondensed(color: Colors.white),
+                  ),
+
+//!UNIQUE ID (FOR DEV)
+                  Text(
+                    (widget.id).toString(),
+                    style: const TextStyle(color: Colors.black45, fontSize: 8),
+                  ),
+                ],
               ),
             ),
 
 //X Button
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.close_rounded,
-                color: Colors.white,
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  SupaBaseStuff().deleteData(widget.id);
+                });
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.close_rounded,
+                  color: Colors.white,
+                ),
               ),
             )
 

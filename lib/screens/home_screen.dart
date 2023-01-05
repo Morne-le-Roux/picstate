@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<TaskWidget> tasks = [];
-  final SupaBaseDoStuff _supaBaseDoStuff = SupaBaseDoStuff();
+  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //stream builder
 
             child: StreamBuilder(
-              stream: _supaBaseDoStuff.listenToTasks(),
+              stream: _supaBaseStuff.listenToTasks(),
               builder: (context, snapshot) {
 //clears task list before building new list
                 tasks = [];
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 for (var task in snapshot.data) {
                   tasks.add(TaskWidget(
-                      id: task["id"].toString(),
+                      id: task["id"],
                       taskName: task["task_name"],
                       createdBy: "Person",
                       createdAt: task["created_at"]));
