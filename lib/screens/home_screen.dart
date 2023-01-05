@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
+import 'package:picstate/custom_widgets/new_task.dart';
+import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/task.dart';
 import 'package:picstate/supabase_stuff.dart';
 
@@ -19,38 +21,52 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(8.0),
 
 //stream builder
 
-            child: StreamBuilder(
-              stream: _supaBaseStuff.listenToTasks(),
-              builder: (context, snapshot) {
+                child: StreamBuilder(
+                  stream: _supaBaseStuff.listenToTasks(),
+                  builder: (context, snapshot) {
 //clears task list before building new list
-                tasks = [];
-                if (!snapshot.hasData) {
-                  return const CircularProgressIndicator();
-                }
+                    tasks = [];
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
 //DECODE JSON DATA //wait... its not JSON!!!
 
 //task list builder:
 
-                for (var task in snapshot.data) {
-                  tasks.add(TaskWidget(
-                      id: task["id"],
-                      taskName: task["task_name"],
-                      createdBy: "Person",
-                      createdAt: task["created_at"]));
-                }
+                    for (var task in snapshot.data) {
+                      tasks.add(TaskWidget(
+                          id: task["id"],
+                          taskName: task["task_name"],
+                          createdBy: "Person",
+                          createdAt: task["created_at"]));
+                    }
 
 //return
-                return ListView(
-                  children: tasks,
-                );
+                    return ListView(
+                      children: tasks,
+                    );
+                  },
+                )),
+            RoundedButton(
+              text: "Add Task",
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const NewTask();
+                    });
               },
-            )),
+            )
+          ],
+        ),
       ),
     );
   }
