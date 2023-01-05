@@ -54,24 +54,9 @@ class _TaskWidgetState extends State<TaskWidget> {
 //TASK NAME
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Text(
-                    widget.taskName,
-                    style: GoogleFonts.robotoCondensed(color: Colors.white),
-                  ),
-
-//!UNIQUE ID (FOR DEV)
-                  Text(
-                    (widget.id).toString(),
-                    style: const TextStyle(color: Colors.black45, fontSize: 8),
-                  ),
-                ],
+              child: Text(
+                widget.taskName,
+                style: GoogleFonts.robotoCondensed(color: Colors.white),
               ),
             ),
 
