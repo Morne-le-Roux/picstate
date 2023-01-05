@@ -35,7 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       //clears task list before building new list
                       tasks = [];
                       if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.amber,
+                        ));
                       }
 
                       //DECODE JSON DATA //wait... its not JSON!!!
