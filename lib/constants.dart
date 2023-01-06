@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //Background Color of Screens
-Color kBackgroundColor = Colors.yellowAccent.shade700;
+Color kBackgroundColor = Colors.black;
 
 //Heading Text Style
 TextStyle kHeadingTextStyle =
-    GoogleFonts.anton(color: Colors.black, fontSize: 80);
+    GoogleFonts.anton(color: Colors.amber, fontSize: 80);
 
 //Hint text style for text fields
 TextStyle kHintTextStyle = GoogleFonts.roboto(color: Colors.white60);
 
 //Button Color
-Color kButtonColor = Colors.amber.shade800;
+Color kButtonColor = Colors.redAccent.shade700;
 
 //Button Text Style
 

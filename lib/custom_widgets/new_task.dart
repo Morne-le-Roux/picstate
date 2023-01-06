@@ -22,9 +22,11 @@ class _NewTaskState extends State<NewTask> {
         children: [
 //NEW TASK NAME
           BasicTextField(
-              hintText: "New Task Name",
-              onChanged: (value) => newTaskName = value,
-              obscureText: false),
+            hintText: "New Task Name",
+            onChanged: (value) => newTaskName = value,
+            obscureText: false,
+            fontColor: Colors.black,
+          ),
 
 //ADD TASK BUTTON
 

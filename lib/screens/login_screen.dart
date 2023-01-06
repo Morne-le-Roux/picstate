@@ -81,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Hero(
                 tag: "email",
                 child: BasicTextField(
+                    fontColor: Colors.yellow,
                     hintText: "Email Address",
                     obscureText: false,
                     onChanged: (value) {
@@ -97,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Hero(
                 tag: "password",
                 child: BasicTextField(
+                    fontColor: Colors.yellow,
                     hintText: "Password",
                     obscureText: true,
                     onChanged: (value) {

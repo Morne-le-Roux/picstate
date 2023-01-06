@@ -8,12 +8,14 @@ class BasicTextField extends StatefulWidget {
     this.controller,
     required this.onChanged,
     required this.obscureText,
+    required this.fontColor,
   });
 
   final String hintText;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
   final bool obscureText;
+  final Color fontColor;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
@@ -30,6 +32,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: TextField(
+        style: TextStyle(color: widget.fontColor),
         obscureText: widget.obscureText,
         decoration: InputDecoration(
             border: InputBorder.none,
