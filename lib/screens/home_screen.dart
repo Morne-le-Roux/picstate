@@ -47,10 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       for (var task in snapshot.data) {
                         tasks.add(TaskWidget(
-                            id: task["id"],
-                            taskName: task["task_name"],
-                            createdBy: "Person",
-                            createdAt: task["created_at"]));
+                          id: task["id"],
+                          taskName: task["task_name"],
+                          createdBy: "Person",
+                          createdAt: task["created_at"],
+                          dueDate: task["due_date"] ?? "None",
+                        ));
                       }
 
                       //return

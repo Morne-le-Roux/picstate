@@ -10,13 +10,15 @@ class TaskWidget extends StatefulWidget {
       required this.id,
       required this.taskName,
       required this.createdBy,
-      required this.createdAt});
+      required this.createdAt,
+      required this.dueDate});
 
 //The tasks name
   final int id;
   final String createdBy;
   final String taskName;
   final String createdAt;
+  final String dueDate;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -59,6 +61,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                 style: GoogleFonts.robotoCondensed(color: Colors.white),
               ),
             ),
+
+            Text(widget.dueDate),
 
 //X Button
             GestureDetector(
