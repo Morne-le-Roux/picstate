@@ -3,6 +3,7 @@ import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
+import 'package:picstate/screens/login_screen.dart';
 import 'package:picstate/supabase_stuff.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -138,6 +139,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             const SnackBar(
                                 content: Text("Passwords do not match!")));
                       }
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()));
                     },
                   ),
                 ),

@@ -20,7 +20,8 @@ class SupaBaseStuff {
   }
 
   userLogin(String password, String email) async {
-    await _supabase.auth.signInWithPassword(password: password, email: email);
+    return await _supabase.auth
+        .signInWithPassword(password: password, email: email);
   }
 
   userRegister(

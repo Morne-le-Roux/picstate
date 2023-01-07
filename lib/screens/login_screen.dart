@@ -8,7 +8,6 @@ import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/registration_screen.dart';
 import 'package:picstate/supabase_stuff.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'dart:async';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,24 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final supabase = Supabase.instance.client;
 
-  late final StreamSubscription<AuthState> _authSubscription;
-  User? user;
-
   @override
   void initState() {
-    _authSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      final Session? session = data.session;
-      setState(() {
-        user = session?.user;
-      });
-    });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _authSubscription.cancel();
-    super.dispose();
   }
 
   @override
@@ -119,9 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: RoundedButton(
                     text: "Login",
                     onTap: () async {
-                      await _supaBaseStuff.userLogin(_password, _email);
                       try {
-                        if (user != null) {
+                        final AuthResponse response =
+                            await _supaBaseStuff.userLogin(_password, _email);
+
+                        if (response.user != null) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
