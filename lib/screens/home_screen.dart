@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
 
-                  //stream builder
+//stream builder
 
                   child: StreamBuilder(
                     stream: _supaBaseStuff.listenToTasks(),
@@ -40,10 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.amber,
                         ));
                       }
+//DECODE JSON DATA //wait... its not JSON!!!
 
-                      //DECODE JSON DATA //wait... its not JSON!!!
-
-                      //task list builder:
+//task list builder:
 
                       for (var task in snapshot.data) {
                         tasks.add(TaskWidget(
@@ -51,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           taskName: task["task_name"],
                           createdBy: "Person",
                           createdAt: task["created_at"],
-                          dueDate: task["due_date"] ?? "None",
+                          dueDate: task["due_date"] ?? "No Due Date",
                         ));
                       }
 
-                      //return
+//return
                       return ListView(
                         children: tasks,
                       );

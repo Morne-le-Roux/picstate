@@ -18,3 +18,6 @@ Color kButtonColor = Colors.redAccent.shade700;
 
 TextStyle kButtonTextStyle = GoogleFonts.roboto(
     color: Colors.grey.shade200, fontWeight: FontWeight.w400);
+
+//Task Text Style
+TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(color: Colors.white);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:picstate/constants.dart';
 import 'package:picstate/supabase_stuff.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
@@ -58,29 +58,33 @@ class _TaskWidgetState extends State<TaskWidget> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.taskName,
-                style: GoogleFonts.robotoCondensed(color: Colors.white),
+                style: kTaskTextStyle,
               ),
             ),
 
-            Text(widget.dueDate),
-
 //X Button
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  SupaBaseStuff().deleteData(widget.id);
-                });
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.close_rounded,
-                  color: Colors.white,
+            Row(
+              children: [
+                Text(
+                  widget.dueDate,
+                  style: kTaskTextStyle,
                 ),
-              ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      SupaBaseStuff().deleteData(widget.id);
+                    });
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.close_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             )
-
-//Calendar
           ],
         ),
       ),
