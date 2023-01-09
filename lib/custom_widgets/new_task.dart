@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/supabase_stuff.dart';
-import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({super.key});
@@ -24,29 +24,31 @@ class _NewTaskState extends State<NewTask> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
 //NEW TASK NAME
-          BasicTextField(
-            hintText: "New Task Name",
-            onChanged: (value) => _newTaskName = value,
-            obscureText: false,
-            fontColor: Colors.black,
-          ),
+          Column(
+            children: [
+              BasicTextField(
+                hintText: "New Task Name",
+                onChanged: (value) => _newTaskName = value,
+                obscureText: false,
+                fontColor: Colors.black,
+              ),
 
 //DUE DATE PICKER
 
-          TimePickerSpinnerPopUp(
-            mode: CupertinoDatePickerMode.date,
-            initTime: DateTime.now(),
-            barrierColor: Colors.black12,
-            timeFormat: "dd/MM/yyyy",
-            timeWidgetBuilder: (p0) {
-              return Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: const BorderRadius.all(Radius.circular(20))),
-                child: Text(p0.toString()),
-              );
-            },
+              DatePicker(
+                DateTime.now(),
+                daysCount: 365,
+                initialSelectedDate: DateTime.now(),
+                selectionColor: Colors.black,
+                selectedTextColor: Colors.white,
+                onDateChange: (date) {
+                  // New date selected
+                  setState(() {
+                    _dueDate = DateFormat("dd MMM").format(date);
+                  });
+                },
+              ),
+            ],
           ),
 
 //ADD TASK BUTTON
