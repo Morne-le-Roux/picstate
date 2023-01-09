@@ -15,6 +15,7 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   String _newTaskName = "";
   late String _dueDate;
+
   @override
   Widget build(BuildContext context) {
     return Container(

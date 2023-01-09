@@ -9,7 +9,8 @@ TextStyle kHeadingTextStyle =
     GoogleFonts.anton(color: Colors.amber, fontSize: 80);
 
 //Hint text style for text fields
-TextStyle kHintTextStyle = GoogleFonts.roboto(color: Colors.white60);
+TextStyle kHintTextStyle =
+    GoogleFonts.roboto(color: Colors.white60, fontStyle: FontStyle.italic);
 
 //Button Color
 Color kButtonColor = Colors.redAccent.shade700;

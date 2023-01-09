@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/supabase_stuff.dart';
+import 'package:intl/intl.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
@@ -25,10 +26,16 @@ class TaskWidget extends StatefulWidget {
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
+  String today = DateFormat("dd MMM").format(DateTime.now());
+
+  //TODO: IMPLEMENT TOMORROW
+  // String tomorrow = DateFormat("dd MMM").format(DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+//SPACE BETWEEN WIDGETS
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: Container(
 //height of the widget
         height: 50,
@@ -45,7 +52,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                 offset: Offset(2, 2))
           ],
 //border of the widget
-          border: Border.all(color: Colors.white),
+          border: Border.all(color: Colors.amber.shade700),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -53,22 +60,42 @@ class _TaskWidgetState extends State<TaskWidget> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-//TASK NAME
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                widget.taskName,
-                style: kTaskTextStyle,
-              ),
-            ),
-
-//X Button
+//TASK NAME and INFO
             Row(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.taskName,
+                    style: kTaskTextStyle,
+                  ),
+                ),
+
+//CREATED BY
                 Text(
-                  widget.dueDate,
+                  "Created by: ${widget.createdBy}",
+                  style: kHintTextStyle,
+                ),
+              ],
+            ),
+
+//SIDE INFO
+            Row(
+              children: [
+//DUE DATE
+
+                Text(
+                  "Due by: ",
                   style: kTaskTextStyle,
                 ),
+                Text(
+                  //IF DUE DATE IS TODAY > PRINT TODAY
+                  //OTHERWISE PRINT NORMAL DUE DATE
+                  widget.dueDate == today ? "Today" : widget.dueDate,
+                  style: kTaskTextStyle,
+                ),
+
+//X BUTTON
                 GestureDetector(
                   onTap: () {
                     setState(() {
