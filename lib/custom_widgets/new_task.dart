@@ -47,7 +47,6 @@ class _NewTaskState extends State<NewTask> {
                 DateTime.now(),
                 daysCount: 365,
                 dayTextStyle: const TextStyle(fontSize: 8),
-                initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black,
                 selectedTextColor: Colors.white,
                 onDateChange: (date) {
