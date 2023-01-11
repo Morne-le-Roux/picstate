@@ -13,8 +13,9 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
-  String _newTaskName = "";
+  late String _newTaskName;
   late String _dueDate;
+  final String _createdBy = SupaBaseStuff().getUserName().toString();
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class _NewTaskState extends State<NewTask> {
               DatePicker(
                 DateTime.now(),
                 daysCount: 365,
+                dayTextStyle: const TextStyle(fontSize: 5),
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black,
                 selectedTextColor: Colors.white,
@@ -57,7 +59,8 @@ class _NewTaskState extends State<NewTask> {
           RoundedButton(
             text: "Add Task",
             onTap: () {
-              SupaBaseStuff().addData(_newTaskName, _dueDate.toString());
+              SupaBaseStuff()
+                  .addData(_newTaskName, _dueDate.toString(), _createdBy);
               Navigator.pop(context);
             },
           ),

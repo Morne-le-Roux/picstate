@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         tasks.add(TaskWidget(
                           id: task["id"],
                           taskName: task["task_name"],
-                          createdBy: "Person",
+                          createdBy: task["created_by"],
                           createdAt: task["created_at"],
                           dueDate: task["due_date"] ?? "No Due Date",
                         ));
