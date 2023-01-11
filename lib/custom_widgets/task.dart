@@ -74,7 +74,7 @@ class _TaskWidgetState extends State<TaskWidget> {
 //CREATED BY
                 Text(
                   "Created by: ${widget.createdBy}",
-                  style: kHintTextStyle,
+                  style: kHintTextStyle.copyWith(fontSize: 10),
                 ),
               ],
             ),
