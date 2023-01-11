@@ -13,7 +13,7 @@ TextStyle kHintTextStyle =
     GoogleFonts.roboto(color: Colors.white60, fontStyle: FontStyle.italic);
 
 //Button Color
-Color kButtonColor = Colors.redAccent.shade700;
+Color kButtonColor = Colors.amber;
 
 //Button Text Style
 

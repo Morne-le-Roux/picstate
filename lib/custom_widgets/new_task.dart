@@ -29,6 +29,7 @@ class _NewTaskState extends State<NewTask> {
           Column(
             children: [
               BasicTextField(
+                icon: Icons.abc,
                 hintText: "New Task Name",
                 onChanged: (value) => _newTaskName = value,
                 obscureText: false,

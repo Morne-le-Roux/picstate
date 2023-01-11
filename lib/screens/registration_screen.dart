@@ -54,6 +54,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Hero(
                 tag: "email",
                 child: BasicTextField(
+                    icon: Icons.email_rounded,
                     fontColor: Colors.yellow,
                     hintText: "Email Address",
                     obscureText: false,
@@ -69,6 +70,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
 //USERNAME
               BasicTextField(
+                  icon: Icons.person,
                   fontColor: Colors.yellow,
                   hintText: "Username",
                   obscureText: false,
@@ -85,6 +87,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Hero(
                 tag: "password",
                 child: BasicTextField(
+                    icon: Icons.password,
                     fontColor: Colors.yellow,
                     hintText: "Password",
                     obscureText: true,
@@ -101,6 +104,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 //confirm password
 
               BasicTextField(
+                  icon: Icons.password,
                   fontColor: Colors.yellow,
                   hintText: "Confirm Password",
                   obscureText: true,
