@@ -36,12 +36,17 @@ class _NewTaskState extends State<NewTask> {
                 fontColor: Colors.black,
               ),
 
+//SPACING
+              const SizedBox(
+                height: 20,
+              ),
+
 //DUE DATE PICKER
 
               DatePicker(
                 DateTime.now(),
                 daysCount: 365,
-                dayTextStyle: const TextStyle(fontSize: 5),
+                dayTextStyle: const TextStyle(fontSize: 8),
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black,
                 selectedTextColor: Colors.white,
