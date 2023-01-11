@@ -28,7 +28,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-//SPACE BETWEEN WIDGETS
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Container(
 //height of the widget
@@ -36,8 +35,8 @@ class _TaskWidgetState extends State<TaskWidget> {
         decoration: BoxDecoration(
 //color of the widget
           gradient: const LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
               colors: [Colors.amber, Colors.amberAccent]),
 
 //shadow cast
