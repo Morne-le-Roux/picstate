@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/supabase_stuff.dart';
-import 'package:intl/intl.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
@@ -26,11 +25,6 @@ class TaskWidget extends StatefulWidget {
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
-  String today = DateFormat("dd MMM").format(DateTime.now());
-
-  //TODO: IMPLEMENT TOMORROW
-  // String tomorrow = DateFormat("dd MMM").format(DateTime.now());
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,7 +35,10 @@ class _TaskWidgetState extends State<TaskWidget> {
         height: 50,
         decoration: BoxDecoration(
 //color of the widget
-          color: Colors.amber.shade400,
+          gradient: const LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.amber, Colors.amberAccent]),
 
 //shadow cast
           boxShadow: const [
@@ -89,9 +86,17 @@ class _TaskWidgetState extends State<TaskWidget> {
                   style: kTaskTextStyle,
                 ),
                 Text(
-                  //IF DUE DATE IS TODAY > PRINT TODAY
-                  //OTHERWISE PRINT NORMAL DUE DATE
-                  widget.dueDate == today ? "Today" : widget.dueDate,
+// Checks if due date is today
+                  widget.dueDate == today
+                      ? "Today"
+// Checks if due date is yesterday
+                      : widget.dueDate == yesterday
+                          ? "Yesterday"
+// Checks if due date is tomorrow
+                          : widget.dueDate == tomorrow
+                              ? "Tomorrow"
+// Otherwise prints due date
+                              : widget.dueDate,
                   style: kTaskTextStyle,
                 ),
 
