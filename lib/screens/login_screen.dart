@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: Text(
                   "Not a Member? Subscribe instead.",
-                  style: kButtonTextStyle.copyWith(color: Colors.black45),
+                  style: kButtonTextStyle.copyWith(color: Colors.amber),
                 ),
               ),
             ],
