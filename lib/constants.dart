@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 //Background Color of Screens
 Color kBackgroundColor = Colors.black;
@@ -22,3 +23,13 @@ TextStyle kButtonTextStyle = GoogleFonts.roboto(
 
 //Task Text Style
 TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(color: Colors.white);
+
+//DATES
+
+final DateTime now = DateTime.now();
+final String today =
+    DateFormat("dd MMM").format(DateTime(now.year, now.month, now.day));
+final String yesterday =
+    DateFormat("dd MMM").format(DateTime(now.year, now.month, now.day - 1));
+final String tomorrow =
+    DateFormat("dd MMM").format(DateTime(now.year, now.month, now.day + 1));
