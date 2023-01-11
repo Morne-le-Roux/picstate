@@ -55,8 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
 
 //return
-                      return ListView(
-                        children: tasks,
+                      return ListView.builder(
+                        itemCount: tasks.length,
+                        itemBuilder: (context, index) {
+                          //TODO: IMPLEMENT LIST VIEW
+                          //TODO: PASS ITEM INDEX BACK TO TASK WIDGET TO DISPLAY DIFFERENT GRADIENT
+                        },
                       );
                     },
                   )),
