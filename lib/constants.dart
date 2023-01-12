@@ -14,7 +14,8 @@ TextStyle kHintTextStyle =
     GoogleFonts.roboto(color: Colors.white60, fontStyle: FontStyle.italic);
 
 //Button Color
-Color kButtonColor = Colors.amber.shade700;
+Gradient kButtonColor =
+    const LinearGradient(colors: [Colors.amber, Colors.amberAccent]);
 
 //Button Text Style
 

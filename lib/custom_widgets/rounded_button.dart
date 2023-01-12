@@ -12,10 +12,10 @@ class RoundedButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 200,
-        height: 50,
+        width: 150,
+        height: 40,
         decoration: BoxDecoration(
-            color: kButtonColor,
+            gradient: kButtonColor,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             boxShadow: const [
               BoxShadow(

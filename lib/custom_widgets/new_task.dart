@@ -20,7 +20,11 @@ class _NewTaskState extends State<NewTask> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amber,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+        Colors.amber.shade700,
+        Colors.amber.shade400,
+      ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
       padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,8 +51,8 @@ class _NewTaskState extends State<NewTask> {
                 DateTime.now(),
                 daysCount: 365,
                 dayTextStyle: const TextStyle(fontSize: 8),
-                selectionColor: Colors.black,
-                selectedTextColor: Colors.white,
+                selectionColor: Colors.white,
+                selectedTextColor: Colors.black,
                 onDateChange: (date) {
                   // New date selected
                   setState(() {
