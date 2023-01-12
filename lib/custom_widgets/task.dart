@@ -28,16 +28,23 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.symmetric(vertical: 0),
       child: Container(
 //height of the widget
         height: 50,
         decoration: BoxDecoration(
-//color of the widget
-          gradient: const LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.centerLeft,
-              colors: [Colors.amber, Colors.amberAccent]),
+//gradient settings
+          gradient: LinearGradient(
+
+//Based on Task id, will invert the gradient so the tasks separate a bit better in list view
+              begin: widget.id % 2 == 0
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              end: widget.id % 2 == 0
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+//gradient color
+              colors: const [Colors.amber, Colors.amberAccent]),
 
 //shadow cast
           boxShadow: const [
@@ -45,12 +52,12 @@ class _TaskWidgetState extends State<TaskWidget> {
                 color: Colors.black12,
                 blurRadius: 2,
                 spreadRadius: 1,
-                offset: Offset(2, 2))
+                offset: Offset(0, 0))
           ],
 //border of the widget
-          border: Border.all(color: Colors.amber.shade700),
+
           borderRadius: const BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(0),
           ),
         ),
         child: Row(
@@ -60,7 +67,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
                     widget.taskName,
                     style: kTaskTextStyle,
