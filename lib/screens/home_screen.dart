@@ -5,6 +5,7 @@ import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/task.dart';
 import 'package:picstate/supabase_stuff.dart';
 import 'package:picstate/custom_widgets/top_bar.dart';
+import 'package:simplified_flutter_animations/generic_fade_transition.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,7 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ListView.builder(
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
-                    return tasks[index];
+                    return GenericFadeTransition(
+                        curve: Curves.easeInOutCubicEmphasized,
+                        duration: const Duration(milliseconds: 800),
+                        builder: (context) {
+                          return tasks[index];
+                        });
                   },
                 );
               },

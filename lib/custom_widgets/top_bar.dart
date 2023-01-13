@@ -10,7 +10,7 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(gradient: kButtonColor),
-      height: 50,
+      height: 30,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
