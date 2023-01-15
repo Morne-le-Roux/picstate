@@ -10,8 +10,10 @@ TextStyle kHeadingTextStyle =
     GoogleFonts.anton(color: Colors.amber, fontSize: 80);
 
 //Hint text style for text fields
-TextStyle kHintTextStyle =
-    GoogleFonts.roboto(color: Colors.white60, fontStyle: FontStyle.italic);
+TextStyle kHintTextStyle = GoogleFonts.roboto(
+    color: Colors.white60, fontStyle: FontStyle.italic,
+    //Leave this here. Even though it seems like it does nothing, it removes the shadow added somewhere else.
+    shadows: <Shadow>[]);
 
 //Button Color
 Gradient kButtonColor =
@@ -21,11 +23,16 @@ Gradient kButtonColor =
 
 TextStyle kButtonTextStyle = GoogleFonts.roboto(
     color: Colors.grey.shade200,
-    fontWeight: FontWeight.w400,
-    shadows: <Shadow>[const Shadow()]);
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.italic,
+    shadows: <Shadow>[const Shadow(blurRadius: 0.5, color: Colors.black)]);
 
 //Task Text Style
-TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(color: Colors.white);
+TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(
+    color: Colors.white,
+    shadows: <Shadow>[const Shadow(blurRadius: 0.5, color: Colors.black)],
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.italic);
 
 //DATES
 

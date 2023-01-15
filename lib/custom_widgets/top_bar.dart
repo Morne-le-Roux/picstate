@@ -17,7 +17,9 @@ class TopBar extends StatelessWidget {
           Text(
             '"//TODO: Insert corny productivity quote here."',
             style: kTaskTextStyle.copyWith(
-                fontStyle: FontStyle.italic, color: Colors.white60),
+                fontStyle: FontStyle.italic,
+                color: Colors.white60,
+                shadows: <Shadow>[]),
           )
         ],
       ),
