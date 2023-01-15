@@ -114,6 +114,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     _password2 = value;
                   }),
 
+//Spacing between fields
+              const SizedBox(
+                height: 20,
+              ),
+
 //Workspace Pin Code.
 
 //This is set in supabase_settings.dart

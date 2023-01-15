@@ -20,7 +20,9 @@ Gradient kButtonColor =
 //Button Text Style
 
 TextStyle kButtonTextStyle = GoogleFonts.roboto(
-    color: Colors.grey.shade200, fontWeight: FontWeight.w400);
+    color: Colors.grey.shade200,
+    fontWeight: FontWeight.w400,
+    shadows: <Shadow>[const Shadow()]);
 
 //Task Text Style
 TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(color: Colors.white);
