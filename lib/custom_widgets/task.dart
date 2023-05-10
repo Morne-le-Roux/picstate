@@ -28,7 +28,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
 //height of the widget
       height: 80,
       decoration: BoxDecoration(
@@ -59,24 +59,32 @@ class _TaskWidgetState extends State<TaskWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
 //TASK NAME and INFO
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   widget.taskName,
                   style: kTaskTextStyle,
                 ),
-              ),
+
+//spacing
+
+                const SizedBox(
+                  height: 5,
+                ),
 
 //CREATED BY
-              Text(
-                "Created by: ${widget.createdBy}",
-                style: kHintTextStyle.copyWith(
-                  fontSize: 12,
+                Text(
+                  "Created by: ${widget.createdBy}",
+                  style: kHintTextStyle.copyWith(
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
 //SIDE INFO
