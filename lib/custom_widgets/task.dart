@@ -28,8 +28,9 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(10),
 //height of the widget
-      height: 50,
+      height: 80,
       decoration: BoxDecoration(
 //gradient settings
         gradient: LinearGradient(
@@ -51,7 +52,7 @@ class _TaskWidgetState extends State<TaskWidget> {
 //border of the widget
 
         borderRadius: const BorderRadius.all(
-          Radius.circular(0),
+          Radius.circular(20),
         ),
       ),
       child: Row(
