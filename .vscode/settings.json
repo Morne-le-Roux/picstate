@@ -4,5 +4,17 @@
         "roboto",
         "tasklist",
         "tasktable"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#b70c0f",
+        "titleBar.activeForeground": "#000000",
+        "titleBar.inactiveBackground": "#b70c0f",
+        "titleBar.inactiveForeground": "#000000",
+        "titleBar.border": "#b70c0f",
+        "activityBar.foreground": "#b70c0f",
+        "tab.activeBorder": "#b70c0f",
+        "iLoveWorkSpaceColors": true,
+        "iLoveWorkSpaceRandom": false,
+        "useWorkspaceLite": true
+    }
 }
