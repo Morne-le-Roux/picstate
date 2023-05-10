@@ -11,7 +11,8 @@ TextStyle kHeadingTextStyle =
 
 //Hint text style for text fields
 TextStyle kHintTextStyle = GoogleFonts.roboto(
-    color: Colors.white60, fontStyle: FontStyle.italic,
+    color: Colors.white60,
+    fontStyle: FontStyle.italic,
     //Leave this here. Even though it seems like it does nothing, it removes the shadow added somewhere else.
     shadows: <Shadow>[]);
 
