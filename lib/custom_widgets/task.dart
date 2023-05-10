@@ -27,106 +27,99 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0),
-      child: Container(
+    return Container(
 //height of the widget
-        height: 50,
-        decoration: BoxDecoration(
+      height: 50,
+      decoration: BoxDecoration(
 //gradient settings
-          gradient: LinearGradient(
+        gradient: LinearGradient(
 
 //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-              begin: widget.id % 2 == 0
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
-              end: widget.id % 2 == 0
-                  ? Alignment.centerLeft
-                  : Alignment.centerRight,
+            begin: widget.id % 2 == 0 ? Alignment.centerRight : Alignment.centerLeft,
+            end: widget.id % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
 //gradient color
-              colors: const [Colors.amber, Colors.amberAccent]),
+            colors: const [Colors.amber, Colors.amberAccent]),
 
 //shadow cast
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black12,
-                blurRadius: 2,
-                spreadRadius: 1,
-                offset: Offset(0, 0))
-          ],
+        boxShadow: const [
+          BoxShadow(
+              color: Colors.black12,
+              blurRadius: 2,
+              spreadRadius: 1,
+              offset: Offset(0, 0))
+        ],
 //border of the widget
 
-          borderRadius: const BorderRadius.all(
-            Radius.circular(0),
-          ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(0),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
 //TASK NAME and INFO
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    widget.taskName,
-                    style: kTaskTextStyle,
-                  ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  widget.taskName,
+                  style: kTaskTextStyle,
                 ),
+              ),
 
 //CREATED BY
-                Text(
-                  "Created by: ${widget.createdBy}",
-                  style: kHintTextStyle.copyWith(
-                    fontSize: 12,
-                  ),
+              Text(
+                "Created by: ${widget.createdBy}",
+                style: kHintTextStyle.copyWith(
+                  fontSize: 12,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
 
 //SIDE INFO
-            Row(
-              children: [
+          Row(
+            children: [
 //DUE DATE
 
-                Text(
-                  "Due by: ",
-                  style: kTaskTextStyle,
-                ),
-                Text(
+              Text(
+                "Due by: ",
+                style: kTaskTextStyle,
+              ),
+              Text(
 // Checks if due date is today
-                  widget.dueDate == today
-                      ? "Today"
+                widget.dueDate == today
+                    ? "Today"
 // Checks if due date is yesterday
-                      : widget.dueDate == yesterday
-                          ? "Yesterday"
+                    : widget.dueDate == yesterday
+                        ? "Yesterday"
 // Checks if due date is tomorrow
-                          : widget.dueDate == tomorrow
-                              ? "Tomorrow"
+                        : widget.dueDate == tomorrow
+                            ? "Tomorrow"
 // Otherwise prints due date
-                              : widget.dueDate,
-                  style: kTaskTextStyle,
-                ),
+                            : widget.dueDate,
+                style: kTaskTextStyle,
+              ),
 
 //X BUTTON
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      SupaBaseStuff().deleteData(widget.id);
-                    });
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.close_rounded,
-                      color: Colors.white,
-                    ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    SupaBaseStuff().deleteData(widget.id);
+                  });
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.close_rounded,
+                    color: Colors.white,
                   ),
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
