@@ -30,7 +30,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
       padding: const EdgeInsets.only(left: 5, top: 5),
       //border decoration
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
+        border: Border.all(color: Colors.grey),
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: TextField(
@@ -40,7 +40,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
         decoration: InputDecoration(
             prefixIcon: Icon(
               widget.icon,
-              color: Colors.white70,
+              color: Colors.grey,
             ),
             border: InputBorder.none,
             hintText: widget.hintText,

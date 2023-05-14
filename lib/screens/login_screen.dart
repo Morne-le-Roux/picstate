@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 tag: "email",
                 child: BasicTextField(
                     icon: Icons.email_rounded,
-                    fontColor: Colors.yellow,
+                    fontColor: Colors.yellow.shade800,
                     hintText: "Email Address",
                     obscureText: false,
                     onChanged: (value) {
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 tag: "password",
                 child: BasicTextField(
                     icon: Icons.password,
-                    fontColor: Colors.yellow,
+                    fontColor: Colors.yellow.shade800,
                     hintText: "Password",
                     obscureText: true,
                     onChanged: (value) {
