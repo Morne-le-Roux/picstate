@@ -11,7 +11,7 @@ TextStyle kHeadingTextStyle =
 
 //Hint text style for text fields
 TextStyle kHintTextStyle = GoogleFonts.roboto(
-  color: Colors.white60,
+  color: Colors.grey,
   fontStyle: FontStyle.italic,
 );
 
