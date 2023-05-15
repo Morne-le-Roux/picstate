@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 
 class BasicTextField extends StatefulWidget {
-  const BasicTextField(
+  BasicTextField(
       {super.key,
       required this.hintText,
       this.controller,
       required this.onChanged,
       required this.obscureText,
       required this.fontColor,
-      required this.icon});
+      required this.icon,
+      this.width = 400});
 
   final String hintText;
   final TextEditingController? controller;
@@ -17,6 +18,7 @@ class BasicTextField extends StatefulWidget {
   final bool obscureText;
   final Color fontColor;
   final IconData icon;
+  double width;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
@@ -26,7 +28,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      width: widget.width,
       padding: const EdgeInsets.only(left: 5, top: 5),
       //border decoration
       decoration: BoxDecoration(

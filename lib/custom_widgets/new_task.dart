@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/supabase_stuff.dart';
@@ -22,10 +23,10 @@ class _NewTaskState extends State<NewTask> {
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-        Colors.amber.shade700,
-        Colors.amber.shade400,
+        Colors.grey.shade300,
+        Colors.white,
       ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -33,6 +34,7 @@ class _NewTaskState extends State<NewTask> {
           Column(
             children: [
               BasicTextField(
+                width: 500,
                 icon: Icons.abc,
                 hintText: "New Task Name",
                 onChanged: (value) => _newTaskName = value,
@@ -47,11 +49,16 @@ class _NewTaskState extends State<NewTask> {
 
 //DUE DATE PICKER
 
+              Text(
+                "Due Date",
+                style: kTaskTextStyle.copyWith(color: Colors.black),
+              ),
+
               DatePicker(
                 DateTime.now(),
                 daysCount: 365,
                 dayTextStyle: const TextStyle(fontSize: 8),
-                selectionColor: Colors.white,
+                selectionColor: Colors.yellow.shade300,
                 selectedTextColor: Colors.black,
                 onDateChange: (date) {
                   // New date selected
