@@ -26,7 +26,7 @@ class _NewTaskState extends State<NewTask> {
         Colors.grey.shade300,
         Colors.white,
       ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
-      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+      padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

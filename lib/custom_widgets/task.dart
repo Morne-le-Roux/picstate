@@ -11,7 +11,8 @@ class TaskWidget extends StatefulWidget {
       required this.taskName,
       required this.createdBy,
       required this.createdAt,
-      required this.dueDate});
+      required this.dueDate,
+      required this.state});
 
 //The tasks name
   final int id;
@@ -19,6 +20,7 @@ class TaskWidget extends StatefulWidget {
   final String taskName;
   final String createdAt;
   final String dueDate;
+  final String state;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();

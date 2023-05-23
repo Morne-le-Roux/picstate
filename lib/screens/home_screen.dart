@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     createdBy: task["created_by"],
                     createdAt: task["created_at"],
                     dueDate: task["due_date"] ?? "No Due Date",
+                    state: task["state"],
                   ));
                 }
 
