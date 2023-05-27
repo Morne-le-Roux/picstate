@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 
 class BasicTextField extends StatefulWidget {
-  BasicTextField(
+  const BasicTextField(
       {super.key,
       required this.hintText,
       this.controller,
@@ -18,7 +18,7 @@ class BasicTextField extends StatefulWidget {
   final bool obscureText;
   final Color fontColor;
   final IconData icon;
-  double width;
+  final double width;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
