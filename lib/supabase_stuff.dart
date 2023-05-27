@@ -15,7 +15,7 @@ class SupaBaseStuff {
     return _supabase.from("tasktable").stream(primaryKey: ["id"]);
   }
 
-  updateData(int id, bool statusValue) async {
+  updateData(int id, String statusValue) async {
     _supabase.from("tasktable").update({"status": statusValue}).eq("id", id);
   }
 

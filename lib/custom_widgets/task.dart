@@ -38,10 +38,16 @@ class _TaskWidgetState extends State<TaskWidget> {
         gradient: LinearGradient(
 
 //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-            begin: widget.id % 2 == 0 ? Alignment.centerRight : Alignment.centerLeft,
-            end: widget.id % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
+            begin: widget.id % 2 == 0
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            end: widget.id % 2 == 0
+                ? Alignment.centerLeft
+                : Alignment.centerRight,
 //gradient color
-            colors: const [Colors.amber, Colors.amberAccent]),
+            colors: widget.state == "todo"
+                ? const [Colors.amber, Colors.amberAccent]
+                : const [Colors.green, Colors.greenAccent]),
 
 //shadow cast
         boxShadow: const [
@@ -95,36 +101,66 @@ class _TaskWidgetState extends State<TaskWidget> {
             children: [
 //DUE DATE
 
-              Text(
-                "Due by: ",
-                style: kTaskTextStyle,
-              ),
-              Text(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Due by: ",
+                        style: kTaskTextStyle,
+                      ),
+                      Text(
 // Checks if due date is today
-                widget.dueDate == today
-                    ? "Today"
+                        widget.dueDate == today
+                            ? "Today"
 // Checks if due date is yesterday
-                    : widget.dueDate == yesterday
-                        ? "Yesterday"
+                            : widget.dueDate == yesterday
+                                ? "Yesterday"
 // Checks if due date is tomorrow
-                        : widget.dueDate == tomorrow
-                            ? "Tomorrow"
+                                : widget.dueDate == tomorrow
+                                    ? "Tomorrow"
 // Otherwise prints due date
-                            : widget.dueDate,
-                style: kTaskTextStyle,
+                                    : widget.dueDate,
+                        style: kTaskTextStyle,
+                      ),
+                    ],
+                  ),
+
+//SPACING
+                  const SizedBox(
+                    height: 5,
+                  ),
+
+                  Text(
+                    "Status: ${widget.state}",
+                    style: kTaskTextStyle,
+                  )
+                ],
               ),
 
-//X BUTTON
+//spacing
+
+              const SizedBox(
+                width: 20,
+              ),
+
+//state BUTTON
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    SupaBaseStuff().deleteData(widget.id);
+                    try {
+                      SupaBaseStuff().updateData(widget.id, "done");
+                    } on Exception catch (e) {
+                      print(e);
+                    }
                   });
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
-                    Icons.close_rounded,
+                    Icons.menu,
                     color: Colors.white,
                   ),
                 ),
