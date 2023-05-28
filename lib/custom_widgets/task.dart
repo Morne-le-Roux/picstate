@@ -147,24 +147,24 @@ class _TaskWidgetState extends State<TaskWidget> {
               ),
 
 //state BUTTON
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    try {
-                      SupaBaseStuff().updateData(widget.id, "done");
-                    } on Exception catch (e) {
-                      print(e);
-                    }
-                  });
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.menu,
-                    color: Colors.white,
+              PopupMenuButton(
+                onSelected: (value) =>
+                    SupaBaseStuff().updateData(widget.id, value),
+                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                  const PopupMenuItem(
+                    value: "todo",
+                    child: Text('todo'),
                   ),
-                ),
-              ),
+                  const PopupMenuItem(
+                    value: "done",
+                    child: Text('done'),
+                  ),
+                  const PopupMenuItem(
+                    value: "waiting",
+                    child: Text('waiting'),
+                  ),
+                ],
+              )
             ],
           )
         ],
