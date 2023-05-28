@@ -29,64 +29,65 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-      //height of the widget
-      height: 80,
-      decoration: BoxDecoration(
-        //gradient settings
-        gradient: LinearGradient(
-
-            //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-            begin: widget.id % 2 == 0
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            end: widget.id % 2 == 0
-                ? Alignment.centerLeft
-                : Alignment.centerRight,
-            //gradient color
-            colors: widget.state == "todo"
-                ? const [Colors.amber, Colors.amberAccent]
-                : const [Colors.green, Colors.greenAccent]),
-
-        //shadow cast
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black12,
-              blurRadius: 2,
-              spreadRadius: 1,
-              offset: Offset(0, 0))
-        ],
-        //border of the widget
-
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
-      child: Dismissible(
-//dismissible settings
-        key: ValueKey(widget.id),
-        direction: DismissDirection.horizontal,
-        onDismissed: (direction) => SupaBaseStuff().deleteData(widget.id),
+    return Dismissible(
+//Dismissible settings
+      key: ValueKey(widget.id),
+      direction: DismissDirection.horizontal,
+      onDismissed: (direction) => SupaBaseStuff().deleteData(widget.id),
 
 //dismiss background
-        background: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 223, 69, 59),
-              borderRadius: BorderRadius.circular(20)),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                Icons.delete_rounded,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.delete_rounded,
-                color: Colors.white,
-              ),
-            ],
+      background: Container(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 223, 69, 59),
+            borderRadius: BorderRadius.circular(20)),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              Icons.delete_rounded,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.delete_rounded,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ),
+      child: Container(
+        margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+        //height of the widget
+        height: 80,
+        decoration: BoxDecoration(
+          //gradient settings
+          gradient: LinearGradient(
+
+              //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
+              begin: widget.id % 2 == 0
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              end: widget.id % 2 == 0
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+              //gradient color
+              colors: widget.state == "todo"
+                  ? const [Colors.amber, Colors.amberAccent]
+                  : const [Colors.green, Colors.greenAccent]),
+
+          //shadow cast
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black12,
+                blurRadius: 2,
+                spreadRadius: 1,
+                offset: Offset(0, 0))
+          ],
+          //border of the widget
+
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
           ),
         ),
         child: Row(
