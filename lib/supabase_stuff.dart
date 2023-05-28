@@ -18,7 +18,7 @@ class SupaBaseStuff {
   updateData(int id, String statusValue) async {
     await _supabase
         .from("tasktable")
-        .update({"status": statusValue}).eq("id", id);
+        .update({"state": statusValue}).eq("id", id);
   }
 
   deleteData(int id) async {
