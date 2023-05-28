@@ -30,7 +30,7 @@ TextStyle kButtonTextStyle = GoogleFonts.roboto(
 
 //Task Text Style
 TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(
-    color: Colors.white,
+    color: const Color.fromARGB(255, 10, 10, 3),
     // shadows: <Shadow>[const Shadow(blurRadius: 0.5, color: Colors.black)],
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.italic);
