@@ -29,145 +29,150 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-//height of the widget
-      height: 80,
-      decoration: BoxDecoration(
-//gradient settings
-        gradient: LinearGradient(
+    return Dismissible(
+      key: ValueKey(widget.id),
+      direction: DismissDirection.horizontal,
+      onDismissed: (direction) => SupaBaseStuff().deleteData(widget.id),
+      child: Container(
+        margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+        //height of the widget
+        height: 80,
+        decoration: BoxDecoration(
+          //gradient settings
+          gradient: LinearGradient(
 
-//Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-            begin: widget.id % 2 == 0
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            end: widget.id % 2 == 0
-                ? Alignment.centerLeft
-                : Alignment.centerRight,
-//gradient color
-            colors: widget.state == "todo"
-                ? const [Colors.amber, Colors.amberAccent]
-                : const [Colors.green, Colors.greenAccent]),
+              //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
+              begin: widget.id % 2 == 0
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              end: widget.id % 2 == 0
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+              //gradient color
+              colors: widget.state == "todo"
+                  ? const [Colors.amber, Colors.amberAccent]
+                  : const [Colors.green, Colors.greenAccent]),
 
-//shadow cast
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black12,
-              blurRadius: 2,
-              spreadRadius: 1,
-              offset: Offset(0, 0))
-        ],
-//border of the widget
+          //shadow cast
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black12,
+                blurRadius: 2,
+                spreadRadius: 1,
+                offset: Offset(0, 0))
+          ],
+          //border of the widget
 
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-//TASK NAME and INFO
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.taskName,
-                  style: kTaskTextStyle,
-                ),
-
-//spacing
-
-                const SizedBox(
-                  height: 5,
-                ),
-
-//CREATED BY
-                Text(
-                  "Created by: ${widget.createdBy}",
-                  style: kHintTextStyle.copyWith(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
           ),
-
-//SIDE INFO
-          Row(
-            children: [
-//DUE DATE
-
-              Column(
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            //TASK NAME and INFO
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Due by: ",
-                        style: kTaskTextStyle,
-                      ),
-                      Text(
-// Checks if due date is today
-                        widget.dueDate == today
-                            ? "Today"
-// Checks if due date is yesterday
-                            : widget.dueDate == yesterday
-                                ? "Yesterday"
-// Checks if due date is tomorrow
-                                : widget.dueDate == tomorrow
-                                    ? "Tomorrow"
-// Otherwise prints due date
-                                    : widget.dueDate,
-                        style: kTaskTextStyle,
-                      ),
-                    ],
+                  Text(
+                    widget.taskName,
+                    style: kTaskTextStyle,
                   ),
 
-//SPACING
+                  //spacing
+
                   const SizedBox(
                     height: 5,
                   ),
 
+                  //CREATED BY
                   Text(
-                    "Status: ${widget.state}",
-                    style: kTaskTextStyle,
-                  )
-                ],
-              ),
-
-//spacing
-
-              const SizedBox(
-                width: 20,
-              ),
-
-//state BUTTON
-              PopupMenuButton(
-                onSelected: (value) =>
-                    SupaBaseStuff().updateData(widget.id, value),
-                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                  const PopupMenuItem(
-                    value: "todo",
-                    child: Text('todo'),
-                  ),
-                  const PopupMenuItem(
-                    value: "done",
-                    child: Text('done'),
-                  ),
-                  const PopupMenuItem(
-                    value: "waiting",
-                    child: Text('waiting'),
+                    "Created by: ${widget.createdBy}",
+                    style: kHintTextStyle.copyWith(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
-              )
-            ],
-          )
-        ],
+              ),
+            ),
+
+            //SIDE INFO
+            Row(
+              children: [
+                //DUE DATE
+
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Due by: ",
+                          style: kTaskTextStyle,
+                        ),
+                        Text(
+                          // Checks if due date is today
+                          widget.dueDate == today
+                              ? "Today"
+                              // Checks if due date is yesterday
+                              : widget.dueDate == yesterday
+                                  ? "Yesterday"
+                                  // Checks if due date is tomorrow
+                                  : widget.dueDate == tomorrow
+                                      ? "Tomorrow"
+                                      // Otherwise prints due date
+                                      : widget.dueDate,
+                          style: kTaskTextStyle,
+                        ),
+                      ],
+                    ),
+
+                    //SPACING
+                    const SizedBox(
+                      height: 5,
+                    ),
+
+                    Text(
+                      "Status: ${widget.state}",
+                      style: kTaskTextStyle,
+                    )
+                  ],
+                ),
+
+                //spacing
+
+                const SizedBox(
+                  width: 20,
+                ),
+
+                //state BUTTON
+                PopupMenuButton(
+                  onSelected: (value) =>
+                      SupaBaseStuff().updateData(widget.id, value),
+                  itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                    const PopupMenuItem(
+                      value: "todo",
+                      child: Text('todo'),
+                    ),
+                    const PopupMenuItem(
+                      value: "done",
+                      child: Text('done'),
+                    ),
+                    const PopupMenuItem(
+                      value: "waiting",
+                      child: Text('waiting'),
+                    ),
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
