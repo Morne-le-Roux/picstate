@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 
 class BasicTextField extends StatefulWidget {
-  const BasicTextField(
-      {super.key,
-      required this.hintText,
-      this.controller,
-      required this.onChanged,
-      required this.obscureText,
-      required this.fontColor,
-      required this.icon,
-      this.width = 400});
+  const BasicTextField({
+    super.key,
+    this.width = 400,
+    this.hintText = "",
+    this.controller,
+    this.obscureText = false,
+    this.multiline = false,
+    required this.fontColor,
+    required this.icon,
+    required this.onChanged,
+  });
 
   final String hintText;
   final TextEditingController? controller;
@@ -19,6 +21,7 @@ class BasicTextField extends StatefulWidget {
   final Color fontColor;
   final IconData icon;
   final double width;
+  final bool multiline;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
@@ -36,7 +39,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: TextField(
-        maxLines: null,
+        maxLines: widget.multiline ? null : 1,
         keyboardType: TextInputType.multiline,
         style: kTaskTextStyle.copyWith(
             color: widget.fontColor, fontStyle: FontStyle.italic),
