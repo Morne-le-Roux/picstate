@@ -30,8 +30,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-//TODO: SMALL VISUAL BUG WHEN DELETING TASK
-
       padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -116,7 +114,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                         "Created by: ${widget.createdBy}",
                         style: kHintTextStyle.copyWith(
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -180,15 +178,15 @@ class _TaskWidgetState extends State<TaskWidget> {
                       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                         const PopupMenuItem(
                           value: "todo",
-                          child: Text('todo'),
+                          child: Text('ToDo'),
                         ),
                         const PopupMenuItem(
                           value: "done",
-                          child: Text('done'),
+                          child: Text('Done'),
                         ),
                         const PopupMenuItem(
                           value: "waiting",
-                          child: Text('waiting'),
+                          child: Text('Waiting'),
                         ),
                       ],
                     )
