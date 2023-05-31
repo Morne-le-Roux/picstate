@@ -3,10 +3,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupaBaseStuff {
   final _supabase = Supabase.instance.client;
 
-  addData(String newTaskName, String dueDate, String createdBy) async {
+  addData(String newTaskName, String dueDate, String createdBy,
+      String description) async {
     await _supabase.from("tasktable").insert({
       "task_name": newTaskName,
       "due_date": dueDate,
+      "description": description,
       "created_by": createdBy
     });
   }
