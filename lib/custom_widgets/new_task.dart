@@ -69,6 +69,10 @@ class _NewTaskState extends State<NewTask> {
                 },
               ),
 
+              const SizedBox(
+                height: 20,
+              ),
+
               BasicTextField(
                   width: 500,
                   hintText: "Description",
