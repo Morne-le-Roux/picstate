@@ -75,8 +75,10 @@ class _TaskWidgetState extends State<TaskWidget> {
                       : Alignment.centerRight,
                   //gradient color
                   colors: widget.state == "todo"
-                      ? const [Colors.amber, Colors.amberAccent]
-                      : const [Colors.green, Colors.greenAccent]),
+                      ? widget.dueDate == today
+                          ? kColorTodoToday
+                          : kColorTodo
+                      : kColorDone),
 
               //shadow cast
               boxShadow: const [

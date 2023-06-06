@@ -22,7 +22,7 @@ Gradient kButtonColor =
 //Button Text Style
 
 TextStyle kButtonTextStyle = GoogleFonts.roboto(
-  color: Colors.grey.shade200,
+  color: Colors.black87,
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.italic,
   // shadows: <Shadow>[const Shadow(blurRadius: 0.5, color: Colors.black)],
@@ -44,3 +44,12 @@ final String yesterday =
     DateFormat("dd MMM").format(DateTime(now.year, now.month, now.day - 1));
 final String tomorrow =
     DateFormat("dd MMM").format(DateTime(now.year, now.month, now.day + 1));
+
+//Task Colors
+
+const List<Color> kColorTodo = [Colors.amber, Colors.amberAccent];
+const List<Color> kColorDone = [Colors.green, Colors.greenAccent];
+const List<Color> kColorTodoToday = [
+  Color.fromARGB(255, 255, 98, 0),
+  Color.fromARGB(255, 255, 144, 64)
+];
