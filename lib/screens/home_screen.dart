@@ -20,69 +20,71 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBackgroundColor,
-      body: Column(
-        children: [
-          const TopBar(),
-          Expanded(
-            child: StreamBuilder(
-              stream: _supaBaseStuff.listenToTasks(),
-              builder: (context, snapshot) {
-                //clears task list before building new list
-                tasks = [];
-                if (!snapshot.hasData) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.amber,
-                  ));
-                }
-//DECODE JSON DATA //wait... its not JSON!!!
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: kBackgroundColor,
+        body: Column(
+          children: [
+            const TopBar(),
+            Expanded(
+              child: StreamBuilder(
+                stream: _supaBaseStuff.listenToTasks(),
+                builder: (context, snapshot) {
+                  //clears task list before building new list
+                  tasks = [];
+                  if (!snapshot.hasData) {
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.amber,
+                    ));
+                  }
+                  //DECODE JSON DATA //wait... its not JSON!!!
 
-//task list builder:
+                  //task list builder:
 
-                for (var task in snapshot.data) {
-                  tasks.add(TaskWidget(
-                    id: task["id"],
-                    taskName: task["task_name"],
-                    createdBy: task["created_by"],
-                    createdAt: task["created_at"],
-                    dueDate: task["due_date"] ?? "No Due Date",
-                    state: task["state"],
-                  ));
-                }
+                  for (var task in snapshot.data) {
+                    tasks.add(TaskWidget(
+                      id: task["id"],
+                      taskName: task["task_name"],
+                      createdBy: task["created_by"],
+                      createdAt: task["created_at"],
+                      dueDate: task["due_date"] ?? "No Due Date",
+                      state: task["state"],
+                    ));
+                  }
 
-//return
-                return ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) {
-                    return GenericFadeTransition(
-                        curve: Curves.easeInOutCubicEmphasized,
-                        duration: const Duration(milliseconds: 800),
-                        builder: (context) {
-                          return tasks[index];
-                        });
-                  },
-                );
-              },
+                  //return
+                  return ListView.builder(
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) {
+                      return GenericFadeTransition(
+                          curve: Curves.easeInOutCubicEmphasized,
+                          duration: const Duration(milliseconds: 800),
+                          builder: (context) {
+                            return tasks[index];
+                          });
+                    },
+                  );
+                },
+              ),
             ),
-          ),
 
-//add task button
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: RoundedButton(
-              text: "Add Task",
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const NewTask();
-                    });
-              },
-            ),
-          )
-        ],
+            //add task button
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RoundedButton(
+                text: "Add Task",
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const NewTask();
+                      });
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
