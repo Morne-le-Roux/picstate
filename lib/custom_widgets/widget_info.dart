@@ -27,12 +27,11 @@ class WidgetInfo extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
 //HEADING / TASK NAME
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-            width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(20)),
@@ -43,14 +42,11 @@ class WidgetInfo extends StatelessWidget {
           ),
 
 //SPACING
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
 
 //DESCRIPTION
           Container(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-            width: double.infinity,
             height: 200,
             decoration: BoxDecoration(
                 color: Colors.grey.shade100,
@@ -61,23 +57,24 @@ class WidgetInfo extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(height: 20),
+
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text("Created by: $createdBy"),
               ),
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text("State: $state"),
               ),
