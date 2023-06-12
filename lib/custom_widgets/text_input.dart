@@ -39,6 +39,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: TextField(
+        controller: widget.controller,
         maxLines: widget.multiline ? null : 1,
         keyboardType: TextInputType.multiline,
         style: kTaskTextStyle.copyWith(

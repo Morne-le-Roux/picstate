@@ -7,6 +7,7 @@ import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/registration_screen.dart';
 import 'package:picstate/supabase_stuff.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,18 +18,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
-  String _password = "";
-  String _email = "";
+  bool? _rememberMe;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   ///
   ///
 
   final supabase = Supabase.instance.client;
 
+  Future<void> loadRememberMe() async {
+    final SharedPreferences prefs = await _prefs;
+    final bool rememberMe = prefs.getBool('rememberMe') == null ? false : true;
+    _rememberMe = rememberMe;
+    _emailController.text =
+        rememberMe == true ? prefs.getString('email').toString() : "";
+    _passwordController.text =
+        rememberMe == true ? prefs.getString('password').toString() : "";
+  }
+
   @override
   void initState() {
     super.initState();
+    loadRememberMe();
   }
 
   @override
@@ -54,49 +68,74 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
-              //Spacing
+//Spacing
 
               const SizedBox(
                 height: 50,
               ),
 
-              //Email field
+//Email field
               Hero(
                 tag: "email",
                 child: BasicTextField(
+                    controller: _emailController,
                     icon: Icons.email_rounded,
                     fontColor: Colors.yellow.shade800,
                     hintText: "Email Address",
                     obscureText: false,
                     onChanged: (value) {
-                      _email = value;
+                      _emailController.text = value;
+                      _emailController.selection = TextSelection(
+                          baseOffset: value.length, extentOffset: value.length);
                     }),
               ),
 
-              //Spacing between fields
+//Spacing between fields
               const SizedBox(
                 height: 10,
               ),
 
-              //Password Field
+//Password Field
               Hero(
                 tag: "password",
                 child: BasicTextField(
+                    controller: _passwordController,
                     icon: Icons.password,
                     fontColor: Colors.yellow.shade800,
                     hintText: "Password",
                     obscureText: true,
                     onChanged: (value) {
-                      _password = value;
+                      _passwordController.text = value;
+                      _passwordController.selection = TextSelection(
+                          baseOffset: value.length, extentOffset: value.length);
                     }),
               ),
 
-              //spacing
+//spacing
 
-              const SizedBox(
-                height: 20,
+              const SizedBox(height: 20),
+
+//REMEMBER ME?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Checkbox(
+                    activeColor: Colors.amber,
+                    value: _rememberMe ?? false,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _rememberMe = value;
+                      });
+                    },
+                  ),
+                  Text(
+                    "Remember me?",
+                    style: kHintTextStyle,
+                  ),
+                ],
               ),
+
+              const SizedBox(height: 20),
 
               Hero(
                 tag: "login",
@@ -105,9 +144,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: RoundedButton(
                     text: "Login",
                     onTap: () async {
+                      SharedPreferences prefs = await _prefs;
+                      prefs.setBool(
+                          'rememberMe', _rememberMe == true ? true : false);
                       try {
                         final AuthResponse response =
-                            await _supaBaseStuff.userLogin(_password, _email);
+                            await _supaBaseStuff.userLogin(
+                                _passwordController.text,
+                                _emailController.text);
 
                         if (response.user != null) {
                           Navigator.push(
