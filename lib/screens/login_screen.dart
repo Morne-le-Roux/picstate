@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
@@ -18,174 +19,227 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
-  bool? _rememberMe;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  ///
-  ///
-
   final supabase = Supabase.instance.client;
+  bool _rememberMe = false;
+  bool _loading = false;
 
-  Future<void> loadRememberMe() async {
-    final SharedPreferences prefs = await _prefs;
-    final bool rememberMe = prefs.getBool('rememberMe') == null ? false : true;
-    _rememberMe = rememberMe;
-    _emailController.text =
-        rememberMe == true ? prefs.getString('email').toString() : "";
-    _passwordController.text =
-        rememberMe == true ? prefs.getString('password').toString() : "";
+  ///
+  ///
+
+//LOGIN CODE
+  void login() async {
+    setState(() {
+      _loading = true;
+    });
+    try {
+      final AuthResponse response = await _supaBaseStuff.userLogin(
+          _passwordController.text, _emailController.text);
+
+      if (response.user != null) {
+        setState(() {
+          _loading = false;
+        });
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  void getStoredData() async {
+    print("getting data");
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    String storedEmail = preferences.getString('email') == null
+        ? ""
+        : preferences.getString('email').toString();
+    String storedPassword = preferences.getString('password') == null
+        ? ""
+        : preferences.getString('password').toString();
+
+    print(storedEmail);
+    print(storedPassword);
+    setState(() {
+      _emailController.text = storedEmail;
+      _passwordController.text = storedPassword;
+      _loading = false;
+    });
+  }
+
+  void setStoredData() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString('email', _emailController.text);
+    await preferences.setString('password', _passwordController.text);
+  }
+
+  void setRememberMe() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setBool('rememberMe', _rememberMe);
+  }
+
+  void getRememberMe() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool value = preferences.getBool('rememberMe') ?? false;
+    print(value);
+    _rememberMe = value;
+    bool loadData = value;
+    print(loadData);
+    if (loadData) {
+      getStoredData();
+    }
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    loadRememberMe();
+    setState(() {
+      _loading = true;
+    });
+    getRememberMe();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //Main Heading
-              Center(
-                child: Hero(
-                  tag: "name",
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Text(
-                      "PICstate",
-                      style: kHeadingTextStyle,
+      body: ModalProgressHUD(
+        progressIndicator: const CircularProgressIndicator(
+          color: Colors.amber,
+        ),
+        inAsyncCall: _loading,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //Main Heading
+                Center(
+                  child: Hero(
+                    tag: "name",
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Text(
+                        "PICstate",
+                        style: kHeadingTextStyle,
+                      ),
                     ),
                   ),
                 ),
-              ),
-//Spacing
+                //Spacing
 
-              const SizedBox(
-                height: 50,
-              ),
+                const SizedBox(
+                  height: 50,
+                ),
 
-//Email field
-              Hero(
-                tag: "email",
-                child: BasicTextField(
-                    controller: _emailController,
-                    icon: Icons.email_rounded,
-                    fontColor: Colors.yellow.shade800,
-                    hintText: "Email Address",
-                    obscureText: false,
-                    onChanged: (value) {
-                      _emailController.text = value;
-                      _emailController.selection = TextSelection(
-                          baseOffset: value.length, extentOffset: value.length);
-                    }),
-              ),
+                //Email field
+                Hero(
+                  tag: "email",
+                  child: BasicTextField(
+                      controller: _emailController,
+                      icon: Icons.email_rounded,
+                      fontColor: Colors.yellow.shade800,
+                      hintText: "Email Address",
+                      obscureText: false,
+                      onChanged: (value) {
+                        _emailController.text = value;
+                        _emailController.selection = TextSelection(
+                            baseOffset: value.length,
+                            extentOffset: value.length);
+                      }),
+                ),
 
-//Spacing between fields
-              const SizedBox(
-                height: 10,
-              ),
+                //Spacing between fields
+                const SizedBox(
+                  height: 10,
+                ),
 
-//Password Field
-              Hero(
-                tag: "password",
-                child: BasicTextField(
-                    controller: _passwordController,
-                    icon: Icons.password,
-                    fontColor: Colors.yellow.shade800,
-                    hintText: "Password",
-                    obscureText: true,
-                    onChanged: (value) {
-                      _passwordController.text = value;
-                      _passwordController.selection = TextSelection(
-                          baseOffset: value.length, extentOffset: value.length);
-                    }),
-              ),
+                //Password Field
+                Hero(
+                  tag: "password",
+                  child: BasicTextField(
+                      controller: _passwordController,
+                      icon: Icons.password,
+                      fontColor: Colors.yellow.shade800,
+                      hintText: "Password",
+                      obscureText: true,
+                      onChanged: (value) {
+                        _passwordController.text = value;
+                        _passwordController.selection = TextSelection(
+                            baseOffset: value.length,
+                            extentOffset: value.length);
+                      }),
+                ),
 
-//spacing
+                //spacing
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-//REMEMBER ME?
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    activeColor: Colors.amber,
-                    value: _rememberMe ?? false,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _rememberMe = value;
-                      });
-                    },
-                  ),
-                  Text(
-                    "Remember me?",
-                    style: kHintTextStyle,
-                  ),
-                ],
-              ),
+                //REMEMBER ME?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      activeColor: Colors.amber,
+                      value: _rememberMe,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _rememberMe = value ?? false;
+                        });
+                      },
+                    ),
+                    Text(
+                      "Remember me?",
+                      style: kHintTextStyle,
+                    ),
+                  ],
+                ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              Hero(
-                tag: "login",
-                child: Material(
-                  color: Colors.transparent,
-                  child: RoundedButton(
-                    text: "Login",
-                    onTap: () async {
-                      SharedPreferences prefs = await _prefs;
-                      prefs.setBool(
-                          'rememberMe', _rememberMe == true ? true : false);
-                      try {
-                        final AuthResponse response =
-                            await _supaBaseStuff.userLogin(
-                                _passwordController.text,
-                                _emailController.text);
-
-                        if (response.user != null) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                Hero(
+                  tag: "login",
+                  child: Material(
+                    color: Colors.transparent,
+                    child: RoundedButton(
+                      text: "Login",
+                      onTap: () {
+                        setRememberMe();
+                        if (_rememberMe) {
+                          setStoredData();
                         }
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(e.toString())));
-                      }
-                    },
+                        login();
+                      },
+                    ),
                   ),
                 ),
-              ),
 
-              const SizedBox(
-                height: 40,
-              ),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegistrationScreen(),
-                      ));
-                },
-                child: Text(
-                  "Not a Member? Subscribe instead.",
-                  style: kButtonTextStyle.copyWith(color: Colors.amber),
+                const SizedBox(
+                  height: 40,
                 ),
-              ),
-            ],
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegistrationScreen(),
+                        ));
+                  },
+                  child: Text(
+                    "Not a Member? Subscribe instead.",
+                    style: kButtonTextStyle.copyWith(color: Colors.amber),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

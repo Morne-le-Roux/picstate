@@ -29,15 +29,16 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cupertino_icons: 
-  date_picker_timeline: 
+  cupertino_icons:
+  date_picker_timeline:
   flutter:
     sdk: flutter
-  google_fonts: 
-  intl: 
-  simplified_flutter_animations: 
-  supabase_flutter: 
-  shared_preferences: 
+  google_fonts:
+  intl:
+  modal_progress_hud_nsn: 
+  shared_preferences:
+  simplified_flutter_animations:
+  supabase_flutter:
 
 dev_dependencies:
   flutter_lints: ^2.0.0
