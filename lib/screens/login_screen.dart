@@ -52,7 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void getStoredData() async {
-    print("getting data");
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String storedEmail = preferences.getString('email') == null
         ? ""
@@ -61,8 +60,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ? ""
         : preferences.getString('password').toString();
 
-    print(storedEmail);
-    print(storedPassword);
     setState(() {
       _emailController.text = storedEmail;
       _passwordController.text = storedPassword;
@@ -84,10 +81,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void getRememberMe() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     bool value = preferences.getBool('rememberMe') ?? false;
-    print(value);
+
     _rememberMe = value;
     bool loadData = value;
-    print(loadData);
+
     if (loadData) {
       getStoredData();
     }
