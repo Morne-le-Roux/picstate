@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 //TODO: Fix a bug where after the app is minimized, the stream gets broken.
 //Try implementing WidgetsBindingObserver to check when the app is resumed.
 class _HomeScreenState extends State<HomeScreen> {
-  List<TaskWidget> tasks = [];
+  List<TaskWidget> tasks = []; //list of tasks that the listView uses
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
 
   @override
@@ -27,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: kBackgroundColor,
         body: Column(
           children: [
-            const TopBar(),
+            const TopBar(), //yellow border line thingy.
+
+//StreamBuilder
             Expanded(
               child: StreamBuilder(
                 stream: _supaBaseStuff.listenToTasks(),
