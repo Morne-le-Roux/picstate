@@ -96,7 +96,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                         ? widget.dueDate == today
                             ? kColorTodoToday
                             : kColorTodo
-                        : kColorDone),
+                        : widget.state == "order"
+                            ? kColorToOrder
+                            : kColorDone),
 
                 //shadow cast
                 boxShadow: const [
@@ -208,6 +210,10 @@ class _TaskWidgetState extends State<TaskWidget> {
                             value: "waiting",
                             child: Text('Waiting'),
                           ),
+                          const PopupMenuItem(
+                            value: "order",
+                            child: Text('To Order'),
+                          )
                         ],
                       )
                     ],
