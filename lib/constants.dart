@@ -53,3 +53,7 @@ const List<Color> kColorTodoToday = [
   Color.fromARGB(255, 255, 98, 0),
   Color.fromARGB(255, 255, 144, 64)
 ];
+const List<Color> kColorToOrder = [
+  Color.fromARGB(255, 33, 107, 243),
+  Color.fromARGB(255, 3, 208, 244)
+];
