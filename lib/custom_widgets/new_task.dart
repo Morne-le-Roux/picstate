@@ -17,7 +17,7 @@ class _NewTaskState extends State<NewTask> {
   late String _newTaskName;
   late String _dueDate;
   final String _createdBy = SupaBaseStuff().getUserName().toString();
-  late String _description;
+  String? _description;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class _NewTaskState extends State<NewTask> {
               const SizedBox(
                 height: 20,
               ),
-
+//Description
               BasicTextField(
                   width: 500,
                   hintText: "Description",
@@ -88,8 +88,8 @@ class _NewTaskState extends State<NewTask> {
           RoundedButton(
             text: "Add Task",
             onTap: () {
-              SupaBaseStuff().addData(
-                  _newTaskName, _dueDate.toString(), _createdBy, _description);
+              SupaBaseStuff().addData(_newTaskName, _dueDate.toString(),
+                  _createdBy, _description ?? "");
               Navigator.pop(context);
             },
           ),

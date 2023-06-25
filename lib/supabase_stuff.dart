@@ -4,7 +4,7 @@ class SupaBaseStuff {
   final _supabase = Supabase.instance.client;
 
   addData(String newTaskName, String dueDate, String createdBy,
-      String description) async {
+      String? description) async {
     await _supabase.from("tasktable").insert({
       "task_name": newTaskName,
       "due_date": dueDate,
