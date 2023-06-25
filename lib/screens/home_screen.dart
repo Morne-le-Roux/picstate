@@ -22,6 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
 
   @override
+  void initState() {
+    super.initState();
+    SupaBaseStuff().needsUpdate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

@@ -1,7 +1,23 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SupaBaseStuff {
   final _supabase = Supabase.instance.client;
+
+  needsUpdate() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    //checks current app version
+    double version = double.parse(packageInfo.version);
+
+    //checks newest app version number
+    final latestVersionNumberString =
+        await _supabase.from("versioncheck").select("versionNumber");
+    final latestVersionNumber =
+        double.parse(latestVersionNumberString[0]["versionNumber"]);
+
+    print(version < latestVersionNumber ? "true" : "false");
+  }
 
   addData(String newTaskName, String dueDate, String createdBy,
       String? description) async {
