@@ -76,7 +76,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                 ],
               ),
             ),
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
               //height of the widget
               height: 80,
               decoration: BoxDecoration(
