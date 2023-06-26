@@ -20,11 +20,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<TaskWidget> tasks = []; //list of tasks that the listView uses
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
+  bool needsUpdate = false;
 
   @override
   void initState() {
     super.initState();
-    SupaBaseStuff().needsUpdate();
+    setState(() {
+      checkForUpdate();
+    });
+  }
+
+  checkForUpdate() async {
+    needsUpdate = await SupaBaseStuff().needsUpdate();
   }
 
   @override
@@ -93,6 +100,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         return const NewTask();
                       });
                 },
+              ),
+            ),
+
+            Visibility(
+              replacement: const SizedBox.shrink(),
+              visible: needsUpdate,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    height: 80,
+                    decoration: const BoxDecoration(color: Colors.red),
+                    child: Text(
+                      "Your app needs an update!",
+                      style: kTaskTextStyle.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             )
           ],

@@ -4,19 +4,35 @@ import 'package:package_info_plus/package_info_plus.dart';
 class SupaBaseStuff {
   final _supabase = Supabase.instance.client;
 
+  //checks if app needs an update
   needsUpdate() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     //checks current app version
-    double version = double.parse(packageInfo.version);
+    String versionString = packageInfo.version;
 
     //checks newest app version number
-    final latestVersionNumberString =
+    final latestVersionNumberData =
         await _supabase.from("versioncheck").select("versionNumber");
-    final latestVersionNumber =
-        double.parse(latestVersionNumberString[0]["versionNumber"]);
+    final latestVersionNumberString =
+        latestVersionNumberData[0]["versionNumber"];
 
-    print(version < latestVersionNumber ? "true" : "false");
+    //uses getExtendedVersionNumber to parse version numbers to integers for comparison
+    final latestVersionNumber =
+        getExtendedVersionNumber(latestVersionNumberString);
+    final version = getExtendedVersionNumber(versionString);
+
+    //checks if current version number is smaller than latest version number
+    final needsUpdate = version < latestVersionNumber;
+    print(needsUpdate);
+    return needsUpdate == true ? true : false;
+  }
+
+  //parses Strings like 1.2.3 to a large iteger so version numbers can be compared
+  int getExtendedVersionNumber(String version) {
+    List versionCells = version.split(".");
+    versionCells = versionCells.map((e) => int.parse(e)).toList();
+    return versionCells[0] * 100000 + versionCells[1] * 1000 + versionCells[2];
   }
 
   addData(String newTaskName, String dueDate, String createdBy,
