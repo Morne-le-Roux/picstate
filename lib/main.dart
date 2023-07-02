@@ -20,8 +20,35 @@ Future<void> main() async {
   runApp(const PicState());
 }
 
-class PicState extends StatelessWidget {
+class PicState extends StatefulWidget {
   const PicState({super.key});
+
+  @override
+  State<PicState> createState() => _PicStateState();
+}
+
+class _PicStateState extends State<PicState> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+//If app is resumed, push login screen
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
