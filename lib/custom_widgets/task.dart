@@ -99,16 +99,6 @@ class _TaskWidgetState extends State<TaskWidget> {
                         : widget.state == "order"
                             ? kColorToOrder
                             : kColorDone),
-
-                //shadow cast
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 2,
-                      spreadRadius: 1,
-                      offset: Offset(0, 0))
-                ],
-                //border of the widget
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
