@@ -74,12 +74,14 @@ class _NewTaskState extends State<NewTask> {
               ),
 //Description
               BasicTextField(
-                  width: 500,
-                  hintText: "Description",
-                  onChanged: (value) => _description = value,
-                  obscureText: false,
-                  fontColor: Colors.black,
-                  icon: Icons.description)
+                width: 500,
+                hintText: "Description",
+                onChanged: (value) => _description = value,
+                obscureText: false,
+                fontColor: Colors.black,
+                icon: Icons.description,
+                multiline: true,
+              )
             ],
           ),
 
