@@ -22,9 +22,14 @@ class SupaBaseStuff {
         getExtendedVersionNumber(latestVersionNumberString);
     final version = getExtendedVersionNumber(versionString);
 
+    //debug
+    print("LatestVersionNumber $latestVersionNumber");
+    print("version $version");
+
     //checks if current version number is smaller than latest version number
     final needsUpdate = version < latestVersionNumber;
     print(needsUpdate);
+
     return needsUpdate == true ? true : false;
   }
 

@@ -25,13 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      checkForUpdate();
-    });
+    checkForUpdate();
   }
 
   checkForUpdate() async {
     needsUpdate = await SupaBaseStuff().needsUpdate();
+    setState(() {});
   }
 
   @override
