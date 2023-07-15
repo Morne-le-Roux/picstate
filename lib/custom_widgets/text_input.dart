@@ -23,7 +23,7 @@ class BasicTextField extends StatefulWidget {
   final IconData icon;
   final double width;
   final bool multiline;
-  final void Function(String)? onSubmitted;
+  final void Function()? onSubmitted;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
