@@ -103,33 +103,36 @@ class _TaskWidgetState extends State<TaskWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  //TASK NAME and INFO
+//TASK NAME and INFO
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.taskName,
-                          style: kTaskTextStyle,
-                        ),
-
-                        //spacing
-
-                        const SizedBox(
-                          height: 5,
-                        ),
-
-                        //CREATED BY
-                        Text(
-                          "Created by: ${widget.createdBy}",
-                          style: kHintTextStyle.copyWith(
-                            fontSize: 12,
-                            color: Colors.black,
+                    child: SizedBox(
+                      width: 200,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.taskName,
+                            style: kTaskTextStyle,
                           ),
-                        ),
-                      ],
+
+                          //spacing
+
+                          const SizedBox(
+                            height: 5,
+                          ),
+
+                          //CREATED BY
+                          Text(
+                            "Created by: ${widget.createdBy}",
+                            style: kHintTextStyle.copyWith(
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 
