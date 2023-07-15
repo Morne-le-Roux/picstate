@@ -162,17 +162,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 Hero(
                   tag: "password",
                   child: BasicTextField(
-                      controller: _passwordController,
-                      icon: Icons.password,
-                      fontColor: Colors.yellow.shade800,
-                      hintText: "Password",
-                      obscureText: true,
-                      onChanged: (value) {
-                        _passwordController.text = value;
-                        _passwordController.selection = TextSelection(
-                            baseOffset: value.length,
-                            extentOffset: value.length);
-                      }),
+                    controller: _passwordController,
+                    icon: Icons.password,
+                    fontColor: Colors.yellow.shade800,
+                    hintText: "Password",
+                    obscureText: true,
+                    onChanged: (value) {
+                      _passwordController.text = value;
+                      _passwordController.selection = TextSelection(
+                          baseOffset: value.length, extentOffset: value.length);
+                    },
+                    onSubmitted: (value) {
+                      setRememberMe();
+                      if (_rememberMe) {
+                        setStoredData();
+                      }
+                      login();
+                    },
+                  ),
                 ),
 
                 //spacing
