@@ -9,6 +9,7 @@ class BasicTextField extends StatefulWidget {
     this.controller,
     this.obscureText = false,
     this.multiline = false,
+    this.onSubmitted,
     required this.fontColor,
     required this.icon,
     required this.onChanged,
@@ -22,6 +23,7 @@ class BasicTextField extends StatefulWidget {
   final IconData icon;
   final double width;
   final bool multiline;
+  final void Function(String)? onSubmitted;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
@@ -54,6 +56,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
             hintText: widget.hintText,
             hintStyle: kHintTextStyle),
         onChanged: widget.onChanged,
+        onSubmitted: widget.onSubmitted,
       ),
     );
   }
