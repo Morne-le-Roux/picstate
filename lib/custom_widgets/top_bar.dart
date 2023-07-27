@@ -9,7 +9,9 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
           gradient: kButtonColor,
           border: Border.all(color: Colors.black87, width: 1.5)),
       height: 60,
