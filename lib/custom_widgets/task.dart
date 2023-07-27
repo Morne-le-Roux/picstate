@@ -79,7 +79,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),
               //height of the widget
-              height: 80,
+              height: 60,
               decoration: BoxDecoration(
                 //gradient settings
                 gradient: LinearGradient(
