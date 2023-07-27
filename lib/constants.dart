@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 //Background Color of Screens
-Color kBackgroundColor = Colors.white;
+Color kBackgroundColor = Colors.black;
 
 //Heading Text Style
 TextStyle kHeadingTextStyle =

@@ -109,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ModalProgressHUD(
         progressIndicator: const CircularProgressIndicator(
           color: Colors.amber,
+          backgroundColor: Colors.transparent,
         ),
         inAsyncCall: _loading,
         child: SafeArea(
