@@ -68,7 +68,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ));
                   }
 
+                  //sort
+
+                  int customCompare(TaskWidget a, TaskWidget b) {
+                    final statesOrder = ["todo", "waiting", "order", "done"];
+                    return statesOrder
+                        .indexOf(a.state)
+                        .compareTo(statesOrder.indexOf(b.state));
+                  }
+
+                  tasks.sort(customCompare);
+
                   //return
+
                   return ListView.builder(
                     itemCount: tasks.length,
                     itemBuilder: (context, index) {
