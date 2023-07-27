@@ -9,14 +9,17 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(gradient: kButtonColor),
-      height: 30,
+      decoration: BoxDecoration(
+          gradient: kButtonColor,
+          border: Border.all(color: Colors.black87, width: 1.5)),
+      height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '"//TODO: Insert corny productivity quote here."',
+            'PRINT&IMAGE CENTRE',
             style: kTaskTextStyle.copyWith(
+                fontSize: 45,
                 fontStyle: FontStyle.italic,
                 color: Colors.white60,
                 shadows: <Shadow>[]),
