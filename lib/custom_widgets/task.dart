@@ -47,9 +47,12 @@ class _TaskWidgetState extends State<TaskWidget> {
             });
       },
       child: Container(
-        padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+        margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(20)),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(18),
           child: Dismissible(
             //Dismissible settings
             key: ValueKey(widget.id),
@@ -59,9 +62,9 @@ class _TaskWidgetState extends State<TaskWidget> {
             //dismiss background
             background: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 223, 69, 59),
-                  borderRadius: BorderRadius.circular(20)),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 223, 69, 59),
+              ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -103,7 +106,7 @@ class _TaskWidgetState extends State<TaskWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-//TASK NAME and INFO
+                  //TASK NAME and INFO
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: SizedBox(
