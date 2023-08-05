@@ -101,7 +101,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                             : kColorTodo
                         : widget.state == "order"
                             ? kColorToOrder
-                            : kColorDone),
+                            : widget.state == "waiting"
+                                ? kColorWaiting
+                                : kColorDone),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -57,3 +57,8 @@ const List<Color> kColorToOrder = [
   Color.fromARGB(255, 0, 153, 255),
   Color.fromARGB(255, 3, 208, 244)
 ];
+
+const List<Color> kColorWaiting = [
+  Color.fromARGB(103, 255, 255, 255),
+  Colors.grey,
+];
