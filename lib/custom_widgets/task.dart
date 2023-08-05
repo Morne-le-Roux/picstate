@@ -6,15 +6,17 @@ import 'package:picstate/supabase_stuff.dart';
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
 class TaskWidget extends StatefulWidget {
-  const TaskWidget(
-      {super.key,
-      required this.id,
-      required this.taskName,
-      required this.createdBy,
-      required this.createdAt,
-      required this.dueDate,
-      required this.description,
-      required this.state});
+  const TaskWidget({
+    super.key,
+    required this.id,
+    required this.taskName,
+    required this.createdBy,
+    required this.createdAt,
+    required this.dueDate,
+    required this.description,
+    required this.state,
+    required this.index,
+  });
 
 //The tasks name
   final int id;
@@ -24,6 +26,7 @@ class TaskWidget extends StatefulWidget {
   final String dueDate;
   final String state;
   final String description;
+  final int index;
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -88,10 +91,10 @@ class _TaskWidgetState extends State<TaskWidget> {
                 gradient: LinearGradient(
 
                     //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-                    begin: widget.id % 2 == 0
+                    begin: widget.index % 2 == 0
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
-                    end: widget.id % 2 == 0
+                    end: widget.index % 2 == 0
                         ? Alignment.centerLeft
                         : Alignment.centerRight,
                     //gradient color
