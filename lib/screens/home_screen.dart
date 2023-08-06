@@ -82,32 +82,53 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   //return
 
-                  return ListView.builder(
-                    itemCount: tasks.length,
-                    itemBuilder: (context, index) {
-                      return GenericFadeTransition(
-                          curve: Curves.easeInOutCubicEmphasized,
-                          duration: const Duration(milliseconds: 800),
-                          builder: (context) {
-                            return tasks[index];
-                          });
-                    },
-                  );
-                },
-              ),
-            ),
-
-            //add task button
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RoundedButton(
-                text: "Add Task",
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const NewTask();
-                      });
+                  return Stack(alignment: Alignment.bottomCenter, children: [
+                    ShaderMask(
+                      shaderCallback: (bounds) {
+                        return const LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Colors.black,
+                            Colors.black,
+                            Colors.black,
+                            Colors.black,
+                            Colors.black,
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ).createShader(bounds);
+                      },
+                      blendMode: BlendMode.dstIn,
+                      child: Container(
+                        margin: const EdgeInsets.only(),
+                        child: ListView.builder(
+                          itemCount: tasks.length,
+                          itemBuilder: (context, index) {
+                            return GenericFadeTransition(
+                                curve: Curves.easeInOutCubicEmphasized,
+                                duration: const Duration(milliseconds: 800),
+                                builder: (context) {
+                                  return tasks[index];
+                                });
+                          },
+                        ),
+                      ),
+                    ),
+                    //add task button
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RoundedButton(
+                        text: "Add Task",
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const NewTask();
+                              });
+                        },
+                      ),
+                    ),
+                  ]);
                 },
               ),
             ),
