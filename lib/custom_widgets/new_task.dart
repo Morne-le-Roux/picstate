@@ -22,11 +22,11 @@ class _NewTaskState extends State<NewTask> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Colors.grey.shade300,
-        Colors.white,
-      ], begin: Alignment.bottomRight, end: Alignment.topLeft)),
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.black87, Colors.black],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft)),
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,14 +52,19 @@ class _NewTaskState extends State<NewTask> {
 
               Text(
                 "Due Date",
-                style: kTaskTextStyle.copyWith(color: Colors.black),
+                style: kTaskTextStyle.copyWith(color: Colors.white70),
               ),
 
               DatePicker(
                 DateTime.now(),
                 daysCount: 365,
-                dayTextStyle: const TextStyle(fontSize: 8),
-                selectionColor: Colors.yellow.shade300,
+                dayTextStyle:
+                    const TextStyle(fontSize: 8, color: Colors.white70),
+                monthTextStyle:
+                    const TextStyle(fontSize: 8, color: Colors.white70),
+                dateTextStyle:
+                    const TextStyle(fontSize: 24, color: Colors.white70),
+                selectionColor: Colors.yellow,
                 selectedTextColor: Colors.black,
                 onDateChange: (date) {
                   // New date selected

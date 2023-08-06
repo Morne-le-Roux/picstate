@@ -10,6 +10,7 @@ class BasicTextField extends StatefulWidget {
     this.obscureText = false,
     this.multiline = false,
     this.onSubmitted,
+    this.height,
     required this.fontColor,
     required this.icon,
     required this.onChanged,
@@ -24,6 +25,7 @@ class BasicTextField extends StatefulWidget {
   final double width;
   final bool multiline;
   final void Function(String)? onSubmitted;
+  final double? height;
 
   @override
   State<BasicTextField> createState() => _BasicTextFieldState();
@@ -33,6 +35,7 @@ class _BasicTextFieldState extends State<BasicTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: widget.height,
       width: widget.width,
       padding: const EdgeInsets.only(left: 5, top: 5),
       //border decoration

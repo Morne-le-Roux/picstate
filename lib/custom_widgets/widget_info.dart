@@ -25,7 +25,9 @@ class WidgetInfo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.black87,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -33,11 +35,10 @@ class WidgetInfo extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
             decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(20)),
+                color: Colors.black87, borderRadius: BorderRadius.circular(20)),
             child: Text(
               taskName,
-              style: kTaskTextStyle.copyWith(fontSize: 30),
+              style: kTaskTextStyle.copyWith(fontSize: 30, color: Colors.white),
             ),
           ),
 
@@ -49,11 +50,12 @@ class WidgetInfo extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             height: 200,
             decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(20)),
+                color: Colors.black87,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.white)),
             child: Text(
               description,
-              style: kTaskTextStyle,
+              style: kTaskTextStyle.copyWith(color: Colors.white),
             ),
           ),
 
@@ -66,17 +68,25 @@ class WidgetInfo extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text("Created by: $createdBy"),
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white)),
+                child: Text(
+                  "Created by: $createdBy",
+                  style: kTaskTextStyle.copyWith(color: Colors.white),
+                ),
               ),
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text("State: $state"),
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white)),
+                child: Text(
+                  "State: $state",
+                  style: kTaskTextStyle.copyWith(color: Colors.white),
+                ),
               ),
             ],
           ),

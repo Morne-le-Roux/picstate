@@ -53,7 +53,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.black54)),
+            border: Border.all(color: Colors.black, width: 2)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: Dismissible(
