@@ -40,7 +40,7 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "New Task Name",
                 onChanged: (value) => _newTaskName = value,
                 obscureText: false,
-                fontColor: Colors.black,
+                fontColor: Colors.white,
               ),
 
 //SPACING
@@ -83,7 +83,7 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "Description",
                 onChanged: (value) => _description = value,
                 obscureText: false,
-                fontColor: Colors.black,
+                fontColor: Colors.white,
                 icon: Icons.description,
                 multiline: true,
               )

@@ -9,7 +9,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       // margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         gradient: kButtonColor,
