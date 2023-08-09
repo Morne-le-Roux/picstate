@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
+import 'package:picstate/custom_widgets/stream.dart';
 import 'package:picstate/supabase_stuff.dart';
 import 'package:picstate/custom_widgets/top_bar.dart';
 
@@ -33,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const TopBar(), //yellow border line thingy.
 
+            const ListStream(),
+
 //Update Notifier
             Visibility(
               replacement: const SizedBox.shrink(),
@@ -51,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            )
+            ),
+
+//BOTTOM NAVBAR
           ],
         ),
       ),
