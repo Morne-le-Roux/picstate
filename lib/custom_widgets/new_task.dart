@@ -90,6 +90,8 @@ class _NewTaskState extends State<NewTask> {
             ],
           ),
 
+          const Row(children: [],)
+
 //ADD TASK BUTTON
 
           RoundedButton(
