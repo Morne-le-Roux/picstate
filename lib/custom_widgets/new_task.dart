@@ -90,7 +90,10 @@ class _NewTaskState extends State<NewTask> {
             ],
           ),
 
-          const Row(children: [],)
+//TODO: ADD STATE OPTION WHEN CREATING TASK.
+          const Row(
+            children: [],
+          ),
 
 //ADD TASK BUTTON
 
