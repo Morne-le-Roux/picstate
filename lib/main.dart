@@ -42,6 +42,7 @@ class _PicStateState extends State<PicState> with WidgetsBindingObserver {
   }
 
 //If app is resumed, push login screen
+//TODO: THIS DOESNT WORK. PLZ FIX.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
