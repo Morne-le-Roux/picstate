@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/widget_info.dart';
@@ -27,6 +29,38 @@ class TaskWidget extends StatefulWidget {
   final String state;
   final String description;
   final int index;
+
+//CODE FOR THE UNDO WHEN REMOVING A WIDGET
+  Future<bool> showConfirmationSnackBar(BuildContext context) async {
+    Completer<bool> completer = Completer<bool>();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.amber,
+        behavior: SnackBarBehavior.floating,
+        content: const Text(
+          "Deleting Task...",
+          style: TextStyle(color: Colors.black),
+        ),
+        action: SnackBarAction(
+          label: "UNDO",
+          textColor: Colors.black,
+          onPressed: () {
+            completer.complete(false); // User confirmed
+          },
+        ),
+      ),
+    );
+
+    // Use a Timer to automatically complete with false after a timeout
+    Timer(const Duration(seconds: 4), () {
+      if (!completer.isCompleted) {
+        completer.complete(true); // Timed out
+      }
+    });
+
+    return completer.future;
+  }
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -59,6 +93,10 @@ class _TaskWidgetState extends State<TaskWidget> {
           child: Dismissible(
             //Dismissible settings
             key: ValueKey(widget.id),
+            confirmDismiss: (direction) async {
+              bool confirmed = await widget.showConfirmationSnackBar(context);
+              return confirmed;
+            },
             direction: DismissDirection.horizontal,
             onDismissed: (direction) => SupaBaseStuff().deleteData(widget.id),
 
