@@ -20,10 +20,7 @@ class MenuButton extends StatelessWidget {
           color: Colors.amber,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.black, width: 2),
-          gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.amber, Color.fromARGB(255, 252, 215, 95)])),
+          gradient: kButtonColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
