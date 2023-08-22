@@ -12,6 +12,7 @@ class TopBar extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       // margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
+        border: const Border(bottom: BorderSide(color: Colors.black, width: 2)),
         gradient: kButtonColor,
       ),
       height: 60,
