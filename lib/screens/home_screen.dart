@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
 import 'package:picstate/supabase_stuff.dart';
-import 'package:picstate/custom_widgets/top_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,13 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'PRINT&IMAGE CENTRE',
+          style: kTaskTextStyle.copyWith(
+              fontStyle: FontStyle.italic, color: Colors.white60, fontSize: 30),
+        ),
+      ),
+      backgroundColor: kBackgroundColor,
+      body: SafeArea(
+        top: false,
+        child: Column(
           children: [
-            const TopBar(), //yellow border line thingy.
+            // const TopBar(), //yellow border line thingy.
 
             GridView.count(
               shrinkWrap: true,
@@ -53,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
 
-//Update Notifier
+            //Update Notifier
             Visibility(
               replacement: const SizedBox.shrink(),
               visible: needsUpdate,
@@ -73,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-//BOTTOM NAVBAR
+            //BOTTOM NAVBAR
           ],
         ),
       ),
