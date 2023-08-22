@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 //Background Color of Screens
-Color kBackgroundColor = const Color.fromARGB(255, 36, 36, 36);
+Color kBackgroundColor = const Color.fromARGB(255, 255, 255, 255);
 
 //Heading Text Style
 TextStyle kHeadingTextStyle =

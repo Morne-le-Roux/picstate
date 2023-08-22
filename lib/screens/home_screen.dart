@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
-import 'package:picstate/custom_widgets/stream.dart';
+import 'package:picstate/custom_widgets/menu_button.dart';
 import 'package:picstate/supabase_stuff.dart';
 import 'package:picstate/custom_widgets/top_bar.dart';
 
@@ -31,10 +31,27 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: kBackgroundColor,
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const TopBar(), //yellow border line thingy.
 
-            const ListStream(),
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              childAspectRatio: 2.5,
+              children: const [
+                MenuButton(
+                  heading: "Todo's",
+                  content: "Jobs to be done",
+                ),
+                MenuButton(heading: "Orders", content: "Please Order"),
+                MenuButton(
+                    heading: "Whatsapp Dialer", content: "Open Whatsapp Chat"),
+                MenuButton(
+                    heading: "Price Calculator",
+                    content: "Calculate Odd Pricing")
+              ],
+            ),
 
 //Update Notifier
             Visibility(
