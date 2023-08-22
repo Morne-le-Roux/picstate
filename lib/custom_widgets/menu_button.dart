@@ -19,7 +19,8 @@ class MenuButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.amber,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.black, width: 2),
+          border:
+              Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 2),
           gradient: kButtonColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
