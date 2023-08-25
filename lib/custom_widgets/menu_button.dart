@@ -7,11 +7,13 @@ class MenuButton extends StatefulWidget {
     required this.heading,
     required this.content,
     required this.selected,
+    required this.onTap,
   });
 
   final String heading;
   final String content;
   bool selected = false;
+  final void Function() onTap;
 
   @override
   State<MenuButton> createState() => _MenuButtonState();
@@ -23,10 +25,13 @@ class _MenuButtonState extends State<MenuButton> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          widget.onTap;
           widget.selected = !widget.selected;
         });
       },
       child: AnimatedContainer(
+        // height: 50,
+        // width: 200,
         duration: const Duration(milliseconds: 100),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 25),

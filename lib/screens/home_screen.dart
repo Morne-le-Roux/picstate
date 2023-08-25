@@ -24,6 +24,37 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+//List of menu buttons to show on main screen
+  List<MenuButton> menuButtons = [
+    MenuButton(
+      heading: "Todo's",
+      content: "Jobs to be done",
+      selected: false,
+      onTap: () {},
+    ),
+    MenuButton(
+      heading: "Orders",
+      content: "Please Order",
+      selected: false,
+      onTap: () {},
+    ),
+    MenuButton(
+      heading: "Whatsapp Dialer",
+      content: "Open Whatsapp Chat",
+      selected: false,
+      onTap: () {},
+    ),
+    MenuButton(
+      heading: "Price Calculator",
+      content: "Calculate Odd Pricing",
+      selected: false,
+      onTap: () {},
+    )
+  ];
+
+//currently selected button
+  int selectedMenuButton = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,32 +73,17 @@ class _HomeScreenState extends State<HomeScreen> {
             // const TopBar(), //yellow border line thingy.
 
             GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              childAspectRatio: 2.5,
-              children: [
-                MenuButton(
-                  heading: "Todo's",
-                  content: "Jobs to be done",
-                  selected: false,
-                ),
-                MenuButton(
-                  heading: "Orders",
-                  content: "Please Order",
-                  selected: false,
-                ),
-                MenuButton(
-                  heading: "Whatsapp Dialer",
-                  content: "Open Whatsapp Chat",
-                  selected: false,
-                ),
-                MenuButton(
-                  heading: "Price Calculator",
-                  content: "Calculate Odd Pricing",
-                  selected: false,
-                )
-              ],
-            ),
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                childAspectRatio: 2,
+                children: List.generate(menuButtons.length, (index) {
+                  return MenuButton(
+                    heading: menuButtons[index].heading,
+                    content: menuButtons[index].content,
+                    selected: menuButtons[index].selected,
+                    onTap: menuButtons[index].onTap,
+                  );
+                })),
 
             //Update Notifier
             Visibility(
