@@ -45,17 +45,27 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
               crossAxisCount: 2,
               childAspectRatio: 2.5,
-              children: const [
+              children: [
                 MenuButton(
                   heading: "Todo's",
                   content: "Jobs to be done",
+                  selected: false,
                 ),
-                MenuButton(heading: "Orders", content: "Please Order"),
                 MenuButton(
-                    heading: "Whatsapp Dialer", content: "Open Whatsapp Chat"),
+                  heading: "Orders",
+                  content: "Please Order",
+                  selected: false,
+                ),
                 MenuButton(
-                    heading: "Price Calculator",
-                    content: "Calculate Odd Pricing")
+                  heading: "Whatsapp Dialer",
+                  content: "Open Whatsapp Chat",
+                  selected: false,
+                ),
+                MenuButton(
+                  heading: "Price Calculator",
+                  content: "Calculate Odd Pricing",
+                  selected: false,
+                )
               ],
             ),
 
