@@ -29,31 +29,27 @@ class _HomeScreenState extends State<HomeScreen> {
     MenuButton(
       heading: "Todo's",
       content: "Jobs to be done",
-      selected: false,
-      onTap: () {},
+      color: kButtonColor,
     ),
     MenuButton(
       heading: "Orders",
       content: "Please Order",
-      selected: false,
-      onTap: () {},
+      color: kButtonColor,
     ),
     MenuButton(
       heading: "Whatsapp Dialer",
       content: "Open Whatsapp Chat",
-      selected: false,
-      onTap: () {},
+      color: kButtonColor,
     ),
     MenuButton(
       heading: "Price Calculator",
       content: "Calculate Odd Pricing",
-      selected: false,
-      onTap: () {},
+      color: kButtonColor,
     )
   ];
 
 //currently selected button
-  int selectedMenuButton = 0;
+  int selectedButton = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +73,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 2,
                 childAspectRatio: 2,
                 children: List.generate(menuButtons.length, (index) {
-                  return MenuButton(
-                    heading: menuButtons[index].heading,
-                    content: menuButtons[index].content,
-                    selected: menuButtons[index].selected,
-                    onTap: menuButtons[index].onTap,
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedButton = index;
+                      });
+                    },
+                    child: MenuButton(
+                      heading: menuButtons[index].heading,
+                      content: menuButtons[index].content,
+                      color: selectedButton == index
+                          ? kSelectedButtonColor
+                          : kButtonColor,
+                    ),
                   );
                 })),
 
