@@ -81,12 +81,19 @@ class _ListStreamState extends State<ListStream> {
                 child: ListView.builder(
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
-                    return GenericFadeTransition(
-                        curve: Curves.easeInOutCubicEmphasized,
-                        duration: const Duration(milliseconds: 800),
-                        builder: (context) {
-                          return tasks[index];
-                        });
+                    //TODO: This is not working. Try and find a resolution.
+                    return FutureBuilder(
+                      future:
+                          Future.delayed(Duration(milliseconds: index * 1000)),
+                      builder: (context, snapshot) {
+                        return GenericFadeTransition(
+                            curve: Curves.easeInOutCubicEmphasized,
+                            duration: const Duration(milliseconds: 2000),
+                            builder: (context) {
+                              return tasks[index];
+                            });
+                      },
+                    );
                   },
                 ),
               ),
