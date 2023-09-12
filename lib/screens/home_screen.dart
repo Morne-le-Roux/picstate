@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
+import 'package:picstate/custom_widgets/order_stream.dart';
 import 'package:picstate/custom_widgets/todo_stream.dart';
 import 'package:picstate/supabase_stuff.dart';
 
@@ -93,7 +94,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 })),
 
 //!STREAM. THIS IS TEMP
-            const ToDoStream(),
+            FutureBuilder(
+              builder: (context, snapshot) {
+                Widget widgetToshow = const SizedBox();
+
+                if (selectedButton == 0) {
+                  widgetToshow = const ToDoStream();
+                }
+                if (selectedButton == 1) {
+                  widgetToshow = const OrderStream();
+                }
+
+                return widgetToshow;
+              },
+            ),
 
 //Update Notifier (If not updated, display "Your app needs an update!")
             Visibility(
