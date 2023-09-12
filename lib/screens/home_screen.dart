@@ -84,14 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: MenuButton(
                       heading: menuButtons[index].heading,
                       content: menuButtons[index].content,
-                      color: selectedButton == index
-                          ? kSelectedButtonColor
-                          : kButtonColor,
+                      color: selectedButton == index //is selected?
+                          ? kSelectedButtonColor //color if selected
+                          : kButtonColor, //color if not selected
                     ),
                   );
                 })),
 
-//Update Notifier
+//Update Notifier (If not updated, display "Your app needs an update!")
             Visibility(
               replacement: const SizedBox.shrink(),
               visible: needsUpdate,
