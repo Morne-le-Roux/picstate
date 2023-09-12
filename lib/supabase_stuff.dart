@@ -45,8 +45,13 @@ class SupaBaseStuff {
     });
   }
 
-  Stream listenToTasks() {
+//Listens to tasks in task table
+  Stream taskStream() {
     return _supabase.from("tasktable").stream(primaryKey: ["id"]);
+  }
+
+  Stream orderStream() {
+    return _supabase.from("ordertable").stream(primaryKey: ["id"]);
   }
 
   updateData(int id, String statusValue) async {
