@@ -16,6 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    //Checks if the app is updated (version number is hosted on supabase)
     checkForUpdate();
   }
 
@@ -51,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //currently selected button
   int selectedButton = -1;
 
+//build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,8 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         top: false,
         child: Column(
           children: [
-            // const TopBar(), //yellow border line thingy.
-
+//Menu Buttons
             GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 2,
@@ -89,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 })),
 
-            //Update Notifier
+//Update Notifier
             Visibility(
               replacement: const SizedBox.shrink(),
               visible: needsUpdate,
@@ -108,8 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-
-            //BOTTOM NAVBAR
           ],
         ),
       ),
