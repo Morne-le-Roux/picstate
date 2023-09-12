@@ -5,21 +5,21 @@ import 'package:simplified_flutter_animations/generic_fade_transition.dart';
 import 'new_task.dart';
 import 'rounded_button.dart';
 
-class ListStream extends StatefulWidget {
-  const ListStream({super.key});
+class ToDoStream extends StatefulWidget {
+  const ToDoStream({super.key});
 
   @override
-  State<ListStream> createState() => _ListStreamState();
+  State<ToDoStream> createState() => _ToDoStreamState();
 }
 
-class _ListStreamState extends State<ListStream> {
+class _ToDoStreamState extends State<ToDoStream> {
   List<TaskWidget> tasks = []; //list of tasks that the listView uses
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
-        stream: _supaBaseStuff.listenToTasks(),
+        stream: _supaBaseStuff.taskStream(),
         builder: (context, snapshot) {
           //clears task list before building new list
           tasks = [];

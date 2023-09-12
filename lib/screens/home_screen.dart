@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
-import 'package:picstate/custom_widgets/stream.dart';
+import 'package:picstate/custom_widgets/todo_stream.dart';
 import 'package:picstate/supabase_stuff.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 })),
 
 //!STREAM. THIS IS TEMP
-            const ListStream(),
+            const ToDoStream(),
 
 //Update Notifier (If not updated, display "Your app needs an update!")
             Visibility(
