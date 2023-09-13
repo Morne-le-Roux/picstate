@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 })),
 
-//!STREAM. THIS IS TEMP
+//Shows selected item
             FutureBuilder(
               builder: (context, snapshot) {
                 Widget widgetToshow = const SizedBox();
