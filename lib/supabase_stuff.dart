@@ -35,13 +35,21 @@ class SupaBaseStuff {
     return versionCells[0] * 100000 + versionCells[1] * 1000 + versionCells[2];
   }
 
-  addData(String newTaskName, String dueDate, String createdBy,
+  addTask(String newTaskName, String dueDate, String createdBy,
       String? description) async {
     await _supabase.from("tasktable").insert({
       "task_name": newTaskName,
       "due_date": dueDate,
       "description": description,
       "created_by": createdBy
+    });
+  }
+
+  addOrder(String newOrderName, String createdBy, String? description) async {
+    await _supabase.from("ordertable").insert({
+      "order_name": newOrderName,
+      "description": description,
+      "created_by": createdBy,
     });
   }
 
@@ -60,8 +68,12 @@ class SupaBaseStuff {
         .update({"state": statusValue}).eq("id", id);
   }
 
-  deleteData(int id) async {
+  deleteTask(int id) async {
     await _supabase.from("tasktable").delete().eq("id", id);
+  }
+
+  deleteOrder(int id) async {
+    await _supabase.from("ordertable").delete().eq("id", id);
   }
 
   userLogin(String password, String email) async {
