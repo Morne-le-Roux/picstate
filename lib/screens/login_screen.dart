@@ -7,7 +7,7 @@ import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/registration_screen.dart';
-import 'package:picstate/logic.dart';
+import 'package:picstate/logic_and_streams/logic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
-import 'package:picstate/logic.dart';
+import 'package:picstate/logic_and_streams/logic.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({super.key});

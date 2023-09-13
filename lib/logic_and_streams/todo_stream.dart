@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/logic.dart';
+import '../custom_widgets/task.dart';
+import 'package:picstate/logic_and_streams/logic.dart';
 import 'package:simplified_flutter_animations/generic_fade_transition.dart';
-import 'new_order.dart';
-import 'rounded_button.dart';
-import 'order.dart';
+import '../custom_widgets/new_task.dart';
+import '../custom_widgets/rounded_button.dart';
 
-class OrderStream extends StatefulWidget {
-  const OrderStream({super.key});
+class ToDoStream extends StatefulWidget {
+  const ToDoStream({super.key});
 
   @override
-  State<OrderStream> createState() => _OrderStreamState();
+  State<ToDoStream> createState() => _ToDoStreamState();
 }
 
-class _OrderStreamState extends State<OrderStream> {
-  List<OrderWidget> orders = []; //list of tasks that the listView uses
+class _ToDoStreamState extends State<ToDoStream> {
+  List<TaskWidget> tasks = []; //list of tasks that the listView uses
   final Logic _supaBaseStuff = Logic();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
-        stream: _supaBaseStuff.orderStream(),
+        stream: _supaBaseStuff.taskStream(),
         builder: (context, snapshot) {
           //clears task list before building new list
-          orders = [];
+          tasks = [];
           if (!snapshot.hasData) {
             return const Center(
                 child: CircularProgressIndicator(
@@ -33,28 +33,29 @@ class _OrderStreamState extends State<OrderStream> {
 
           //task list builder:
 
-          for (var order in snapshot.data) {
-            orders.add(
-              OrderWidget(
-                id: order["id"],
-                orderName: order["order_name"],
-                description: order["description"],
-                state: order["state"],
-                index: orders.length,
-              ),
-            );
+          for (var task in snapshot.data) {
+            tasks.add(TaskWidget(
+              id: task["id"],
+              taskName: task["task_name"],
+              description: task["description"],
+              createdBy: task["created_by"],
+              createdAt: task["created_at"],
+              dueDate: task["due_date"] ?? "No Due Date",
+              state: task["state"],
+              index: tasks.length,
+            ));
           }
 
           //sort
 
-          int customCompare(OrderWidget a, OrderWidget b) {
+          int customCompare(TaskWidget a, TaskWidget b) {
             final statesOrder = ["todo", "waiting", "order", "done"];
             return statesOrder
                 .indexOf(a.state)
                 .compareTo(statesOrder.indexOf(b.state));
           }
 
-          orders.sort(customCompare);
+          tasks.sort(customCompare);
 
           //return
 
@@ -78,7 +79,7 @@ class _OrderStreamState extends State<OrderStream> {
               child: Container(
                 margin: const EdgeInsets.only(),
                 child: ListView.builder(
-                  itemCount: orders.length,
+                  itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     //TODO: This is not working. Try and find a resolution.
                     return FutureBuilder(
@@ -89,7 +90,7 @@ class _OrderStreamState extends State<OrderStream> {
                             curve: Curves.easeInOutCubicEmphasized,
                             duration: const Duration(milliseconds: 2000),
                             builder: (context) {
-                              return orders[index];
+                              return tasks[index];
                             });
                       },
                     );
@@ -101,12 +102,12 @@ class _OrderStreamState extends State<OrderStream> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RoundedButton(
-                text: "Add Order",
+                text: "Add Task",
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
-                        return const NewOrder();
+                        return const NewTask();
                       });
                 },
               ),
