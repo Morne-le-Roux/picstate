@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/supabase_stuff.dart';
+import 'package:picstate/logic.dart';
 import 'package:simplified_flutter_animations/generic_fade_transition.dart';
 import 'new_order.dart';
 import 'rounded_button.dart';

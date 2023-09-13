@@ -5,7 +5,7 @@ import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/login_screen.dart';
 import 'package:picstate/supabase_settings.dart';
-import 'package:picstate/supabase_stuff.dart';
+import 'package:picstate/logic.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});

@@ -3,7 +3,7 @@ import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
 import 'package:picstate/custom_widgets/order_stream.dart';
 import 'package:picstate/custom_widgets/todo_stream.dart';
-import 'package:picstate/supabase_stuff.dart';
+import 'package:picstate/logic.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

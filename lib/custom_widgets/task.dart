@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:picstate/constants.dart';
 import 'package:picstate/custom_widgets/widget_info.dart';
-import 'package:picstate/supabase_stuff.dart';
+import 'package:picstate/logic.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
