@@ -1,7 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-class SupaBaseStuff {
+class Logic {
   final _supabase = Supabase.instance.client;
 
   //checks if app needs an update

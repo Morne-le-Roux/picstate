@@ -16,7 +16,7 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   late String _newTaskName;
   late String _dueDate;
-  final String _createdBy = SupaBaseStuff().getUserName().toString();
+  final String _createdBy = Logic().getUserName().toString();
   String? _description;
 
   @override
@@ -100,8 +100,8 @@ class _NewTaskState extends State<NewTask> {
           RoundedButton(
             text: "Add Task",
             onTap: () {
-              SupaBaseStuff().addTask(_newTaskName, _dueDate.toString(),
-                  _createdBy, _description ?? "");
+              Logic().addTask(_newTaskName, _dueDate.toString(), _createdBy,
+                  _description ?? "");
               Navigator.pop(context);
             },
           ),

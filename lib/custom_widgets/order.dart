@@ -92,7 +92,7 @@ class _OrderWidgetState extends State<OrderWidget> {
               return confirmed;
             },
             direction: DismissDirection.horizontal,
-            onDismissed: (direction) => SupaBaseStuff().deleteOrder(widget.id),
+            onDismissed: (direction) => Logic().deleteOrder(widget.id),
 
             //dismiss background
             background: Container(
@@ -178,7 +178,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                       //state BUTTON
                       PopupMenuButton(
                         onSelected: (value) =>
-                            SupaBaseStuff().updateData(widget.id, value),
+                            Logic().updateData(widget.id, value),
                         itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                           const PopupMenuItem(
                             value: "ToOrder",

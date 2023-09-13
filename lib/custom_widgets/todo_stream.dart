@@ -14,7 +14,7 @@ class ToDoStream extends StatefulWidget {
 
 class _ToDoStreamState extends State<ToDoStream> {
   List<TaskWidget> tasks = []; //list of tasks that the listView uses
-  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
+  final Logic _supaBaseStuff = Logic();
   @override
   Widget build(BuildContext context) {
     return Expanded(

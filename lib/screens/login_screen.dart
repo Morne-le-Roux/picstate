@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
+  final Logic _supaBaseStuff = Logic();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final supabase = Supabase.instance.client;

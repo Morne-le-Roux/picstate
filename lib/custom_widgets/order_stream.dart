@@ -14,7 +14,7 @@ class OrderStream extends StatefulWidget {
 
 class _OrderStreamState extends State<OrderStream> {
   List<OrderWidget> orders = []; //list of tasks that the listView uses
-  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
+  final Logic _supaBaseStuff = Logic();
   @override
   Widget build(BuildContext context) {
     return Expanded(

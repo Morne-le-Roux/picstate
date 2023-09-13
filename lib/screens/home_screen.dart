@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   checkForUpdate() async {
-    needsUpdate = await SupaBaseStuff().needsUpdate();
+    needsUpdate = await Logic().needsUpdate();
     setState(() {});
   }
 

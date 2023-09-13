@@ -98,7 +98,7 @@ class _TaskWidgetState extends State<TaskWidget> {
               return confirmed;
             },
             direction: DismissDirection.horizontal,
-            onDismissed: (direction) => SupaBaseStuff().deleteTask(widget.id),
+            onDismissed: (direction) => Logic().deleteTask(widget.id),
 
             //dismiss background
             background: Container(
@@ -235,7 +235,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                       //state BUTTON
                       PopupMenuButton(
                         onSelected: (value) =>
-                            SupaBaseStuff().updateData(widget.id, value),
+                            Logic().updateData(widget.id, value),
                         itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                           const PopupMenuItem(
                             value: "todo",

@@ -13,7 +13,7 @@ class NewOrder extends StatefulWidget {
 class _NewOrderState extends State<NewOrder> {
   late String _newOrderName;
 
-  final String _createdBy = SupaBaseStuff().getUserName().toString();
+  final String _createdBy = Logic().getUserName().toString();
   String? _description;
 
   @override
@@ -63,8 +63,7 @@ class _NewOrderState extends State<NewOrder> {
           RoundedButton(
             text: "Add Order",
             onTap: () {
-              SupaBaseStuff()
-                  .addOrder(_newOrderName, _createdBy, _description ?? "");
+              Logic().addOrder(_newOrderName, _createdBy, _description ?? "");
               Navigator.pop(context);
             },
           ),

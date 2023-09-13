@@ -15,7 +15,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
+  final Logic _supaBaseStuff = Logic();
   String _password = "";
   String _password2 = "";
   String _email = "";
