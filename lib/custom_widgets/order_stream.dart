@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/supabase_stuff.dart';
 import 'package:simplified_flutter_animations/generic_fade_transition.dart';
-import 'new_task.dart';
+import 'new_order.dart';
 import 'rounded_button.dart';
 import 'order.dart';
 
@@ -33,14 +33,16 @@ class _OrderStreamState extends State<OrderStream> {
 
           //task list builder:
 
-          for (var task in snapshot.data) {
-            orders.add(OrderWidget(
-              id: task["id"],
-              orderName: task["orderName"],
-              description: task["description"],
-              state: task["state"],
-              index: orders.length,
-            ));
+          for (var order in snapshot.data) {
+            orders.add(
+              OrderWidget(
+                id: order["id"],
+                orderName: order["order_name"],
+                description: order["description"],
+                state: order["state"],
+                index: orders.length,
+              ),
+            );
           }
 
           //sort
@@ -99,12 +101,12 @@ class _OrderStreamState extends State<OrderStream> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RoundedButton(
-                text: "Add Task",
+                text: "Add Order",
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
-                        return const NewTask();
+                        return const NewOrder();
                       });
                 },
               ),
