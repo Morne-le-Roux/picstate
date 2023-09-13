@@ -47,7 +47,7 @@ class OrderWidget extends StatefulWidget {
     );
 
     // Use a Timer to automatically complete with false after a timeout
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 2), () {
       if (!completer.isCompleted) {
         completer.complete(true); // Timed out
       }
@@ -92,7 +92,7 @@ class _OrderWidgetState extends State<OrderWidget> {
               return confirmed;
             },
             direction: DismissDirection.horizontal,
-            onDismissed: (direction) => SupaBaseStuff().deleteData(widget.id),
+            onDismissed: (direction) => SupaBaseStuff().deleteOrder(widget.id),
 
             //dismiss background
             background: Container(
