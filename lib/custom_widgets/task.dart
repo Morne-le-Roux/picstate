@@ -98,7 +98,7 @@ class _TaskWidgetState extends State<TaskWidget> {
               return confirmed;
             },
             direction: DismissDirection.horizontal,
-            onDismissed: (direction) => SupaBaseStuff().deleteData(widget.id),
+            onDismissed: (direction) => SupaBaseStuff().deleteTask(widget.id),
 
             //dismiss background
             background: Container(
