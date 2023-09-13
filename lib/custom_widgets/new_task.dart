@@ -100,7 +100,7 @@ class _NewTaskState extends State<NewTask> {
           RoundedButton(
             text: "Add Task",
             onTap: () {
-              SupaBaseStuff().addData(_newTaskName, _dueDate.toString(),
+              SupaBaseStuff().addTask(_newTaskName, _dueDate.toString(),
                   _createdBy, _description ?? "");
               Navigator.pop(context);
             },
