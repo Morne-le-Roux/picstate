@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:picstate/logic/constants.dart';
-import 'package:picstate/custom_widgets/widget_info.dart';
+import 'package:picstate/custom_widgets/task_info.dart';
 import 'package:picstate/logic/logic.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
@@ -68,7 +68,7 @@ class _OrderWidgetState extends State<OrderWidget> {
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return WidgetInfo(
+              return TaskInfo(
                   taskName: widget.orderName,
                   description: widget.description,
                   createdAt: "temp",

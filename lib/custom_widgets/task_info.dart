@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/logic/constants.dart';
 
-class WidgetInfo extends StatelessWidget {
-  const WidgetInfo({
+class TaskInfo extends StatelessWidget {
+  const TaskInfo({
     super.key,
     required this.taskName,
     required this.description,
