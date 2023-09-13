@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'task.dart';
 import 'package:picstate/supabase_stuff.dart';
 import 'package:simplified_flutter_animations/generic_fade_transition.dart';
 import 'new_task.dart';
 import 'rounded_button.dart';
+import 'order.dart';
 
 class OrderStream extends StatefulWidget {
   const OrderStream({super.key});
@@ -13,7 +13,7 @@ class OrderStream extends StatefulWidget {
 }
 
 class _OrderStreamState extends State<OrderStream> {
-  List<TaskWidget> orders = []; //list of tasks that the listView uses
+  List<OrderWidget> orders = []; //list of tasks that the listView uses
   final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
   @override
   Widget build(BuildContext context) {
@@ -34,13 +34,10 @@ class _OrderStreamState extends State<OrderStream> {
           //task list builder:
 
           for (var task in snapshot.data) {
-            orders.add(TaskWidget(
+            orders.add(OrderWidget(
               id: task["id"],
-              taskName: task["task_name"],
+              orderName: task["orderName"],
               description: task["description"],
-              createdBy: task["created_by"],
-              createdAt: task["created_at"],
-              dueDate: task["due_date"] ?? "No Due Date",
               state: task["state"],
               index: orders.length,
             ));
@@ -48,7 +45,7 @@ class _OrderStreamState extends State<OrderStream> {
 
           //sort
 
-          int customCompare(TaskWidget a, TaskWidget b) {
+          int customCompare(OrderWidget a, OrderWidget b) {
             final statesOrder = ["todo", "waiting", "order", "done"];
             return statesOrder
                 .indexOf(a.state)

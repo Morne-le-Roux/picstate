@@ -7,8 +7,8 @@ import 'package:picstate/supabase_stuff.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
-class TaskWidget extends StatefulWidget {
-  const TaskWidget({
+class OrderWidget extends StatefulWidget {
+  const OrderWidget({
     super.key,
     required this.id,
     required this.orderName,
@@ -57,10 +57,10 @@ class TaskWidget extends StatefulWidget {
   }
 
   @override
-  State<TaskWidget> createState() => _TaskWidgetState();
+  State<OrderWidget> createState() => _OrderWidgetState();
 }
 
-class _TaskWidgetState extends State<TaskWidget> {
+class _OrderWidgetState extends State<OrderWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
