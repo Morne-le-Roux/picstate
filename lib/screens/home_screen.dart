@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
-import 'package:picstate/logic_and_streams/order_stream.dart';
-import 'package:picstate/logic_and_streams/todo_stream.dart';
-import 'package:picstate/logic_and_streams/logic.dart';
+import 'package:picstate/logic/order_stream.dart';
+import 'package:picstate/logic/todo_stream.dart';
+import 'package:picstate/logic/logic.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

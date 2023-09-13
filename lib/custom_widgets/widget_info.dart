@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 
 class WidgetInfo extends StatelessWidget {
   const WidgetInfo({

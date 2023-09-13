@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/login_screen.dart';
 import 'package:picstate/supabase_settings.dart';
-import 'package:picstate/logic_and_streams/logic.dart';
+import 'package:picstate/logic/logic.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});

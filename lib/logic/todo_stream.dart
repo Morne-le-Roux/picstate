@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom_widgets/task.dart';
-import 'package:picstate/logic_and_streams/logic.dart';
+import 'package:picstate/logic/logic.dart';
 import 'package:simplified_flutter_animations/generic_fade_transition.dart';
 import '../custom_widgets/new_task.dart';
 import '../custom_widgets/rounded_button.dart';

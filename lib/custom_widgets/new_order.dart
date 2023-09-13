@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
-import 'package:picstate/logic_and_streams/logic.dart';
+import 'package:picstate/logic/logic.dart';
 
 class NewOrder extends StatefulWidget {
   const NewOrder({super.key});

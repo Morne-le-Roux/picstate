@@ -1,10 +1,10 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
-import 'package:picstate/logic_and_streams/logic.dart';
+import 'package:picstate/logic/logic.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({super.key});
