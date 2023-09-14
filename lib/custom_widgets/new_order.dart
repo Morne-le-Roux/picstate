@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
+import 'package:picstate/logic/constants.dart';
 import 'package:picstate/logic/logic.dart';
 
 class NewOrder extends StatefulWidget {
@@ -19,11 +20,7 @@ class _NewOrderState extends State<NewOrder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.black87, Colors.black],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft)),
+      decoration: BoxDecoration(color: kBackgroundColor),
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,7 +34,7 @@ class _NewOrderState extends State<NewOrder> {
                 hintText: "New Order Name",
                 onChanged: (value) => _newOrderName = value,
                 obscureText: false,
-                fontColor: Colors.white,
+                fontColor: Colors.black,
               ),
 
 //SPACING
