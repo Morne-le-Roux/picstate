@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picstate/applets/whatsapp_chat.dart';
 import 'package:picstate/logic/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
 import 'package:picstate/logic/order_stream.dart';
@@ -106,6 +107,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
                 if (selectedButton == 1) {
                   widgetToshow = const OrderStream();
+                }
+
+                if (selectedButton == 2) {
+                  widgetToshow = const WhatsappChatDialer();
                 }
 
                 return widgetToshow;
