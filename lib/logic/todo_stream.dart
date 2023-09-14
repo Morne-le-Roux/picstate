@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../custom_widgets/task.dart';
 import 'package:picstate/logic/logic.dart';
-import 'package:simplified_flutter_animations/generic_fade_transition.dart';
+import 'package:simplified_flutter_animations/generic_slide_transition.dart';
 import '../custom_widgets/new_task.dart';
 import '../custom_widgets/rounded_button.dart';
 
@@ -93,17 +93,24 @@ class _ToDoStreamState extends State<ToDoStream> {
                 child: ListView.builder(
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
-                    //TODO: This is not working. Try and find a resolution.
+                    final delay = Duration(
+                        milliseconds: index * 100); //delay between widgets
+
                     return FutureBuilder(
-                      future:
-                          Future.delayed(Duration(milliseconds: index * 1000)),
+                      future: Future.delayed(delay),
                       builder: (context, snapshot) {
-                        return GenericFadeTransition(
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return GenericSlideTransition(
+                            initialOffset: const Offset(-5, 0),
                             curve: Curves.easeInOutCubicEmphasized,
-                            duration: const Duration(milliseconds: 2000),
+                            duration: const Duration(milliseconds: 1000),
                             builder: (context) {
                               return tasks[index];
-                            });
+                            },
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
                       },
                     );
                   },
