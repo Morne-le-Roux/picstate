@@ -20,7 +20,8 @@ class MenuButton extends StatefulWidget {
 class _MenuButtonState extends State<MenuButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.all(5),
       margin: const EdgeInsets.only(top: 15, left: 10, right: 10),
       decoration: BoxDecoration(
