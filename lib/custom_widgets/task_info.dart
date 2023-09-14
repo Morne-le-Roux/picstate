@@ -26,7 +26,7 @@ class TaskInfo extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.black87,
+        color: kBackgroundColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,7 +52,7 @@ class TaskInfo extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.black87,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white)),
+                border: Border.all(color: Colors.black)),
             child: Text(
               description,
               style: kTaskTextStyle.copyWith(color: Colors.white),
