@@ -87,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       heading: menuButtons[index].heading,
                       content: menuButtons[index].content,
                       color: selectedButton == index //is selected?
-                          ? kSelectedButtonColor //color if selected
-                          : kButtonColor, //color if not selected
+                          ? kSelectedMenuButtonColor //color if selected
+                          : kMenuButtonColor, //color if not selected
                     ),
                   );
                 })),

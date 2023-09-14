@@ -53,7 +53,7 @@ class TaskWidget extends StatefulWidget {
     );
 
     // Use a Timer to automatically complete with false after a timeout
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 2), () {
       if (!completer.isCompleted) {
         completer.complete(true); // Timed out
       }
@@ -86,8 +86,9 @@ class _TaskWidgetState extends State<TaskWidget> {
       child: Container(
         margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.black, width: 2)),
+          borderRadius: BorderRadius.circular(20),
+          // border: Border.all(color: Colors.black, width: 2),
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18),
           child: Dismissible(
@@ -122,6 +123,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             ),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),
+              padding: const EdgeInsets.all(4), //BORDER WIDTH
               //height of the widget
               height: 60,
               decoration: BoxDecoration(
@@ -146,118 +148,125 @@ class _TaskWidgetState extends State<TaskWidget> {
                                 ? kColorWaiting
                                 : kColorDone),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //TASK NAME and INFO
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: SizedBox(
-                      width: 200,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Material(
+                elevation: 5,
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //TASK NAME and INFO
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: SizedBox(
+                          width: 200,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.taskName,
+                                style: kTaskTextStyle,
+                              ),
+
+                              //spacing
+
+                              const SizedBox(
+                                height: 5,
+                              ),
+
+                              //CREATED BY
+                              Text(
+                                "Created by: ${widget.createdBy}",
+                                style: kHintTextStyle.copyWith(
+                                  fontSize: 12,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      //SIDE INFO
+                      Row(
                         children: [
-                          Text(
-                            widget.taskName,
-                            style: kTaskTextStyle,
+                          //DUE DATE
+
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Due by: ",
+                                    style: kTaskTextStyle,
+                                  ),
+                                  Text(
+                                    // Checks if due date is today
+                                    widget.dueDate == today
+                                        ? "Today"
+                                        // Checks if due date is yesterday
+                                        : widget.dueDate == yesterday
+                                            ? "Yesterday"
+                                            // Checks if due date is tomorrow
+                                            : widget.dueDate == tomorrow
+                                                ? "Tomorrow"
+                                                // Otherwise prints due date
+                                                : widget.dueDate,
+                                    style: kTaskTextStyle,
+                                  ),
+                                ],
+                              ),
+
+                              //SPACING
+                              const SizedBox(
+                                height: 5,
+                              ),
+
+                              Text(
+                                "Status: ${widget.state}",
+                                style: kTaskTextStyle,
+                              )
+                            ],
                           ),
 
                           //spacing
 
                           const SizedBox(
-                            height: 5,
+                            width: 20,
                           ),
 
-                          //CREATED BY
-                          Text(
-                            "Created by: ${widget.createdBy}",
-                            style: kHintTextStyle.copyWith(
-                              fontSize: 12,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  //SIDE INFO
-                  Row(
-                    children: [
-                      //DUE DATE
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Due by: ",
-                                style: kTaskTextStyle,
+                          //state BUTTON
+                          PopupMenuButton(
+                            onSelected: (value) =>
+                                Logic().updateData(widget.id, value),
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry>[
+                              const PopupMenuItem(
+                                value: "todo",
+                                child: Text('ToDo'),
                               ),
-                              Text(
-                                // Checks if due date is today
-                                widget.dueDate == today
-                                    ? "Today"
-                                    // Checks if due date is yesterday
-                                    : widget.dueDate == yesterday
-                                        ? "Yesterday"
-                                        // Checks if due date is tomorrow
-                                        : widget.dueDate == tomorrow
-                                            ? "Tomorrow"
-                                            // Otherwise prints due date
-                                            : widget.dueDate,
-                                style: kTaskTextStyle,
+                              const PopupMenuItem(
+                                value: "done",
+                                child: Text('Done'),
+                              ),
+                              const PopupMenuItem(
+                                value: "waiting",
+                                child: Text('Waiting'),
                               ),
                             ],
-                          ),
-
-                          //SPACING
-                          const SizedBox(
-                            height: 5,
-                          ),
-
-                          Text(
-                            "Status: ${widget.state}",
-                            style: kTaskTextStyle,
-                          )
-                        ],
-                      ),
-
-                      //spacing
-
-                      const SizedBox(
-                        width: 20,
-                      ),
-
-                      //state BUTTON
-                      PopupMenuButton(
-                        onSelected: (value) =>
-                            Logic().updateData(widget.id, value),
-                        itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                          const PopupMenuItem(
-                            value: "todo",
-                            child: Text('ToDo'),
-                          ),
-                          const PopupMenuItem(
-                            value: "done",
-                            child: Text('Done'),
-                          ),
-                          const PopupMenuItem(
-                            value: "waiting",
-                            child: Text('Waiting'),
-                          ),
-                          const PopupMenuItem(
-                            value: "order",
-                            child: Text('To Order'),
                           )
                         ],
                       )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
           ),

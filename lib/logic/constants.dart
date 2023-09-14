@@ -16,10 +16,14 @@ TextStyle kHintTextStyle = GoogleFonts.roboto(
 );
 
 //Button Color
+
 Gradient kButtonColor =
     const LinearGradient(colors: [Colors.amber, Colors.amberAccent]);
 
-Gradient kSelectedButtonColor =
+Gradient kMenuButtonColor =
+    const LinearGradient(colors: [Colors.amber, Colors.amberAccent]);
+
+Gradient kSelectedMenuButtonColor =
     const LinearGradient(colors: [Colors.orange, Colors.redAccent]);
 
 //Button Text Style
