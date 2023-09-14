@@ -43,6 +43,7 @@ class _ToDoStreamState extends State<ToDoStream> {
               dueDate: task["due_date"] ?? "No Due Date",
               state: task["state"],
               index: tasks.length,
+              visible: true,
             ));
           }
 
@@ -56,6 +57,17 @@ class _ToDoStreamState extends State<ToDoStream> {
           }
 
           tasks.sort(customCompare);
+
+          tasks.add(const TaskWidget(
+              id: -1,
+              taskName: "",
+              createdBy: "",
+              createdAt: "",
+              dueDate: "",
+              description: "",
+              state: "",
+              index: 99999,
+              visible: false));
 
           //return
 

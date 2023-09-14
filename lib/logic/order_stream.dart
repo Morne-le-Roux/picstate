@@ -41,6 +41,7 @@ class _OrderStreamState extends State<OrderStream> {
                 description: order["description"],
                 state: order["state"],
                 index: orders.length,
+                visible: true,
               ),
             );
           }
@@ -55,6 +56,14 @@ class _OrderStreamState extends State<OrderStream> {
           }
 
           orders.sort(customCompare);
+
+          orders.add(const OrderWidget(
+              id: -1,
+              orderName: "",
+              state: "",
+              index: 999999,
+              description: "",
+              visible: false));
 
           //return
 
