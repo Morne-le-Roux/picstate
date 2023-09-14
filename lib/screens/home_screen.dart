@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
             GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 2,
-                childAspectRatio: 3,
+                childAspectRatio: 2,
                 children: List.generate(menuButtons.length, (index) {
                   return GestureDetector(
                     onTap: () {
@@ -93,6 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 })),
 
+            const SizedBox(
+              height: 20,
+            ),
 //Shows selected item
             FutureBuilder(
               builder: (context, snapshot) {

@@ -19,7 +19,6 @@ class MenuButton extends StatefulWidget {
 
 class _MenuButtonState extends State<MenuButton> {
   @override
-  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(5),
@@ -29,7 +28,7 @@ class _MenuButtonState extends State<MenuButton> {
         gradient: widget.color,
       ),
       child: Material(
-        elevation: 8,
+        elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Container(
           decoration: BoxDecoration(
