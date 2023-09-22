@@ -19,14 +19,17 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
   Future<void> launchWhatsapp({required url}) async {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
-      print("launched");
     } else {
       throw "Could not launch $url";
     }
   }
 
+  final TextEditingController _countryCode = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    _countryCode.text = 27.toString();
+    countryCode = _countryCode.text;
     return Container(
 //BACKGROUND COLOR
       color: Colors.white,
@@ -41,20 +44,25 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 150,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  border: Border.all(
-//BORDER COLOR
-                      color: Colors.lightGreenAccent),
-                  borderRadius: const BorderRadius.all(Radius.circular(10))),
-              child: TextField(
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.map_outlined),
-                    prefix: Text("+"),
-                    border: InputBorder.none),
-                onChanged: (value) => countryCode = value,
+            child: Material(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              elevation: 3,
+              child: Container(
+                width: 150,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        //BORDER COLOR
+                        color: Colors.amber),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: TextField(
+                  controller: _countryCode,
+                  decoration: const InputDecoration(
+                      icon: Icon(Icons.map_outlined),
+                      prefix: Text("+"),
+                      border: InputBorder.none),
+                  onChanged: (value) => countryCode = _countryCode.text,
+                ),
               ),
             ),
           ),
@@ -67,37 +75,49 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      //BORDER COLOR
-                      color: Colors.lightGreenAccent),
-                  borderRadius: const BorderRadius.all(Radius.circular(10))),
-              child: TextField(
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.phone_outlined), border: InputBorder.none),
-                onChanged: (value) => phoneNumber = value,
+            child: Material(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              elevation: 3,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        //BORDER COLOR
+                        color: Colors.amber),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: TextField(
+                  decoration: const InputDecoration(
+                      icon: Icon(Icons.phone_outlined),
+                      border: InputBorder.none),
+                  onChanged: (value) => phoneNumber = value,
+                ),
               ),
             ),
           ),
 
+          const SizedBox(
+            height: 20,
+          ),
 //BUTTON TO LAUNCH URL
 
           GestureDetector(
-            child: Container(
-              height: 50,
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.lightGreenAccent.shade700,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
+            child: Material(
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
+              elevation: 3,
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: const BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(50),
+                  ),
                 ),
-              ),
-              child: const Center(
-                child: Text(
-                  "Open Chat",
-                  style: TextStyle(color: Colors.white),
+                child: const Center(
+                  child: Text(
+                    "Open Chat",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
