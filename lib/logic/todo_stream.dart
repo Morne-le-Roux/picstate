@@ -14,12 +14,13 @@ class ToDoStream extends StatefulWidget {
 
 class _ToDoStreamState extends State<ToDoStream> {
   List<TaskWidget> tasks = []; //list of tasks that the listView uses
-  final Logic _supaBaseStuff = Logic();
+  List<bool> tasksAnimated = []; //List to check if the task was animated before
+  final Logic _logic = Logic();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
-        stream: _supaBaseStuff.taskStream(),
+        stream: _logic.taskStream(),
         builder: (context, snapshot) {
           //clears task list before building new list
           tasks = [];
@@ -45,7 +46,15 @@ class _ToDoStreamState extends State<ToDoStream> {
               index: tasks.length,
               visible: true,
             ));
+
+//adds a bool in tasksAnimated List to display animation or not.
+            tasksAnimated.add(
+              false,
+            );
           }
+
+          //adds extra bool for last "SpaceHolder"
+          tasksAnimated.add(false);
 
           //sort
 
@@ -97,17 +106,28 @@ class _ToDoStreamState extends State<ToDoStream> {
                         milliseconds: index * 100); //delay between widgets
 
                     return FutureBuilder(
-                      future: Future.delayed(delay),
+                      future: Future.delayed(tasksAnimated[
+                              index] //checks if task was animated before
+                          ? const Duration(milliseconds: 0)
+                          : delay),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          return GenericSlideTransition(
-                            initialOffset: const Offset(-5, 0),
-                            curve: Curves.easeInOutCubicEmphasized,
-                            duration: const Duration(milliseconds: 1000),
-                            builder: (context) {
-                              return tasks[index];
-                            },
-                          );
+                          if (!tasksAnimated[index]) {
+                            //if task was not animated b4
+                            return GenericSlideTransition(
+                              initialOffset: const Offset(-5, 0),
+                              curve: Curves.easeInOutCubicEmphasized,
+                              duration: const Duration(milliseconds: 1000),
+                              builder: (context) {
+                                tasksAnimated[index] =
+                                    true; //Marks the widget as animated
+                                return tasks[index];
+                              },
+                            );
+                          } else {
+                            //if task was animated b4
+                            return tasks[index];
+                          }
                         } else {
                           return const SizedBox();
                         }

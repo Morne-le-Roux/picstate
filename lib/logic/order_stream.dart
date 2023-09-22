@@ -14,6 +14,9 @@ class OrderStream extends StatefulWidget {
 
 class _OrderStreamState extends State<OrderStream> {
   List<OrderWidget> orders = []; //list of tasks that the listView uses
+  List<bool> ordersAnimated =
+      []; //List to check if the task was animated before
+
   final Logic _supaBaseStuff = Logic();
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,15 @@ class _OrderStreamState extends State<OrderStream> {
                 visible: true,
               ),
             );
+
+            //adds a bool in tasksAnimated List to display animation or not.
+            ordersAnimated.add(
+              false,
+            );
           }
+
+          //adds extra bool for last "SpaceHolder"
+          ordersAnimated.add(false);
 
           //sort
 
@@ -93,17 +104,28 @@ class _OrderStreamState extends State<OrderStream> {
                         milliseconds: index * 100); //delay between widgets
 
                     return FutureBuilder(
-                      future: Future.delayed(delay),
+                      future: Future.delayed(ordersAnimated[
+                              index] //checks if task was animated before
+                          ? const Duration(milliseconds: 0)
+                          : delay),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          return GenericSlideTransition(
-                            initialOffset: const Offset(-5, 0),
-                            curve: Curves.easeInOutCubicEmphasized,
-                            duration: const Duration(milliseconds: 1000),
-                            builder: (context) {
-                              return orders[index];
-                            },
-                          );
+                          if (!ordersAnimated[index]) {
+                            //if task was not animated b4
+                            return GenericSlideTransition(
+                              initialOffset: const Offset(-5, 0),
+                              curve: Curves.easeInOutCubicEmphasized,
+                              duration: const Duration(milliseconds: 1000),
+                              builder: (context) {
+                                ordersAnimated[index] =
+                                    true; //Marks the widget as animated
+                                return orders[index];
+                              },
+                            );
+                          } else {
+                            //if task was animated b4
+                            return orders[index];
+                          }
                         } else {
                           return const SizedBox();
                         }
