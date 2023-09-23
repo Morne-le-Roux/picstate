@@ -41,14 +41,17 @@ class _MenuButtonState extends State<MenuButton> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //heading
               Text(
                 widget.heading,
-                style: kTaskTextStyle.copyWith(fontSize: 18),
+                style: kTaskTextStyle.copyWith(fontSize: 16),
               ),
+
+              //content
               Text(
                 widget.content,
                 style: kHintTextStyle.copyWith(
-                    color: const Color.fromARGB(149, 0, 0, 0)),
+                    color: const Color.fromARGB(149, 0, 0, 0), fontSize: 10),
               ),
             ],
           ),
