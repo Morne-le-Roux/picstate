@@ -134,7 +134,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   ),
                 ),
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 1000),
                   padding: const EdgeInsets.all(4), //BORDER WIDTH
                   //height of the widget
                   height: 60,
@@ -169,10 +169,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //TASK NAME and INFO
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: SizedBox(
-                            width: 200,
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,6 +179,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                                 Text(
                                   widget.taskName,
                                   style: kTaskTextStyle,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
 
                                 //spacing
@@ -210,27 +211,31 @@ class _TaskWidgetState extends State<TaskWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Due by: ",
-                                      style: kTaskTextStyle,
-                                    ),
-                                    Text(
-                                      // Checks if due date is today
-                                      widget.dueDate == today
-                                          ? "Today"
-                                          // Checks if due date is yesterday
-                                          : widget.dueDate == yesterday
-                                              ? "Yesterday"
-                                              // Checks if due date is tomorrow
-                                              : widget.dueDate == tomorrow
-                                                  ? "Tomorrow"
-                                                  // Otherwise prints due date
-                                                  : widget.dueDate,
-                                      style: kTaskTextStyle,
-                                    ),
-                                  ],
+                                ConstrainedBox(
+                                  constraints:
+                                      BoxConstraints.loose(const Size(100, 50)),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Due by: ",
+                                        style: kTaskTextStyle,
+                                      ),
+                                      Text(
+                                        // Checks if due date is today
+                                        widget.dueDate == today
+                                            ? "Today"
+                                            // Checks if due date is yesterday
+                                            : widget.dueDate == yesterday
+                                                ? "Yesterday"
+                                                // Checks if due date is tomorrow
+                                                : widget.dueDate == tomorrow
+                                                    ? "Tomorrow"
+                                                    // Otherwise prints due date
+                                                    : widget.dueDate,
+                                        style: kTaskTextStyle,
+                                      ),
+                                    ],
+                                  ),
                                 ),
 
                                 //SPACING

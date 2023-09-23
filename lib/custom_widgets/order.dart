@@ -155,10 +155,9 @@ class _OrderWidgetState extends State<OrderWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //TASK NAME and INFO
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: SizedBox(
-                            width: 200,
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 20),
                             child: Text(
                               widget.orderName,
                               style: kTaskTextStyle,
@@ -171,20 +170,24 @@ class _OrderWidgetState extends State<OrderWidget> {
                           children: [
                             //DUE DATE
 
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                //SPACING
-                                const SizedBox(
-                                  height: 5,
-                                ),
+                            ConstrainedBox(
+                              constraints:
+                                  BoxConstraints.loose(const Size(100, 50)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //SPACING
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
 
-                                Text(
-                                  "Status: ${widget.state}",
-                                  style: kTaskTextStyle,
-                                )
-                              ],
+                                  Text(
+                                    "Status: ${widget.state}",
+                                    style: kTaskTextStyle,
+                                  )
+                                ],
+                              ),
                             ),
 
                             //spacing
