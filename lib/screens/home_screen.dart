@@ -55,10 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //currently selected button
   int selectedButton = -1;
+  int buttonRowCount = 2;
 
 //build
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth >= 500) {
+      buttonRowCount = 4;
+    }
+    if (screenWidth <= 499) {
+      buttonRowCount = 2;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -75,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //Menu Buttons
             GridView.count(
                 shrinkWrap: true,
-                crossAxisCount: 2,
+                crossAxisCount: buttonRowCount,
                 childAspectRatio: 2,
                 children: List.generate(menuButtons.length, (index) {
                   return GestureDetector(
