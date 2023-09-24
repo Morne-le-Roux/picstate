@@ -44,6 +44,8 @@ class _OrderStreamState extends State<OrderStream> {
                 description: order["description"],
                 state: order["state"],
                 index: orders.length,
+                createdAt: order["created_at"],
+                createdBy: order["created_by"],
                 visible: true,
               ),
             );
@@ -74,6 +76,8 @@ class _OrderStreamState extends State<OrderStream> {
               state: "",
               index: 999999,
               description: "",
+              createdAt: "2023-09-22T13:11:46.768585",
+              createdBy: "temp",
               visible: false));
 
           //return

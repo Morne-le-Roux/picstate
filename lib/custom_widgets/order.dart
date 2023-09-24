@@ -16,6 +16,8 @@ class OrderWidget extends StatefulWidget {
     required this.index,
     required this.description,
     required this.visible,
+    required this.createdAt,
+    required this.createdBy,
   });
 
 //The tasks name
@@ -25,6 +27,8 @@ class OrderWidget extends StatefulWidget {
   final String description;
   final int index;
   final bool visible;
+  final String createdAt;
+  final String createdBy;
 
 //CODE FOR THE UNDO WHEN REMOVING A WIDGET
   Future<bool> showConfirmationSnackBar(BuildContext context) async {
@@ -79,8 +83,8 @@ class _OrderWidgetState extends State<OrderWidget> {
                 return TaskInfo(
                     taskName: widget.orderName,
                     description: widget.description,
-                    createdAt: "temp",
-                    createdBy: "temp",
+                    createdAt: widget.createdAt,
+                    createdBy: widget.createdBy,
                     dueDate: "temp",
                     state: widget.state);
               });
