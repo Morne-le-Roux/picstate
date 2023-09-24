@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/logic/constants.dart';
+import 'package:intl/intl.dart';
 
 class TaskInfo extends StatelessWidget {
-  const TaskInfo({
+  TaskInfo({
     super.key,
     required this.taskName,
     required this.description,
@@ -19,8 +20,32 @@ class TaskInfo extends StatelessWidget {
   final String state;
   final String description;
 
+  final TextEditingController _taskNameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _dueDateController = TextEditingController();
+
+  parseCreatedAtDate(inputDate) {
+    String inputDateString = inputDate;
+
+// Parse the input string into a DateTime object
+    DateTime dateTime = DateTime.parse(inputDateString);
+
+// Create a custom date format
+    DateFormat dateFormat = DateFormat('dd-MM-yyyy / HH:mm');
+
+// Format the DateTime object as a string in the desired format
+    String formattedDateString = dateFormat.format(dateTime);
+
+    return formattedDateString; // Output: 22-09-2023 / 13:11
+  }
+
   @override
   Widget build(BuildContext context) {
+    //init controller text
+    _taskNameController.text = taskName;
+    _descriptionController.text = description;
+    _dueDateController.text = dueDate;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
@@ -35,10 +60,15 @@ class TaskInfo extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
             decoration: BoxDecoration(
-                color: Colors.black87, borderRadius: BorderRadius.circular(20)),
+              color: kBoxBackgroundColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Text(
               taskName,
-              style: kTaskTextStyle.copyWith(fontSize: 30, color: Colors.white),
+              style: kTaskTextStyle.copyWith(
+                fontSize: 30,
+                color: kBoxTextColor,
+              ),
             ),
           ),
 
@@ -50,12 +80,12 @@ class TaskInfo extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             height: 200,
             decoration: BoxDecoration(
-                color: Colors.black87,
+                color: kBoxBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.black)),
+                border: Border.all(color: kBoxBorderColor)),
             child: Text(
               description,
-              style: kTaskTextStyle.copyWith(color: Colors.white),
+              style: kTaskTextStyle.copyWith(color: kBoxTextColor),
             ),
           ),
 
@@ -68,27 +98,40 @@ class TaskInfo extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 decoration: BoxDecoration(
-                    color: Colors.black87,
+                    color: kBoxBackgroundColor,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white)),
+                    border: Border.all(color: kBoxBorderColor)),
                 child: Text(
                   "Created by: $createdBy",
-                  style: kTaskTextStyle.copyWith(color: Colors.white),
+                  style: kTaskTextStyle.copyWith(color: kBoxTextColor),
                 ),
               ),
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 decoration: BoxDecoration(
-                    color: Colors.black87,
+                    color: kBoxBackgroundColor,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white)),
+                    border: Border.all(color: kBoxBorderColor)),
                 child: Text(
                   "State: $state",
-                  style: kTaskTextStyle.copyWith(color: Colors.white),
+                  style: kTaskTextStyle.copyWith(color: kBoxTextColor),
                 ),
               ),
             ],
+          ),
+
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+            decoration: BoxDecoration(
+                color: kBoxBackgroundColor,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: kBoxBorderColor)),
+            child: Text(
+              "Created at: ${parseCreatedAtDate(createdAt)}",
+              style: kTaskTextStyle.copyWith(color: kBoxTextColor),
+            ),
           ),
         ],
       ),
