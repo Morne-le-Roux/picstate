@@ -37,10 +37,11 @@ TextStyle kButtonTextStyle = GoogleFonts.roboto(
 
 //Task Text Style
 TextStyle kTaskTextStyle = GoogleFonts.robotoCondensed(
-    color: const Color.fromARGB(255, 10, 10, 3),
-    // shadows: <Shadow>[const Shadow(blurRadius: 0.5, color: Colors.black)],
-    fontWeight: FontWeight.w700,
-    fontStyle: FontStyle.italic);
+  color: const Color.fromARGB(255, 10, 10, 3),
+  // shadows: <Shadow>[const Shadow(blurRadius: 0.5, color: Colors.black)],
+  fontWeight: FontWeight.w700,
+  // fontStyle: FontStyle.italic,
+);
 
 //DATES
 
@@ -69,3 +70,10 @@ const List<Color> kColorWaiting = [
   Color.fromARGB(103, 255, 255, 255),
   Colors.grey,
 ];
+
+//Info Widgets
+
+const Color kBoxBackgroundColor = Colors.white;
+const Color kBoxTextColor = Colors.black87;
+const Color kWidgetBackgroundColor = Color.fromARGB(255, 219, 219, 219);
+const Color kBoxBorderColor = Colors.black87;
