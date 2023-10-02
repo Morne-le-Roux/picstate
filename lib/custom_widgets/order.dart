@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:picstate/logic/constants.dart';
+import 'package:picstate/config/constants.dart';
 import 'package:picstate/custom_widgets/task_info.dart';
 import 'package:picstate/logic/logic.dart';
 
