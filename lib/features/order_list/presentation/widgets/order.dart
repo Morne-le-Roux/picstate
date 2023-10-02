@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:picstate/config/constants.dart';
-import 'package:picstate/custom_widgets/task_info.dart';
+import 'package:picstate/features/todo_list/presentation/widgets/task_info.dart';
 import 'package:picstate/logic/logic.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.

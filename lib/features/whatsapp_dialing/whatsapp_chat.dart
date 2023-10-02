@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/custom_widgets/rounded_button.dart';
+import 'package:picstate/core/widgets/rounded_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class WhatsappChatDialer extends StatefulWidget {

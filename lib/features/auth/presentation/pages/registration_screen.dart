@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/config/constants.dart';
-import 'package:picstate/custom_widgets/rounded_button.dart';
-import 'package:picstate/custom_widgets/text_input.dart';
-import 'package:picstate/core/screens/home_screen.dart';
+import 'package:picstate/core/widgets/rounded_button.dart';
+import 'package:picstate/core/widgets/text_input.dart';
+import 'package:picstate/features/main_screen/presentation/pages/home_screen.dart';
 import 'package:picstate/features/auth/presentation/pages/login_screen.dart';
 import 'package:picstate/config/supabase_settings.dart';
 import 'package:picstate/logic/logic.dart';

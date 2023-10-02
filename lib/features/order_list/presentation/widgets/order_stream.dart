@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import '../custom_widgets/task.dart';
 import 'package:picstate/logic/logic.dart';
 import 'package:simplified_flutter_animations/generic_slide_transition.dart';
-import '../custom_widgets/new_task.dart';
-import '../custom_widgets/rounded_button.dart';
+import 'new_order.dart';
+import '../../../../core/widgets/rounded_button.dart';
+import 'order.dart';
 
-class ToDoStream extends StatefulWidget {
-  const ToDoStream({super.key});
+class OrderStream extends StatefulWidget {
+  const OrderStream({super.key});
 
   @override
-  State<ToDoStream> createState() => _ToDoStreamState();
+  State<OrderStream> createState() => _OrderStreamState();
 }
 
-class _ToDoStreamState extends State<ToDoStream> {
-  List<TaskWidget> tasks = []; //list of tasks that the listView uses
-  List<bool> tasksAnimated = []; //List to check if the task was animated before
-  final Logic _logic = Logic();
+class _OrderStreamState extends State<OrderStream> {
+  List<OrderWidget> orders = []; //list of tasks that the listView uses
+  List<bool> ordersAnimated =
+      []; //List to check if the task was animated before
+
+  final Logic _supaBaseStuff = Logic();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
-        stream: _logic.taskStream(),
+        stream: _supaBaseStuff.orderStream(),
         builder: (context, snapshot) {
           //clears task list before building new list
-          tasks = [];
+          orders = [];
           if (!snapshot.hasData) {
             return const Center(
                 child: CircularProgressIndicator(
@@ -34,48 +36,48 @@ class _ToDoStreamState extends State<ToDoStream> {
 
           //task list builder:
 
-          for (var task in snapshot.data) {
-            tasks.add(TaskWidget(
-              id: task["id"],
-              taskName: task["task_name"],
-              description: task["description"],
-              createdBy: task["created_by"],
-              createdAt: task["created_at"],
-              dueDate: task["due_date"] ?? "No Due Date",
-              state: task["state"],
-              index: tasks.length,
-              visible: true,
-            ));
+          for (var order in snapshot.data) {
+            orders.add(
+              OrderWidget(
+                id: order["id"],
+                orderName: order["order_name"],
+                description: order["description"],
+                state: order["state"],
+                index: orders.length,
+                createdAt: order["created_at"],
+                createdBy: order["created_by"],
+                visible: true,
+              ),
+            );
 
-//adds a bool in tasksAnimated List to display animation or not.
-            tasksAnimated.add(
+            //adds a bool in tasksAnimated List to display animation or not.
+            ordersAnimated.add(
               false,
             );
           }
 
           //adds extra bool for last "SpaceHolder"
-          tasksAnimated.add(false);
+          ordersAnimated.add(false);
 
           //sort
 
-          int customCompare(TaskWidget a, TaskWidget b) {
+          int customCompare(OrderWidget a, OrderWidget b) {
             final statesOrder = ["todo", "waiting", "order", "done"];
             return statesOrder
                 .indexOf(a.state)
                 .compareTo(statesOrder.indexOf(b.state));
           }
 
-          tasks.sort(customCompare);
+          orders.sort(customCompare);
 
-          tasks.add(const TaskWidget(
+          orders.add(const OrderWidget(
               id: -1,
-              taskName: "",
-              createdBy: "",
-              createdAt: "",
-              dueDate: "",
-              description: "",
+              orderName: "",
               state: "",
-              index: 99999,
+              index: 999999,
+              description: "",
+              createdAt: "2023-09-22T13:11:46.768585",
+              createdBy: "temp",
               visible: false));
 
           //return
@@ -100,33 +102,33 @@ class _ToDoStreamState extends State<ToDoStream> {
               child: Container(
                 margin: const EdgeInsets.only(),
                 child: ListView.builder(
-                  itemCount: tasks.length,
+                  itemCount: orders.length,
                   itemBuilder: (context, index) {
                     final delay = Duration(
                         milliseconds: index * 100); //delay between widgets
 
                     return FutureBuilder(
-                      future: Future.delayed(tasksAnimated[
+                      future: Future.delayed(ordersAnimated[
                               index] //checks if task was animated before
                           ? const Duration(milliseconds: 0)
                           : delay),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          if (!tasksAnimated[index]) {
+                          if (!ordersAnimated[index]) {
                             //if task was not animated b4
                             return GenericSlideTransition(
                               initialOffset: const Offset(-5, 0),
                               curve: Curves.easeInOutCubicEmphasized,
                               duration: const Duration(milliseconds: 1000),
                               builder: (context) {
-                                tasksAnimated[index] =
+                                ordersAnimated[index] =
                                     true; //Marks the widget as animated
-                                return tasks[index];
+                                return orders[index];
                               },
                             );
                           } else {
                             //if task was animated b4
-                            return tasks[index];
+                            return orders[index];
                           }
                         } else {
                           return const SizedBox();
@@ -141,12 +143,12 @@ class _ToDoStreamState extends State<ToDoStream> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RoundedButton(
-                text: "Add Task",
+                text: "Add Order",
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
-                        return const NewTask();
+                        return const NewOrder();
                       });
                 },
               ),
