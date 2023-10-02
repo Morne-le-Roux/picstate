@@ -14,15 +14,12 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
 
   String phoneNumber = "";
 
-  // String api = "https://wa.me/";
   String completedLink = "";
 
 //FUNCTION TO LAUNCH WHATSAPP URL
   Future<void> launchWhatsapp({required url}) async {
     await launchUrl(url);
   }
-
-  //whatsapp://send/?phone=27710908116&text&type=phone_number&app_absent=0 could not be loaded because:
 
   final TextEditingController _countryCode = TextEditingController();
 

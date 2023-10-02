@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/applets/whatsapp_chat.dart';
+import 'package:picstate/features/whatsapp_dialing/whatsapp_chat.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/custom_widgets/menu_button.dart';
 import 'package:picstate/logic/order_stream.dart';
