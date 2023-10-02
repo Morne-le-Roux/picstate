@@ -1,10 +1,10 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
-import 'package:picstate/supabase_stuff.dart';
+import 'package:picstate/logic/logic.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({super.key});
@@ -16,17 +16,13 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   late String _newTaskName;
   late String _dueDate;
-  final String _createdBy = SupaBaseStuff().getUserName().toString();
+  final String _createdBy = Logic().getUserName().toString();
   String? _description;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.black87, Colors.black],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft)),
+      decoration: BoxDecoration(color: kBackgroundColor),
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +36,7 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "New Task Name",
                 onChanged: (value) => _newTaskName = value,
                 obscureText: false,
-                fontColor: Colors.white,
+                fontColor: Colors.black,
               ),
 
 //SPACING
@@ -58,12 +54,11 @@ class _NewTaskState extends State<NewTask> {
               DatePicker(
                 DateTime.now(),
                 daysCount: 365,
-                dayTextStyle:
-                    const TextStyle(fontSize: 8, color: Colors.white70),
+                dayTextStyle: const TextStyle(fontSize: 8, color: Colors.black),
                 monthTextStyle:
-                    const TextStyle(fontSize: 8, color: Colors.white70),
+                    const TextStyle(fontSize: 8, color: Colors.black),
                 dateTextStyle:
-                    const TextStyle(fontSize: 24, color: Colors.white70),
+                    const TextStyle(fontSize: 24, color: Colors.black),
                 selectionColor: Colors.yellow,
                 selectedTextColor: Colors.black,
                 onDateChange: (date) {
@@ -83,11 +78,16 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "Description",
                 onChanged: (value) => _description = value,
                 obscureText: false,
-                fontColor: Colors.white,
+                fontColor: Colors.black,
                 icon: Icons.description,
                 multiline: true,
               )
             ],
+          ),
+
+//TODO: ADD STATE OPTION WHEN CREATING TASK.
+          const Row(
+            children: [],
           ),
 
 //ADD TASK BUTTON
@@ -95,8 +95,8 @@ class _NewTaskState extends State<NewTask> {
           RoundedButton(
             text: "Add Task",
             onTap: () {
-              SupaBaseStuff().addData(_newTaskName, _dueDate.toString(),
-                  _createdBy, _description ?? "");
+              Logic().addTask(_newTaskName, _dueDate.toString(), _createdBy,
+                  _description ?? "");
               Navigator.pop(context);
             },
           ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/constants.dart';
-import 'package:picstate/custom_widgets/new_task.dart';
-import 'package:picstate/custom_widgets/rounded_button.dart';
-import 'package:picstate/custom_widgets/task.dart';
-import 'package:picstate/supabase_stuff.dart';
-import 'package:picstate/custom_widgets/top_bar.dart';
-import 'package:simplified_flutter_animations/generic_fade_transition.dart';
+import 'package:picstate/applets/whatsapp_chat.dart';
+import 'package:picstate/logic/constants.dart';
+import 'package:picstate/custom_widgets/menu_button.dart';
+import 'package:picstate/logic/order_stream.dart';
+import 'package:picstate/logic/todo_stream.dart';
+import 'package:picstate/logic/logic.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,124 +14,118 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<TaskWidget> tasks = []; //list of tasks that the listView uses
-  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
   bool needsUpdate = false;
 
   @override
   void initState() {
     super.initState();
+
+    //Checks if the app is updated (version number is hosted on supabase)
     checkForUpdate();
   }
 
   checkForUpdate() async {
-    needsUpdate = await SupaBaseStuff().needsUpdate();
+    needsUpdate = await Logic().needsUpdate();
     setState(() {});
   }
 
+//List of menu buttons to show on main screen
+  List<MenuButton> menuButtons = [
+    MenuButton(
+      heading: "Todo's",
+      content: "Jobs to be done",
+      color: kButtonColor,
+    ),
+    MenuButton(
+      heading: "Orders",
+      content: "Please Order",
+      color: kButtonColor,
+    ),
+    MenuButton(
+      heading: "Whatsapp Dialer",
+      content: "Open Whatsapp Chat",
+      color: kButtonColor,
+    ),
+    MenuButton(
+      heading: "Price Calculator",
+      content: "Calculate Odd Pricing",
+      color: kButtonColor,
+    )
+  ];
+
+//currently selected button
+  int selectedButton = -1;
+  int buttonRowCount = 2;
+
+//build
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Column(
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth >= 500) {
+      buttonRowCount = 4;
+    }
+    if (screenWidth <= 499) {
+      buttonRowCount = 2;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'PRINT&IMAGE CENTRE',
+          style: kTaskTextStyle.copyWith(
+              fontStyle: FontStyle.italic, color: Colors.white60, fontSize: 30),
+        ),
+      ),
+      backgroundColor: kBackgroundColor,
+      body: SafeArea(
+        top: false,
+        child: Column(
           children: [
-            const TopBar(), //yellow border line thingy.
-
-//StreamBuilder
-            Expanded(
-              child: StreamBuilder(
-                stream: _supaBaseStuff.listenToTasks(),
-                builder: (context, snapshot) {
-                  //clears task list before building new list
-                  tasks = [];
-                  if (!snapshot.hasData) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.amber,
-                    ));
-                  }
-                  //DECODE JSON DATA //wait... its not JSON!!!
-
-                  //task list builder:
-
-                  for (var task in snapshot.data) {
-                    tasks.add(TaskWidget(
-                      id: task["id"],
-                      taskName: task["task_name"],
-                      description: task["description"],
-                      createdBy: task["created_by"],
-                      createdAt: task["created_at"],
-                      dueDate: task["due_date"] ?? "No Due Date",
-                      state: task["state"],
-                      index: tasks.length,
-                    ));
-                  }
-
-                  //sort
-
-                  int customCompare(TaskWidget a, TaskWidget b) {
-                    final statesOrder = ["todo", "waiting", "order", "done"];
-                    return statesOrder
-                        .indexOf(a.state)
-                        .compareTo(statesOrder.indexOf(b.state));
-                  }
-
-                  tasks.sort(customCompare);
-
-                  //return
-
-                  return Stack(alignment: Alignment.bottomCenter, children: [
-                    ShaderMask(
-                      shaderCallback: (bounds) {
-                        return const LinearGradient(
-                          colors: [
-                            Colors.transparent,
-                            Colors.black,
-                            Colors.black,
-                            Colors.black,
-                            Colors.black,
-                            Colors.black,
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ).createShader(bounds);
-                      },
-                      blendMode: BlendMode.dstIn,
-                      child: Container(
-                        margin: const EdgeInsets.only(),
-                        child: ListView.builder(
-                          itemCount: tasks.length,
-                          itemBuilder: (context, index) {
-                            return GenericFadeTransition(
-                                curve: Curves.easeInOutCubicEmphasized,
-                                duration: const Duration(milliseconds: 800),
-                                builder: (context) {
-                                  return tasks[index];
-                                });
-                          },
-                        ),
-                      ),
+//Menu Buttons
+            GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: buttonRowCount,
+                childAspectRatio: 2,
+                children: List.generate(menuButtons.length, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedButton = index;
+                      });
+                    },
+                    child: MenuButton(
+                      heading: menuButtons[index].heading,
+                      content: menuButtons[index].content,
+                      color: selectedButton == index //is selected?
+                          ? kSelectedMenuButtonColor //color if selected
+                          : kMenuButtonColor, //color if not selected
                     ),
-                    //add task button
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: RoundedButton(
-                        text: "Add Task",
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const NewTask();
-                              });
-                        },
-                      ),
-                    ),
-                  ]);
-                },
-              ),
+                  );
+                })),
+
+            const SizedBox(
+              height: 20,
+            ),
+//Shows selected item
+            FutureBuilder(
+              builder: (context, snapshot) {
+                Widget widgetToshow = const SizedBox();
+
+                if (selectedButton == 0) {
+                  widgetToshow = const ToDoStream();
+                }
+                if (selectedButton == 1) {
+                  widgetToshow = const OrderStream();
+                }
+
+                if (selectedButton == 2) {
+                  widgetToshow = const WhatsappChatDialer();
+                }
+
+                return widgetToshow;
+              },
             ),
 
+//Update Notifier (If not updated, display "Your app needs an update!")
             Visibility(
               replacement: const SizedBox.shrink(),
               visible: needsUpdate,
@@ -150,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

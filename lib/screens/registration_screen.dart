@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 import 'package:picstate/custom_widgets/rounded_button.dart';
 import 'package:picstate/custom_widgets/text_input.dart';
 import 'package:picstate/screens/home_screen.dart';
 import 'package:picstate/screens/login_screen.dart';
 import 'package:picstate/supabase_settings.dart';
-import 'package:picstate/supabase_stuff.dart';
+import 'package:picstate/logic/logic.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -15,7 +15,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final SupaBaseStuff _supaBaseStuff = SupaBaseStuff();
+  final Logic _supaBaseStuff = Logic();
   String _password = "";
   String _password2 = "";
   String _email = "";

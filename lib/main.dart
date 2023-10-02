@@ -42,6 +42,7 @@ class _PicStateState extends State<PicState> with WidgetsBindingObserver {
   }
 
 //If app is resumed, push login screen
+//TODO: THIS DOESNT WORK. PLZ FIX.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -52,9 +53,10 @@ class _PicStateState extends State<PicState> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      theme: ThemeData(primaryColor: Colors.amber, primarySwatch: Colors.amber),
+      home: const LoginScreen(),
     );
   }
 }

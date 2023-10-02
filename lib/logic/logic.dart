@@ -1,7 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-class SupaBaseStuff {
+class Logic {
   final _supabase = Supabase.instance.client;
 
   //checks if app needs an update
@@ -35,7 +35,7 @@ class SupaBaseStuff {
     return versionCells[0] * 100000 + versionCells[1] * 1000 + versionCells[2];
   }
 
-  addData(String newTaskName, String dueDate, String createdBy,
+  addTask(String newTaskName, String dueDate, String createdBy,
       String? description) async {
     await _supabase.from("tasktable").insert({
       "task_name": newTaskName,
@@ -45,18 +45,41 @@ class SupaBaseStuff {
     });
   }
 
-  Stream listenToTasks() {
+  addOrder(String newOrderName, String createdBy, String? description) async {
+    await _supabase.from("ordertable").insert({
+      "order_name": newOrderName,
+      "description": description,
+      "created_by": createdBy,
+    });
+  }
+
+//Listens to tasks in task table
+  Stream taskStream() {
     return _supabase.from("tasktable").stream(primaryKey: ["id"]);
   }
 
-  updateData(int id, String statusValue) async {
+  Stream orderStream() {
+    return _supabase.from("ordertable").stream(primaryKey: ["id"]);
+  }
+
+  updateTaskData(int id, String statusValue) async {
     await _supabase
         .from("tasktable")
         .update({"state": statusValue}).eq("id", id);
   }
 
-  deleteData(int id) async {
+  updateOrderData(int id, String statusValue) async {
+    await _supabase
+        .from("ordertable")
+        .update({"state": statusValue}).eq("id", id);
+  }
+
+  deleteTask(int id) async {
     await _supabase.from("tasktable").delete().eq("id", id);
+  }
+
+  deleteOrder(int id) async {
+    await _supabase.from("ordertable").delete().eq("id", id);
   }
 
   userLogin(String password, String email) async {

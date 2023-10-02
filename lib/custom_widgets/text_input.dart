@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/constants.dart';
+import 'package:picstate/logic/constants.dart';
 
 class BasicTextField extends StatefulWidget {
   const BasicTextField({
