@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/core/widgets/rounded_button.dart';
-import 'package:picstate/core/widgets/text_input.dart';
+import 'package:picstate/features/auth/presentation/widgets/login_text_input.dart';
 import 'package:picstate/features/main_screen/presentation/pages/home_screen.dart';
 import 'package:picstate/features/auth/presentation/pages/registration_screen.dart';
 import 'package:picstate/logic/logic.dart';
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //Email field
                 Hero(
                   tag: "email",
-                  child: BasicTextField(
+                  child: LoginTextInput(
                       controller: _emailController,
                       icon: Icons.email_rounded,
                       fontColor: Colors.yellow.shade800,
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //Password Field
                 Hero(
                   tag: "password",
-                  child: BasicTextField(
+                  child: LoginTextInput(
                     controller: _passwordController,
                     icon: Icons.password,
                     fontColor: Colors.yellow.shade800,
