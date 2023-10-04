@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/core/widgets/rounded_button.dart';
+import 'package:picstate/features/auth/domain/usecases/login.dart';
 import 'package:picstate/features/auth/presentation/widgets/login_text_input.dart';
 import 'package:picstate/features/main_screen/presentation/pages/home_screen.dart';
 import 'package:picstate/features/auth/presentation/pages/registration_screen.dart';
-import 'package:picstate/logic/logic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final Logic _supaBaseStuff = Logic();
+  final Login _login = Login();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final supabase = Supabase.instance.client;
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _loading = true;
     });
     try {
-      final AuthResponse response = await _supaBaseStuff.userLogin(
+      final AuthResponse response = await _login.userLogin(
           _passwordController.text, _emailController.text);
 
       if (response.user != null) {
