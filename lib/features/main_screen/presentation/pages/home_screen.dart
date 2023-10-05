@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:picstate/features/main_screen/domain/usecases/needs_update.dart';
 import 'package:picstate/features/whatsapp_dialing/whatsapp_chat.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/features/main_screen/presentation/widgets/menu_button.dart';
 import 'package:picstate/features/order_list/presentation/widgets/order_stream.dart';
 import 'package:picstate/features/todo_list/presentation/widgets/todo_stream.dart';
-import 'package:picstate/logic/logic.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   checkForUpdate() async {
-    needsUpdate = await Logic().needsUpdate();
+    needsUpdate = await UpdateChecker().needsUpdate();
     setState(() {});
   }
 
