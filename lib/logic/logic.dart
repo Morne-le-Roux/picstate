@@ -87,15 +87,6 @@ class Logic {
         .signInWithPassword(password: password, email: email);
   }
 
-  userRegister(
-    String email,
-    String password,
-    String username,
-  ) async {
-    await _supabase.auth
-        .signUp(password: password, email: email, data: {"Username": username});
-  }
-
   getUserName() {
     var user = _supabase.auth.currentSession!.user.userMetadata;
     return user!["Username"];
