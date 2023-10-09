@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/applets/whatsapp_chat.dart';
-import 'package:picstate/logic/constants.dart';
-import 'package:picstate/custom_widgets/menu_button.dart';
-import 'package:picstate/logic/order_stream.dart';
-import 'package:picstate/logic/todo_stream.dart';
-import 'package:picstate/logic/logic.dart';
+import 'package:picstate/features/main_screen/domain/usecases/needs_update.dart';
+import 'package:picstate/features/whatsapp_dialing/whatsapp_chat.dart';
+import 'package:picstate/config/constants.dart';
+import 'package:picstate/features/main_screen/presentation/widgets/menu_button.dart';
+import 'package:picstate/features/order_list/presentation/widgets/order_stream.dart';
+import 'package:picstate/features/todo_list/presentation/widgets/todo_stream.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   checkForUpdate() async {
-    needsUpdate = await Logic().needsUpdate();
+    needsUpdate = await UpdateChecker().needsUpdate();
     setState(() {});
   }
 
@@ -60,6 +60,21 @@ class _HomeScreenState extends State<HomeScreen> {
 //build
   @override
   Widget build(BuildContext context) {
+    //Checks selected Button
+    Widget widgetToshow = const SizedBox();
+
+    if (selectedButton == 0) {
+      widgetToshow = const ToDoStream();
+    }
+    if (selectedButton == 1) {
+      widgetToshow = const OrderStream();
+    }
+
+    if (selectedButton == 2) {
+      widgetToshow = const WhatsappChatDialer();
+    }
+
+    //gets screen width and ajusts columns
     double screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth >= 500) {
       buttonRowCount = 4;
@@ -67,6 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (screenWidth <= 499) {
       buttonRowCount = 2;
     }
+
+    //return
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -106,24 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 20,
             ),
 //Shows selected item
-            FutureBuilder(
-              builder: (context, snapshot) {
-                Widget widgetToshow = const SizedBox();
-
-                if (selectedButton == 0) {
-                  widgetToshow = const ToDoStream();
-                }
-                if (selectedButton == 1) {
-                  widgetToshow = const OrderStream();
-                }
-
-                if (selectedButton == 2) {
-                  widgetToshow = const WhatsappChatDialer();
-                }
-
-                return widgetToshow;
-              },
-            ),
+            widgetToshow,
 
 //Update Notifier (If not updated, display "Your app needs an update!")
             Visibility(

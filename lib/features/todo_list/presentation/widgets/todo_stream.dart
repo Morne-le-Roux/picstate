@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
+import 'task.dart';
 import 'package:picstate/logic/logic.dart';
 import 'package:simplified_flutter_animations/generic_slide_transition.dart';
-import '../custom_widgets/new_order.dart';
-import '../custom_widgets/rounded_button.dart';
-import '../custom_widgets/order.dart';
+import 'new_task.dart';
+import '../../../../core/widgets/rounded_button.dart';
 
-class OrderStream extends StatefulWidget {
-  const OrderStream({super.key});
+class ToDoStream extends StatefulWidget {
+  const ToDoStream({super.key});
 
   @override
-  State<OrderStream> createState() => _OrderStreamState();
+  State<ToDoStream> createState() => _ToDoStreamState();
 }
 
-class _OrderStreamState extends State<OrderStream> {
-  List<OrderWidget> orders = []; //list of tasks that the listView uses
-  List<bool> ordersAnimated =
-      []; //List to check if the task was animated before
-
-  final Logic _supaBaseStuff = Logic();
+class _ToDoStreamState extends State<ToDoStream> {
+  List<TaskWidget> tasks = []; //list of tasks that the listView uses
+  List<bool> tasksAnimated = []; //List to check if the task was animated before
+  final Logic _logic = Logic();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: StreamBuilder(
-        stream: _supaBaseStuff.orderStream(),
+        stream: _logic.taskStream(),
         builder: (context, snapshot) {
           //clears task list before building new list
-          orders = [];
+          tasks = [];
           if (!snapshot.hasData) {
             return const Center(
                 child: CircularProgressIndicator(
@@ -36,48 +34,48 @@ class _OrderStreamState extends State<OrderStream> {
 
           //task list builder:
 
-          for (var order in snapshot.data) {
-            orders.add(
-              OrderWidget(
-                id: order["id"],
-                orderName: order["order_name"],
-                description: order["description"],
-                state: order["state"],
-                index: orders.length,
-                createdAt: order["created_at"],
-                createdBy: order["created_by"],
-                visible: true,
-              ),
-            );
+          for (var task in snapshot.data) {
+            tasks.add(TaskWidget(
+              id: task["id"],
+              taskName: task["task_name"],
+              description: task["description"],
+              createdBy: task["created_by"],
+              createdAt: task["created_at"],
+              dueDate: task["due_date"] ?? "No Due Date",
+              state: task["state"],
+              index: tasks.length,
+              visible: true,
+            ));
 
-            //adds a bool in tasksAnimated List to display animation or not.
-            ordersAnimated.add(
+//adds a bool in tasksAnimated List to display animation or not.
+            tasksAnimated.add(
               false,
             );
           }
 
           //adds extra bool for last "SpaceHolder"
-          ordersAnimated.add(false);
+          tasksAnimated.add(false);
 
           //sort
 
-          int customCompare(OrderWidget a, OrderWidget b) {
+          int customCompare(TaskWidget a, TaskWidget b) {
             final statesOrder = ["todo", "waiting", "order", "done"];
             return statesOrder
                 .indexOf(a.state)
                 .compareTo(statesOrder.indexOf(b.state));
           }
 
-          orders.sort(customCompare);
+          tasks.sort(customCompare);
 
-          orders.add(const OrderWidget(
+          tasks.add(const TaskWidget(
               id: -1,
-              orderName: "",
-              state: "",
-              index: 999999,
+              taskName: "",
+              createdBy: "",
+              createdAt: "",
+              dueDate: "",
               description: "",
-              createdAt: "2023-09-22T13:11:46.768585",
-              createdBy: "temp",
+              state: "",
+              index: 99999,
               visible: false));
 
           //return
@@ -102,33 +100,33 @@ class _OrderStreamState extends State<OrderStream> {
               child: Container(
                 margin: const EdgeInsets.only(),
                 child: ListView.builder(
-                  itemCount: orders.length,
+                  itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     final delay = Duration(
                         milliseconds: index * 100); //delay between widgets
 
                     return FutureBuilder(
-                      future: Future.delayed(ordersAnimated[
+                      future: Future.delayed(tasksAnimated[
                               index] //checks if task was animated before
                           ? const Duration(milliseconds: 0)
                           : delay),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          if (!ordersAnimated[index]) {
+                          if (!tasksAnimated[index]) {
                             //if task was not animated b4
                             return GenericSlideTransition(
                               initialOffset: const Offset(-5, 0),
                               curve: Curves.easeInOutCubicEmphasized,
                               duration: const Duration(milliseconds: 1000),
                               builder: (context) {
-                                ordersAnimated[index] =
+                                tasksAnimated[index] =
                                     true; //Marks the widget as animated
-                                return orders[index];
+                                return tasks[index];
                               },
                             );
                           } else {
                             //if task was animated b4
-                            return orders[index];
+                            return tasks[index];
                           }
                         } else {
                           return const SizedBox();
@@ -143,12 +141,12 @@ class _OrderStreamState extends State<OrderStream> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RoundedButton(
-                text: "Add Order",
+                text: "Add Task",
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
-                        return const NewOrder();
+                        return const NewTask();
                       });
                 },
               ),

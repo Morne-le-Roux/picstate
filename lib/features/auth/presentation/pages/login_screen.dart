@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:picstate/logic/constants.dart';
-import 'package:picstate/custom_widgets/rounded_button.dart';
-import 'package:picstate/custom_widgets/text_input.dart';
-import 'package:picstate/screens/home_screen.dart';
-import 'package:picstate/screens/registration_screen.dart';
-import 'package:picstate/logic/logic.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:picstate/config/constants.dart';
+import 'package:picstate/core/widgets/rounded_button.dart';
+import 'package:picstate/features/auth/domain/usecases/login.dart';
+import 'package:picstate/features/auth/domain/usecases/shared_preferences.dart';
+import 'package:picstate/features/auth/presentation/widgets/login_text_input.dart';
+import 'package:picstate/features/main_screen/presentation/pages/home_screen.dart';
+import 'package:picstate/features/auth/presentation/pages/registration_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,23 +19,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final Logic _supaBaseStuff = Logic();
+  final Login _login = Login();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final supabase = Supabase.instance.client;
   bool _rememberMe = false;
-  bool _loading = false;
+  bool _loading = true;
 
   ///
   ///
 
-//LOGIN CODE
+//!LOGIN CODE
   void login() async {
     setState(() {
       _loading = true;
     });
     try {
-      final AuthResponse response = await _supaBaseStuff.userLogin(
+      final AuthResponse response = await _login.userLogin(
           _passwordController.text, _emailController.text);
 
       if (response.user != null) {
@@ -51,55 +51,20 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void getStoredData() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    String storedEmail = preferences.getString('email') == null
-        ? ""
-        : preferences.getString('email').toString();
-    String storedPassword = preferences.getString('password') == null
-        ? ""
-        : preferences.getString('password').toString();
-
-    setState(() {
-      _emailController.text = storedEmail;
-      _passwordController.text = storedPassword;
-      _loading = false;
-    });
-  }
-
-  void setStoredData() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.setString('email', _emailController.text);
-    await preferences.setString('password', _passwordController.text);
-  }
-
-  void setRememberMe() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.setBool('rememberMe', _rememberMe);
-  }
-
-  void getRememberMe() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool value = preferences.getBool('rememberMe') ?? false;
-
-    _rememberMe = value;
-    bool loadData = value;
-
-    if (loadData) {
-      getStoredData();
+//! Stuff to run when the screen is opened.
+  void _initData() async {
+    if (await Data().getRememberMe() == true) {
+      Map<String, String> data = await Data().getStoredData();
+      _emailController.text = data["storedEmail"].toString();
+      _passwordController.text = data["storedPassword"].toString();
     }
-    setState(() {
-      _loading = false;
-    });
+    _loading = false;
   }
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _loading = true;
-    });
-    getRememberMe();
+    _initData();
   }
 
   @override
@@ -140,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //Email field
                 Hero(
                   tag: "email",
-                  child: BasicTextField(
+                  child: LoginTextInput(
                       controller: _emailController,
                       icon: Icons.email_rounded,
                       fontColor: Colors.yellow.shade800,
@@ -162,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //Password Field
                 Hero(
                   tag: "password",
-                  child: BasicTextField(
+                  child: LoginTextInput(
                     controller: _passwordController,
                     icon: Icons.password,
                     fontColor: Colors.yellow.shade800,
@@ -174,9 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           baseOffset: value.length, extentOffset: value.length);
                     },
                     onSubmitted: (value) {
-                      setRememberMe();
+                      Data().setRememberMe(_rememberMe);
                       if (_rememberMe) {
-                        setStoredData();
+                        Data().setStoredData(
+                            email: _emailController.text,
+                            password: _passwordController.text);
                       }
                       login();
                     },
@@ -216,9 +183,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: RoundedButton(
                       text: "Login",
                       onTap: () {
-                        setRememberMe();
+                        Data().setRememberMe(_rememberMe);
                         if (_rememberMe) {
-                          setStoredData();
+                          Data().setStoredData(
+                              email: _emailController.text,
+                              password: _passwordController.text);
                         }
                         login();
                       },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/custom_widgets/rounded_button.dart';
+import 'package:picstate/core/widgets/rounded_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class WhatsappChatDialer extends StatefulWidget {
@@ -14,15 +14,12 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
 
   String phoneNumber = "";
 
-  // String api = "https://wa.me/";
   String completedLink = "";
 
 //FUNCTION TO LAUNCH WHATSAPP URL
   Future<void> launchWhatsapp({required url}) async {
     await launchUrl(url);
   }
-
-  //whatsapp://send/?phone=27710908116&text&type=phone_number&app_absent=0 could not be loaded because:
 
   final TextEditingController _countryCode = TextEditingController();
 

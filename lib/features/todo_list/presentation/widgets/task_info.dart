@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/logic/constants.dart';
+import 'package:picstate/config/constants.dart';
 import 'package:intl/intl.dart';
 
 class TaskInfo extends StatelessWidget {

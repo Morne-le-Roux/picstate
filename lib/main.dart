@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/screens/login_screen.dart';
+import 'package:picstate/features/auth/presentation/pages/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'supabase_settings.dart';
+import 'config/supabase_settings.dart';
 
-//! create a supabase_settings.dart in your lib folder, add your details there with the below variables,
+//! create a supabase_settings.dart in your lib/config/ folder, add your details there with the below variables,
 //! and import the file if its not already imported.
 //! security key can be anything you choose, this will be the key users need to register and use your app.
 //! your table name in supabase needs to be 'tasktable', or edit the code in supabase_stuff.dart accordingly.

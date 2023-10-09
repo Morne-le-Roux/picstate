@@ -1,36 +1,34 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:picstate/logic/constants.dart';
-import 'package:picstate/custom_widgets/task_info.dart';
+import 'package:picstate/config/constants.dart';
+import 'package:picstate/features/todo_list/presentation/widgets/task_info.dart';
 import 'package:picstate/logic/logic.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
-class TaskWidget extends StatefulWidget {
-  const TaskWidget({
+class OrderWidget extends StatefulWidget {
+  const OrderWidget({
     super.key,
     required this.id,
-    required this.taskName,
-    required this.createdBy,
-    required this.createdAt,
-    required this.dueDate,
-    required this.description,
+    required this.orderName,
     required this.state,
     required this.index,
+    required this.description,
     required this.visible,
+    required this.createdAt,
+    required this.createdBy,
   });
 
 //The tasks name
   final int id;
-  final String createdBy;
-  final String taskName;
-  final String createdAt;
-  final String dueDate;
+  final String orderName;
   final String state;
   final String description;
   final int index;
   final bool visible;
+  final String createdAt;
+  final String createdBy;
 
 //CODE FOR THE UNDO WHEN REMOVING A WIDGET
   Future<bool> showConfirmationSnackBar(BuildContext context) async {
@@ -41,7 +39,7 @@ class TaskWidget extends StatefulWidget {
         backgroundColor: Colors.amber,
         behavior: SnackBarBehavior.floating,
         content: const Text(
-          "Deleting Task...",
+          "Deleting Order...",
           style: TextStyle(color: Colors.black),
         ),
         action: SnackBarAction(
@@ -65,14 +63,13 @@ class TaskWidget extends StatefulWidget {
   }
 
   @override
-  State<TaskWidget> createState() => _TaskWidgetState();
+  State<OrderWidget> createState() => _OrderWidgetState();
 }
 
-class _TaskWidgetState extends State<TaskWidget> {
+class _OrderWidgetState extends State<OrderWidget> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      //empty space at bottom of list
       replacement: const SizedBox(
         height: 70,
       ),
@@ -82,12 +79,13 @@ class _TaskWidgetState extends State<TaskWidget> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
+                //TODO: Created dedicated Info Dialog for Orders.
                 return TaskInfo(
-                    taskName: widget.taskName,
+                    taskName: widget.orderName,
                     description: widget.description,
                     createdAt: widget.createdAt,
                     createdBy: widget.createdBy,
-                    dueDate: widget.dueDate,
+                    dueDate: "temp",
                     state: widget.state);
               });
         },
@@ -95,7 +93,6 @@ class _TaskWidgetState extends State<TaskWidget> {
           margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            // border: Border.all(color: Colors.black, width: 2),
           ),
           child: Material(
             elevation: 5,
@@ -111,7 +108,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   return confirmed;
                 },
                 direction: DismissDirection.horizontal,
-                onDismissed: (direction) => Logic().deleteTask(widget.id),
+                onDismissed: (direction) => Logic().deleteOrder(widget.id),
 
                 //dismiss background
                 background: Container(
@@ -134,15 +131,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                   ),
                 ),
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  padding: const EdgeInsets.all(4), //BORDER WIDTH
+                  duration: const Duration(milliseconds: 100),
                   //height of the widget
                   height: 60,
                   decoration: BoxDecoration(
                     //gradient settings
                     gradient: LinearGradient(
 
-                        //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
+                        //Based on Task inedx in the listviewbuilder, will invert the gradient so the tasks separate a bit better in list view
                         begin: widget.index % 2 == 0
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
@@ -150,20 +146,14 @@ class _TaskWidgetState extends State<TaskWidget> {
                             ? Alignment.centerLeft
                             : Alignment.centerRight,
                         //gradient color
-                        colors: widget.state == "todo"
-                            ? widget.dueDate == today
-                                ? kColorTodoToday
-                                : kColorTodo
-                            : widget.state == "order"
-                                ? kColorToOrder
-                                : widget.state == "waiting"
-                                    ? kColorWaiting
-                                    : kColorDone),
+                        colors:
+                            widget.state == "todo" ? kColorTodo : kColorDone),
                   ),
                   child: Container(
+                    margin: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,32 +162,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.only(left: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.taskName,
-                                  style: kTaskTextStyle,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-
-                                //spacing
-
-                                const SizedBox(
-                                  height: 5,
-                                ),
-
-                                //CREATED BY
-                                Text(
-                                  "Created by: ${widget.createdBy}",
-                                  style: kHintTextStyle.copyWith(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
+                            child: Text(
+                              widget.orderName,
+                              style: kTaskTextStyle,
                             ),
                           ),
                         ),
@@ -207,47 +174,24 @@ class _TaskWidgetState extends State<TaskWidget> {
                           children: [
                             //DUE DATE
 
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ConstrainedBox(
-                                  constraints:
-                                      BoxConstraints.loose(const Size(100, 50)),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Due by: ",
-                                        style: kTaskTextStyle,
-                                      ),
-                                      Text(
-                                        // Checks if due date is today
-                                        widget.dueDate == today
-                                            ? "Today"
-                                            // Checks if due date is yesterday
-                                            : widget.dueDate == yesterday
-                                                ? "Yesterday"
-                                                // Checks if due date is tomorrow
-                                                : widget.dueDate == tomorrow
-                                                    ? "Tomorrow"
-                                                    // Otherwise prints due date
-                                                    : widget.dueDate,
-                                        style: kTaskTextStyle,
-                                      ),
-                                    ],
+                            ConstrainedBox(
+                              constraints:
+                                  BoxConstraints.loose(const Size(100, 50)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //SPACING
+                                  const SizedBox(
+                                    height: 5,
                                   ),
-                                ),
 
-                                //SPACING
-                                const SizedBox(
-                                  height: 5,
-                                ),
-
-                                Text(
-                                  "Status: ${widget.state}",
-                                  style: kTaskTextStyle,
-                                )
-                              ],
+                                  Text(
+                                    "Status: ${widget.state}",
+                                    style: kTaskTextStyle,
+                                  )
+                                ],
+                              ),
                             ),
 
                             //spacing
@@ -259,20 +203,16 @@ class _TaskWidgetState extends State<TaskWidget> {
                             //state BUTTON
                             PopupMenuButton(
                               onSelected: (value) =>
-                                  Logic().updateTaskData(widget.id, value),
+                                  Logic().updateOrderData(widget.id, value),
                               itemBuilder: (BuildContext context) =>
                                   <PopupMenuEntry>[
                                 const PopupMenuItem(
-                                  value: "todo",
-                                  child: Text('ToDo'),
+                                  value: "ToOrder",
+                                  child: Text('To Order'),
                                 ),
                                 const PopupMenuItem(
-                                  value: "done",
-                                  child: Text('Done'),
-                                ),
-                                const PopupMenuItem(
-                                  value: "waiting",
-                                  child: Text('Waiting'),
+                                  value: "Ordered",
+                                  child: Text('Ordered'),
                                 ),
                               ],
                             )
