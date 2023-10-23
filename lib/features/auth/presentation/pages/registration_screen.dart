@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/core/widgets/rounded_button.dart';
 import 'package:picstate/core/widgets/text_input.dart';
-import 'package:picstate/features/auth/domain/usecases/register.dart';
+import 'package:picstate/features/auth/domain/register.dart';
+
 import 'package:picstate/features/main_screen/presentation/pages/home_screen.dart';
 import 'package:picstate/features/auth/presentation/pages/login_screen.dart';
 import 'package:picstate/config/supabase_settings.dart';
@@ -32,7 +33,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-//Main Heading
+              //Main Heading
               Center(
                 child: Hero(
                   tag: "name",
@@ -46,13 +47,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
 
-//Spacing
+              //Spacing
 
               const SizedBox(
                 height: 50,
               ),
 
-//Email field
+              //Email field
               Hero(
                 tag: "email",
                 child: BasicTextField(
@@ -65,12 +66,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     }),
               ),
 
-//Spacing between fields
+              //Spacing between fields
               const SizedBox(
                 height: 10,
               ),
 
-//USERNAME
+              //USERNAME
               BasicTextField(
                   icon: Icons.person,
                   fontColor: Colors.yellow,
@@ -80,12 +81,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     _username = value;
                   }),
 
-//Spacing between fields
+              //Spacing between fields
               const SizedBox(
                 height: 20,
               ),
 
-//Password Field
+              //Password Field
               Hero(
                 tag: "password",
                 child: BasicTextField(
@@ -98,12 +99,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     }),
               ),
 
-//Spacing between fields
+              //Spacing between fields
               const SizedBox(
                 height: 10,
               ),
 
-//confirm password
+              //confirm password
 
               BasicTextField(
                   icon: Icons.password,
@@ -114,16 +115,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     _password2 = value;
                   }),
 
-//Spacing between fields
+              //Spacing between fields
               const SizedBox(
                 height: 20,
               ),
 
-//Workspace Pin Code.
+              //Workspace Pin Code.
 
-//This is set in supabase_settings.dart
-//This needs to correspond with that setting so that not just anybody can
-//register and add/remove tasks that your team uses.
+              //This is set in supabase_settings.dart
+              //This needs to correspond with that setting so that not just anybody can
+              //register and add/remove tasks that your team uses.
 
               BasicTextField(
                   icon: Icons.people,
@@ -134,7 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     _securityKey = value;
                   }),
 
-//spacing
+              //spacing
 
               const SizedBox(
                 height: 20,
