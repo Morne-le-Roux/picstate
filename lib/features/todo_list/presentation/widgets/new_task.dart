@@ -30,7 +30,7 @@ class _NewTaskState extends State<NewTask> {
 //NEW TASK NAME
           Column(
             children: [
-              BasicTextField(
+              TextInput(
                 width: 500,
                 icon: Icons.abc,
                 hintText: "New Task Name",
@@ -73,7 +73,7 @@ class _NewTaskState extends State<NewTask> {
                 height: 20,
               ),
 //Description
-              BasicTextField(
+              TextInput(
                 width: 500,
                 hintText: "Description",
                 onChanged: (value) => _description = value,

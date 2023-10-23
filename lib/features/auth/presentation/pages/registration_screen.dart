@@ -56,7 +56,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               //Email field
               Hero(
                 tag: "email",
-                child: BasicTextField(
+                child: TextInput(
                     icon: Icons.email_rounded,
                     fontColor: Colors.yellow,
                     hintText: "Email Address",
@@ -72,7 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
 
               //USERNAME
-              BasicTextField(
+              TextInput(
                   icon: Icons.person,
                   fontColor: Colors.yellow,
                   hintText: "Username",
@@ -89,7 +89,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               //Password Field
               Hero(
                 tag: "password",
-                child: BasicTextField(
+                child: TextInput(
                     icon: Icons.password,
                     fontColor: Colors.yellow,
                     hintText: "Password",
@@ -106,7 +106,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
               //confirm password
 
-              BasicTextField(
+              TextInput(
                   icon: Icons.password,
                   fontColor: Colors.yellow,
                   hintText: "Confirm Password",
@@ -126,7 +126,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               //This needs to correspond with that setting so that not just anybody can
               //register and add/remove tasks that your team uses.
 
-              BasicTextField(
+              TextInput(
                   icon: Icons.people,
                   fontColor: Colors.yellow,
                   hintText: "Security Code.",

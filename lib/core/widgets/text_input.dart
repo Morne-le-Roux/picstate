@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/config/constants.dart';
 
-class BasicTextField extends StatefulWidget {
-  const BasicTextField({
+class TextInput extends StatefulWidget {
+  const TextInput({
     super.key,
     this.width = 400,
     this.hintText = "",
@@ -28,38 +28,41 @@ class BasicTextField extends StatefulWidget {
   final double? height;
 
   @override
-  State<BasicTextField> createState() => _BasicTextFieldState();
+  State<TextInput> createState() => _TextInputState();
 }
 
-class _BasicTextFieldState extends State<BasicTextField> {
+class _TextInputState extends State<TextInput> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      padding: const EdgeInsets.only(left: 5, top: 5),
-      //border decoration
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-      child: TextField(
-        controller: widget.controller,
-        maxLines: widget.multiline ? null : 1,
-        keyboardType: TextInputType.multiline,
-        style: kTaskTextStyle.copyWith(
-            color: widget.fontColor, fontStyle: FontStyle.italic),
-        obscureText: widget.obscureText,
-        decoration: InputDecoration(
-            prefixIcon: Icon(
-              widget.icon,
-              color: Colors.grey,
-            ),
-            border: InputBorder.none,
-            hintText: widget.hintText,
-            hintStyle: kHintTextStyle),
-        onChanged: widget.onChanged,
-        onSubmitted: widget.onSubmitted,
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        height: widget.height,
+        width: widget.width,
+        padding: const EdgeInsets.only(left: 5, top: 5),
+        //border decoration
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: TextField(
+          controller: widget.controller,
+          maxLines: widget.multiline ? null : 1,
+          keyboardType: TextInputType.multiline,
+          style: kTaskTextStyle.copyWith(
+              color: widget.fontColor, fontStyle: FontStyle.italic),
+          obscureText: widget.obscureText,
+          decoration: InputDecoration(
+              prefixIcon: Icon(
+                widget.icon,
+                color: Colors.grey,
+              ),
+              border: InputBorder.none,
+              hintText: widget.hintText,
+              hintStyle: kHintTextStyle),
+          onChanged: widget.onChanged,
+          onSubmitted: widget.onSubmitted,
+        ),
       ),
     );
   }

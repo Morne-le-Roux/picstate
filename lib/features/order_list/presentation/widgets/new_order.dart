@@ -28,7 +28,7 @@ class _NewOrderState extends State<NewOrder> {
 //NEW TASK NAME
           Column(
             children: [
-              BasicTextField(
+              TextInput(
                 width: 500,
                 icon: Icons.abc,
                 hintText: "New Order Name",
@@ -43,7 +43,7 @@ class _NewOrderState extends State<NewOrder> {
               ),
 
 //Description
-              BasicTextField(
+              TextInput(
                 width: 500,
                 hintText: "Description",
                 onChanged: (value) => _description = value,
