@@ -22,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final Login _login = Login();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final supabase = Supabase.instance.client;
-  bool _rememberMe = false;
+  final _supabase = Supabase.instance.client;
+  final bool _rememberMe = false;
   bool _loading = true;
 
   ///
@@ -52,13 +52,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 //! Stuff to run when the screen is opened.
+
   void _initData() async {
-    if (await Data().getRememberMe() == true) {
-      Map<String, String> data = await Data().getStoredData();
-      _emailController.text = data["storedEmail"].toString();
-      _passwordController.text = data["storedPassword"].toString();
+    Data data = Data();
+    await data.initPreferences();
+
+    if (await data.getRememberMe() == true) {
+      Map<String, String> returnedData = await data.getStoredData();
+      _emailController.text = returnedData["storedEmail"].toString();
+      _passwordController.text = returnedData["storedPassword"].toString();
     }
-    _loading = false;
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override
