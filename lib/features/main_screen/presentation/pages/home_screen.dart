@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picstate/features/main_screen/domain/usecases/needs_update.dart';
+import 'package:picstate/features/price_calc/presentation/widgets/price_calculator_list.dart';
 import 'package:picstate/features/whatsapp_dialing/whatsapp_chat.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/features/main_screen/presentation/widgets/menu_button.dart';
@@ -69,9 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
     if (selectedButton == 1) {
       widgetToshow = const OrderStream();
     }
-
     if (selectedButton == 2) {
       widgetToshow = const WhatsappChatDialer();
+    }
+    if (selectedButton == 3) {
+      widgetToshow = const PriceCalculatorList();
     }
 
     //gets screen width and ajusts columns
