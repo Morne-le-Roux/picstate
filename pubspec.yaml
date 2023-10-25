@@ -33,7 +33,7 @@ dependencies:
   date_picker_timeline: null
   flutter:
     sdk: flutter
-  get: ^4.6.6
+  
   google_fonts: null
   intl: null
   modal_progress_hud_nsn: null
