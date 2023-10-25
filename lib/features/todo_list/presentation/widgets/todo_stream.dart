@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'task.dart';
+import 'task_widget.dart';
 import 'package:picstate/logic/logic.dart';
 import 'package:simplified_flutter_animations/generic_slide_transition.dart';
 import 'new_task.dart';

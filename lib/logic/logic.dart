@@ -21,7 +21,6 @@ class Logic {
     });
   }
 
-//Listens to tasks in task table
   Stream taskStream() {
     return _supabase.from("tasktable").stream(primaryKey: ["id"]);
   }
