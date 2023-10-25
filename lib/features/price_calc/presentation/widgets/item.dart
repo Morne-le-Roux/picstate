@@ -44,6 +44,12 @@ class Item extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
               ),
+              child: Center(
+                child: Text(
+                  name,
+                  style: kTaskTextStyle.copyWith(fontSize: 20),
+                ),
+              ),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:picstate/features/price_calc/models/items_model.dart';
+import 'package:picstate/features/price_calc/items_controller.dart';
+
 import 'package:picstate/features/price_calc/presentation/widgets/item.dart';
 
 class PriceCalculatorList extends StatefulWidget {
@@ -10,7 +11,7 @@ class PriceCalculatorList extends StatefulWidget {
 }
 
 class _PriceCalculatorListState extends State<PriceCalculatorList> {
-  final ItemsModel _items = ItemsModel();
+  final ItemsController _items = ItemsController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _PriceCalculatorListState extends State<PriceCalculatorList> {
       child: ListView.builder(
         itemCount: _items.itemsList.length,
         itemBuilder: (context, index) => Item(
-          name: _items.itemsList[index],
+          name: _items.itemsList[index]["Name"],
           index: index,
         ),
       ),
