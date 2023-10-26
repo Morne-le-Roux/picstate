@@ -213,7 +213,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                               children: [
                                 ConstrainedBox(
                                   constraints:
-                                      BoxConstraints.loose(const Size(100, 50)),
+                                      BoxConstraints.loose(const Size(120, 50)),
                                   child: Row(
                                     children: [
                                       Text(
