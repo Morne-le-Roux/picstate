@@ -1,8 +1,15 @@
 import "package:flutter/material.dart";
 import 'package:picstate/features/price_calc/controllers/calculator.dart';
 
-class InvoiceBook extends StatelessWidget {
+class InvoiceBook extends StatefulWidget {
   const InvoiceBook({super.key});
+
+  @override
+  State<InvoiceBook> createState() => _InvoiceBookState();
+}
+
+class _InvoiceBookState extends State<InvoiceBook> {
+  final List<bool> _bookSizeSelected = List.generate(3, (_) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +24,7 @@ class InvoiceBook extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flex(
               direction: Axis.horizontal,
@@ -35,7 +43,6 @@ class InvoiceBook extends StatelessWidget {
                     flex: 1, child: Icon(Icons.save, color: Colors.black45)),
               ],
             ),
-            const SizedBox(height: 20),
             Flex(
               direction: Axis.horizontal,
               children: [
@@ -53,6 +60,26 @@ class InvoiceBook extends StatelessWidget {
                 const Expanded(
                     flex: 1, child: Icon(Icons.save, color: Colors.black45)),
               ],
+            ),
+            Center(
+              child: ToggleButtons(
+                borderRadius: BorderRadius.circular(20),
+                constraints: const BoxConstraints(minHeight: 50, minWidth: 100),
+                isSelected: _bookSizeSelected,
+                onPressed: (index) {
+                  setState(() {
+                    for (var i = 0; i < _bookSizeSelected.length; i++) {
+                      _bookSizeSelected[i] = i == index;
+                      calc.selectedSize = index;
+                    }
+                  });
+                },
+                children: const [
+                  Text("A6"),
+                  Text("A5"),
+                  Text("A4"),
+                ],
+              ),
             ),
           ],
         ),
