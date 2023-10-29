@@ -47,7 +47,7 @@ class _InvoiceBookState extends State<InvoiceBook> {
                               decoration:
                                   const InputDecoration(prefixText: "R"),
                               keyboardType: TextInputType.number,
-                              controller: calc.setupCost,
+                              controller: calc.setupCostController,
                             ))),
                     const Expanded(
                         flex: 1,
@@ -70,7 +70,7 @@ class _InvoiceBookState extends State<InvoiceBook> {
                               decoration:
                                   const InputDecoration(prefixText: "R"),
                               keyboardType: TextInputType.number,
-                              controller: calc.printingCost,
+                              controller: calc.printingCostController,
                             ))),
                     const Expanded(
                         flex: 1,
