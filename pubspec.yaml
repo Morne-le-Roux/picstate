@@ -29,11 +29,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  countup: ^0.1.4
   cupertino_icons: null
   date_picker_timeline: null
   flutter:
     sdk: flutter
-  
   google_fonts: null
   intl: null
   modal_progress_hud_nsn: null

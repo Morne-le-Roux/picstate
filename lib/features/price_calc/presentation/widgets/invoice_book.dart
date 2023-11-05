@@ -1,4 +1,6 @@
+import 'package:countup/countup.dart';
 import "package:flutter/material.dart";
+import 'package:picstate/config/constants.dart';
 import 'package:picstate/core/widgets/rounded_button.dart';
 import 'package:picstate/features/price_calc/controllers/calculator.dart';
 
@@ -12,10 +14,11 @@ class InvoiceBook extends StatefulWidget {
 class _InvoiceBookState extends State<InvoiceBook> {
   final List<bool> _bookSizeSelected = List.generate(3, (_) => false);
   final List<bool> _bookFinishSelected = List.generate(2, (_) => false);
+  Calculator calc = Calculator();
+  double calculatedCost = 0;
 
   @override
   Widget build(BuildContext context) {
-    Calculator calc = Calculator();
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -28,7 +31,13 @@ class _InvoiceBookState extends State<InvoiceBook> {
           alignment: Alignment.bottomCenter,
           children: [
 //CALCULATE BUTTTON
-            RoundedButton(text: "Calculate!", onTap: () {}),
+            RoundedButton(
+                text: "Calculate!",
+                onTap: () {
+                  setState(() {
+                    calculatedCost = calc.calculate();
+                  });
+                }),
 //CALCULATE BUTTON
 
             Column(
@@ -129,6 +138,18 @@ class _InvoiceBookState extends State<InvoiceBook> {
                   ),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 80),
+              child: Visibility(
+                  visible: calculatedCost == 0 ? false : true,
+                  child: Countup(
+                    begin: 0,
+                    end: calculatedCost,
+                    duration: const Duration(seconds: 2),
+                    prefix: "R",
+                    style: kTaskTextStyle.copyWith(fontSize: 80),
+                  )),
             ),
           ],
         ),
