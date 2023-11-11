@@ -119,9 +119,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 223, 69, 59),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.delete_rounded,
                         color: Colors.white,
