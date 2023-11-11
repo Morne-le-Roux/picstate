@@ -4,7 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
-  modal_progress_hud_nsn
   url_launcher_windows
 )
 

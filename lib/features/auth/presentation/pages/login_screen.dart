@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:picstate/config/constants.dart';
 import 'package:picstate/core/widgets/rounded_button.dart';
 import 'package:picstate/features/auth/domain/login.dart';
@@ -77,13 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: ModalProgressHUD(
-        progressIndicator: const CircularProgressIndicator(
-          color: Colors.amber,
-          backgroundColor: Colors.transparent,
-        ),
-        inAsyncCall: _loading,
-        child: SafeArea(
+      body: Visibility(
+        visible: _loading,
+        replacement: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -229,6 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
+        child: const Text("Loading."),
       ),
     );
   }
