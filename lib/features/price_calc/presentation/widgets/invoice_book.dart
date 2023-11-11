@@ -31,13 +31,25 @@ class _InvoiceBookState extends State<InvoiceBook> {
           alignment: Alignment.bottomCenter,
           children: [
 //CALCULATE BUTTTON
-            RoundedButton(
-                text: "Calculate!",
-                onTap: () {
-                  setState(() {
-                    calculatedCost = calc.calculate();
-                  });
-                }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                RoundedButton(
+                    text: "Calculate!",
+                    onTap: () {
+                      setState(() {
+                        calculatedCost = calc.calculate();
+                      });
+                    }),
+                RoundedButton(
+                    text: "Close",
+                    onTap: () {
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    })
+              ],
+            ),
 //CALCULATE BUTTON
 
             Column(
