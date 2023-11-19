@@ -89,139 +89,115 @@ class _OrderWidgetState extends State<OrderWidget> {
                     state: widget.state);
               });
         },
-        child: Container(
-          margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Material(
-            elevation: 5,
-            borderRadius: BorderRadius.circular(20),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: Dismissible(
-                //Dismissible settings
-                key: ValueKey(widget.id),
-                confirmDismiss: (direction) async {
-                  bool confirmed =
-                      await widget.showConfirmationSnackBar(context);
-                  return confirmed;
-                },
-                direction: DismissDirection.horizontal,
-                onDismissed: (direction) => Logic().deleteOrder(widget.id),
+        child: Material(
+          elevation: 5,
+          child: Dismissible(
+            //Dismissible settings
+            key: ValueKey(widget.id),
+            confirmDismiss: (direction) async {
+              bool confirmed = await widget.showConfirmationSnackBar(context);
+              return confirmed;
+            },
+            direction: DismissDirection.horizontal,
+            onDismissed: (direction) => Logic().deleteOrder(widget.id),
 
-                //dismiss background
-                background: Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 223, 69, 59),
+            //dismiss background
+            background: Container(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 223, 69, 59),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.delete_rounded,
+                    color: Colors.white,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(
-                        Icons.delete_rounded,
-                        color: Colors.white,
-                      ),
-                      Icon(
-                        Icons.delete_rounded,
-                        color: Colors.white,
-                      ),
-                    ],
+                  Icon(
+                    Icons.delete_rounded,
+                    color: Colors.white,
                   ),
-                ),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 100),
-                  //height of the widget
-                  height: 60,
-                  decoration: BoxDecoration(
-                    //gradient settings
-                    gradient: LinearGradient(
+                ],
+              ),
+            ),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              //height of the widget
+              height: 60,
+              decoration: BoxDecoration(
+                //gradient settings
+                gradient: LinearGradient(
 
-                        //Based on Task inedx in the listviewbuilder, will invert the gradient so the tasks separate a bit better in list view
-                        begin: widget.index % 2 == 0
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        end: widget.index % 2 == 0
-                            ? Alignment.centerLeft
-                            : Alignment.centerRight,
-                        //gradient color
-                        colors:
-                            widget.state == "todo" ? kColorTodo : kColorDone),
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
+                    //Based on Task inedx in the listviewbuilder, will invert the gradient so the tasks separate a bit better in list view
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    //gradient color
+                    colors:
+                        widget.state == "todo" ? kColorTodo : kColorToOrder),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //TASK NAME and INFO
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        widget.orderName,
+                        style: kTaskTextStyle,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //TASK NAME and INFO
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              widget.orderName,
-                              style: kTaskTextStyle,
-                            ),
-                          ),
-                        ),
+                  ),
 
-                        //SIDE INFO
-                        Row(
+                  //SIDE INFO
+                  Row(
+                    children: [
+                      //DUE DATE
+
+                      ConstrainedBox(
+                        constraints: BoxConstraints.loose(const Size(100, 50)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //DUE DATE
-
-                            ConstrainedBox(
-                              constraints:
-                                  BoxConstraints.loose(const Size(100, 50)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //SPACING
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-
-                                  Text(
-                                    "Status: ${widget.state}",
-                                    style: kTaskTextStyle,
-                                  )
-                                ],
-                              ),
-                            ),
-
-                            //spacing
-
+                            //SPACING
                             const SizedBox(
-                              width: 20,
+                              height: 5,
                             ),
 
-                            //state BUTTON
-                            PopupMenuButton(
-                              onSelected: (value) =>
-                                  Logic().updateOrderData(widget.id, value),
-                              itemBuilder: (BuildContext context) =>
-                                  <PopupMenuEntry>[
-                                const PopupMenuItem(
-                                  value: "ToOrder",
-                                  child: Text('To Order'),
-                                ),
-                                const PopupMenuItem(
-                                  value: "Ordered",
-                                  child: Text('Ordered'),
-                                ),
-                              ],
+                            Text(
+                              "Status: ${widget.state}",
+                              style: kTaskTextStyle,
                             )
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                        ),
+                      ),
+
+                      //spacing
+
+                      const SizedBox(
+                        width: 20,
+                      ),
+
+                      //state BUTTON
+                      PopupMenuButton(
+                        onSelected: (value) =>
+                            Logic().updateOrderData(widget.id, value),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                          const PopupMenuItem(
+                            value: "ToOrder",
+                            child: Text('To Order'),
+                          ),
+                          const PopupMenuItem(
+                            value: "Ordered",
+                            child: Text('Ordered'),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),
