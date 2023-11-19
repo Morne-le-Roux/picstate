@@ -91,197 +91,174 @@ class _TaskWidgetState extends State<TaskWidget> {
                     state: widget.state);
               });
         },
-        child: Container(
-          margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            // border: Border.all(color: Colors.black, width: 2),
-          ),
-          child: Material(
-            elevation: 5,
-            borderRadius: BorderRadius.circular(20),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: Dismissible(
-                //Dismissible settings
-                key: ValueKey(widget.id),
-                confirmDismiss: (direction) async {
-                  bool confirmed =
-                      await widget.showConfirmationSnackBar(context);
-                  return confirmed;
-                },
-                direction: DismissDirection.horizontal,
-                onDismissed: (direction) => Logic().deleteTask(widget.id),
+        child: Material(
+          elevation: 5,
+          child: Dismissible(
+            //Dismissible settings
+            key: ValueKey(widget.id),
+            confirmDismiss: (direction) async {
+              bool confirmed = await widget.showConfirmationSnackBar(context);
+              return confirmed;
+            },
+            direction: DismissDirection.horizontal,
+            onDismissed: (direction) => Logic().deleteTask(widget.id),
 
-                //dismiss background
-                background: Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 223, 69, 59),
+            //dismiss background
+            background: Container(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 223, 69, 59),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.delete_rounded,
+                    color: Colors.white,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(
-                        Icons.delete_rounded,
-                        color: Colors.white,
-                      ),
-                      Icon(
-                        Icons.delete_rounded,
-                        color: Colors.white,
-                      ),
-                    ],
+                  Icon(
+                    Icons.delete_rounded,
+                    color: Colors.white,
                   ),
-                ),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  padding: const EdgeInsets.all(4), //BORDER WIDTH
-                  //height of the widget
-                  height: 60,
-                  decoration: BoxDecoration(
-                    //gradient settings
-                    gradient: LinearGradient(
+                ],
+              ),
+            ),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 1000),
+              padding: const EdgeInsets.all(4), //BORDER WIDTH
+              //height of the widget
+              height: 60,
+              decoration: BoxDecoration(
+                //gradient settings
+                gradient: LinearGradient(
 
-                        //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-                        begin: widget.index % 2 == 0
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        end: widget.index % 2 == 0
-                            ? Alignment.centerLeft
-                            : Alignment.centerRight,
-                        //gradient color
-                        colors: widget.state == "todo"
-                            ? widget.dueDate == today
-                                ? kColorTodoToday
-                                : kColorTodo
-                            : widget.state == "order"
-                                ? kColorToOrder
-                                : widget.state == "waiting"
-                                    ? kColorWaiting
-                                    : kColorDone),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                    //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft,
+                    //gradient color
+                    colors: widget.state == "todo"
+                        ? widget.dueDate == today
+                            ? kColorTodoToday
+                            : kColorTodo
+                        : widget.state == "order"
+                            ? kColorToOrder
+                            : widget.state == "waiting"
+                                ? kColorWaiting
+                                : kColorDone),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //TASK NAME and INFO
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.taskName,
+                            style: kTaskTextStyle,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+
+                          //spacing
+
+                          const SizedBox(
+                            height: 5,
+                          ),
+
+                          //CREATED BY
+                          Text(
+                            "Created by: ${widget.createdBy}",
+                            style: kHintTextStyle.copyWith(
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //TASK NAME and INFO
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+
+                  //SIDE INFO
+                  Row(
+                    children: [
+                      //DUE DATE
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ConstrainedBox(
+                            constraints:
+                                BoxConstraints.loose(const Size(120, 50)),
+                            child: Row(
                               children: [
                                 Text(
-                                  widget.taskName,
+                                  "Due by: ",
                                   style: kTaskTextStyle,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
                                 ),
-
-                                //spacing
-
-                                const SizedBox(
-                                  height: 5,
-                                ),
-
-                                //CREATED BY
                                 Text(
-                                  "Created by: ${widget.createdBy}",
-                                  style: kHintTextStyle.copyWith(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
+                                  // Checks if due date is today
+                                  widget.dueDate == today
+                                      ? "Today"
+                                      // Checks if due date is yesterday
+                                      : widget.dueDate == yesterday
+                                          ? "Yesterday"
+                                          // Checks if due date is tomorrow
+                                          : widget.dueDate == tomorrow
+                                              ? "Tomorrow"
+                                              // Otherwise prints due date
+                                              : widget.dueDate,
+                                  style: kTaskTextStyle,
                                 ),
                               ],
                             ),
                           ),
-                        ),
 
-                        //SIDE INFO
-                        Row(
-                          children: [
-                            //DUE DATE
+                          //SPACING
+                          const SizedBox(
+                            height: 5,
+                          ),
 
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ConstrainedBox(
-                                  constraints:
-                                      BoxConstraints.loose(const Size(120, 50)),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Due by: ",
-                                        style: kTaskTextStyle,
-                                      ),
-                                      Text(
-                                        // Checks if due date is today
-                                        widget.dueDate == today
-                                            ? "Today"
-                                            // Checks if due date is yesterday
-                                            : widget.dueDate == yesterday
-                                                ? "Yesterday"
-                                                // Checks if due date is tomorrow
-                                                : widget.dueDate == tomorrow
-                                                    ? "Tomorrow"
-                                                    // Otherwise prints due date
-                                                    : widget.dueDate,
-                                        style: kTaskTextStyle,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                          Text(
+                            "Status: ${widget.state}",
+                            style: kTaskTextStyle,
+                          )
+                        ],
+                      ),
 
-                                //SPACING
-                                const SizedBox(
-                                  height: 5,
-                                ),
+                      //spacing
 
-                                Text(
-                                  "Status: ${widget.state}",
-                                  style: kTaskTextStyle,
-                                )
-                              ],
-                            ),
+                      const SizedBox(
+                        width: 20,
+                      ),
 
-                            //spacing
-
-                            const SizedBox(
-                              width: 20,
-                            ),
-
-                            //state BUTTON
-                            PopupMenuButton(
-                              onSelected: (value) =>
-                                  Logic().updateTaskData(widget.id, value),
-                              itemBuilder: (BuildContext context) =>
-                                  <PopupMenuEntry>[
-                                const PopupMenuItem(
-                                  value: "todo",
-                                  child: Text('ToDo'),
-                                ),
-                                const PopupMenuItem(
-                                  value: "done",
-                                  child: Text('Done'),
-                                ),
-                                const PopupMenuItem(
-                                  value: "waiting",
-                                  child: Text('Waiting'),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                      //state BUTTON
+                      PopupMenuButton(
+                        onSelected: (value) =>
+                            Logic().updateTaskData(widget.id, value),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                          const PopupMenuItem(
+                            value: "todo",
+                            child: Text('ToDo'),
+                          ),
+                          const PopupMenuItem(
+                            value: "done",
+                            child: Text('Done'),
+                          ),
+                          const PopupMenuItem(
+                            value: "waiting",
+                            child: Text('Waiting'),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),
