@@ -29,23 +29,23 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  countup: null
-  cupertino_icons: null
-  date_picker_timeline: null
+  countup:
+  cupertino_icons:
+  date_picker_timeline:
   flutter:
     sdk: flutter
-  google_fonts: null
-  intl: null
-  lottie: ^2.3.0
+  google_fonts:
+  intl:
+  lottie:
  
-  package_info_plus: null
-  shared_preferences: null
-  simplified_flutter_animations: null
-  supabase_flutter: null
-  url_launcher: null
+  package_info_plus:
+  shared_preferences:
+  simplified_flutter_animations:
+  supabase_flutter:
+  url_launcher:
 
 dev_dependencies:
-  flutter_lints: null
+  flutter_lints:
   flutter_test:
     sdk: flutter
 
