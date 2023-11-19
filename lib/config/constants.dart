@@ -23,8 +23,10 @@ Gradient kButtonColor =
 Gradient kMenuButtonColor =
     const LinearGradient(colors: [Colors.amber, Colors.amberAccent]);
 
-Gradient kSelectedMenuButtonColor =
-    const LinearGradient(colors: [Colors.orange, Colors.redAccent]);
+Gradient kSelectedMenuButtonColor = const LinearGradient(colors: [
+  Color.fromARGB(120, 255, 153, 0),
+  Color.fromARGB(0, 255, 255, 255)
+]);
 
 //Button Text Style
 

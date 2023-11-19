@@ -32,25 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //List of menu buttons to show on main screen
   List<MenuButton> menuButtons = [
-    MenuButton(
+    const MenuButton(
       heading: "Todo's",
       content: "Jobs to be done",
-      color: kButtonColor,
+      color: LinearGradient(colors: []),
     ),
-    MenuButton(
+    const MenuButton(
       heading: "Orders",
       content: "Please Order",
-      color: kButtonColor,
+      color: LinearGradient(colors: []),
     ),
-    MenuButton(
+    const MenuButton(
       heading: "Whatsapp Dialer",
       content: "Open Whatsapp Chat",
-      color: kButtonColor,
+      color: LinearGradient(colors: []),
     ),
-    MenuButton(
+    const MenuButton(
       heading: "Price Calculator",
       content: "Calculate Odd Pricing",
-      color: kButtonColor,
+      color: LinearGradient(colors: []),
     )
   ];
 
@@ -117,7 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       content: menuButtons[index].content,
                       color: selectedButton == index //is selected?
                           ? kSelectedMenuButtonColor //color if selected
-                          : kMenuButtonColor, //color if not selected
+                          : const LinearGradient(colors: [
+                              Colors.white,
+                              Colors.white
+                            ]), //color if not selected
                     ),
                   );
                 })),
