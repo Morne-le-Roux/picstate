@@ -133,8 +133,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                 gradient: LinearGradient(
 
                     //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
-                    begin: Alignment.centerRight,
-                    end: Alignment.centerLeft,
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
                     //gradient color
                     colors: widget.state == "todo"
                         ? widget.dueDate == today
