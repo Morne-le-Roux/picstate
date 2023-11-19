@@ -55,20 +55,26 @@ final String tomorrow =
 
 //Task Colors
 
-const List<Color> kColorTodo = [Colors.amber, Colors.amberAccent];
-const List<Color> kColorDone = [Colors.green, Colors.greenAccent];
+const List<Color> kColorTodo = [
+  Color.fromARGB(40, 255, 210, 11),
+  Color.fromARGB(0, 255, 255, 255)
+];
+const List<Color> kColorDone = [
+  Color.fromARGB(40, 0, 255, 8),
+  Color.fromARGB(0, 255, 255, 255)
+];
 const List<Color> kColorTodoToday = [
-  Color.fromARGB(255, 255, 98, 0),
-  Color.fromARGB(255, 255, 144, 64)
+  Color.fromARGB(40, 255, 98, 0),
+  Color.fromARGB(0, 255, 255, 255)
 ];
 const List<Color> kColorToOrder = [
-  Color.fromARGB(255, 0, 153, 255),
-  Color.fromARGB(255, 3, 208, 244)
+  Color.fromARGB(40, 0, 153, 255),
+  Color.fromARGB(0, 255, 255, 255)
 ];
 
 const List<Color> kColorWaiting = [
-  Color.fromARGB(103, 255, 255, 255),
-  Colors.grey,
+  Color.fromARGB(40, 255, 255, 255),
+  Color.fromARGB(0, 255, 255, 255)
 ];
 
 //Info Widgets
