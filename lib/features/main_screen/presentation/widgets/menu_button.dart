@@ -27,7 +27,7 @@ class _MenuButtonState extends State<MenuButton> {
         decoration: BoxDecoration(gradient: widget.color),
         width: 200,
         height: 100,
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 500),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
