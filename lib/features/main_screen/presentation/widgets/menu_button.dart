@@ -21,11 +21,11 @@ class _MenuButtonState extends State<MenuButton> {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      fit: BoxFit.fill,
+      fit: BoxFit.fitWidth,
       child: AnimatedContainer(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(gradient: widget.color),
-        width: 200,
+        width: 180,
         height: 100,
         duration: const Duration(milliseconds: 500),
         child: Column(
