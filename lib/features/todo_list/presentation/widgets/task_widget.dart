@@ -131,8 +131,6 @@ class _TaskWidgetState extends State<TaskWidget> {
               decoration: BoxDecoration(
                 //gradient settings
                 gradient: LinearGradient(
-
-                    //Based on Task id, will invert the gradient so the tasks separate a bit better in list view
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     //gradient color
@@ -197,24 +195,27 @@ class _TaskWidgetState extends State<TaskWidget> {
                                 BoxConstraints.loose(const Size(120, 50)),
                             child: Row(
                               children: [
+                                Text("Due by: ",
+                                    style: kHintTextStyle.copyWith(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    )),
                                 Text(
-                                  "Due by: ",
-                                  style: kTaskTextStyle,
-                                ),
-                                Text(
-                                  // Checks if due date is today
-                                  widget.dueDate == today
-                                      ? "Today"
-                                      // Checks if due date is yesterday
-                                      : widget.dueDate == yesterday
-                                          ? "Yesterday"
-                                          // Checks if due date is tomorrow
-                                          : widget.dueDate == tomorrow
-                                              ? "Tomorrow"
-                                              // Otherwise prints due date
-                                              : widget.dueDate,
-                                  style: kTaskTextStyle,
-                                ),
+                                    // Checks if due date is today
+                                    widget.dueDate == today
+                                        ? "Today"
+                                        // Checks if due date is yesterday
+                                        : widget.dueDate == yesterday
+                                            ? "Yesterday"
+                                            // Checks if due date is tomorrow
+                                            : widget.dueDate == tomorrow
+                                                ? "Tomorrow"
+                                                // Otherwise prints due date
+                                                : widget.dueDate,
+                                    style: kHintTextStyle.copyWith(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    )),
                               ],
                             ),
                           ),
@@ -224,10 +225,11 @@ class _TaskWidgetState extends State<TaskWidget> {
                             height: 5,
                           ),
 
-                          Text(
-                            "Status: ${widget.state}",
-                            style: kTaskTextStyle,
-                          )
+                          Text("Status: ${widget.state}",
+                              style: kHintTextStyle.copyWith(
+                                fontSize: 12,
+                                color: Colors.black,
+                              ))
                         ],
                       ),
 
