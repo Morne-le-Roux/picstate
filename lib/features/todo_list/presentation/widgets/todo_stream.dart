@@ -103,7 +103,7 @@ class _ToDoStreamState extends State<ToDoStream> {
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     final delay = Duration(
-                        milliseconds: index * 100); //delay between widgets
+                        milliseconds: index * 80); //delay between widgets
 
                     return FutureBuilder(
                       future: Future.delayed(tasksAnimated[
@@ -117,7 +117,8 @@ class _ToDoStreamState extends State<ToDoStream> {
                             return GenericSlideTransition(
                               initialOffset: const Offset(-5, 0),
                               curve: Curves.easeInOutCubicEmphasized,
-                              duration: const Duration(milliseconds: 1000),
+                              duration: const Duration(
+                                  milliseconds: 800), //animation load in speed
                               builder: (context) {
                                 tasksAnimated[index] =
                                     true; //Marks the widget as animated
