@@ -16,6 +16,7 @@ class _ToDoStreamState extends State<ToDoStream> {
   List<TaskWidget> tasks = []; //list of tasks that the listView uses
   List<bool> tasksAnimated = []; //List to check if the task was animated before
   final Logic _logic = Logic();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(

@@ -69,8 +69,18 @@ class TaskWidget extends StatefulWidget {
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
+  bool desktopMode = false;
+
   @override
   Widget build(BuildContext context) {
+    //gets screen width and ajusts desktopMode
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth >= 700) {
+      desktopMode = true;
+    }
+    if (screenWidth <= 699) {
+      desktopMode = false;
+    }
     return Visibility(
       //empty space at bottom of list
       replacement: const SizedBox(
@@ -79,17 +89,21 @@ class _TaskWidgetState extends State<TaskWidget> {
       visible: widget.visible,
       child: GestureDetector(
         onTap: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return TaskInfo(
-                    taskName: widget.taskName,
-                    description: widget.description,
-                    createdAt: widget.createdAt,
-                    createdBy: widget.createdBy,
-                    dueDate: widget.dueDate,
-                    state: widget.state);
-              });
+          !desktopMode //not in desktopmode?
+              ? showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return TaskInfo(
+                        taskName: widget.taskName,
+                        description: widget.description,
+                        createdAt: widget.createdAt,
+                        createdBy: widget.createdBy,
+                        dueDate: widget.dueDate,
+                        state: widget.state);
+                  })
+
+              //in desktopMode
+              : ();
         },
         child: Material(
           elevation: 5,

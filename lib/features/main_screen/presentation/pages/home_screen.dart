@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //currently selected button
   int selectedButton = -1;
-  int buttonRowCount = 3;
-  bool sideViewVisible = false;
+  int? selectedTask;
+  bool desktopMode = false;
 
 //build
   @override
@@ -69,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (selectedButton == 0) {
       widgetToshow = const ToDoStream();
     }
-
     if (selectedButton == 1) {
       widgetToshow = const WhatsappChatDialer();
     }
@@ -80,10 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
     //gets screen width and ajusts columns
     double screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth >= 700) {
-      sideViewVisible = true;
+      desktopMode = true;
     }
     if (screenWidth <= 699) {
-      sideViewVisible = false;
+      desktopMode = false;
     }
 
     //return
@@ -101,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //Menu Buttons
                   GridView.count(
                       shrinkWrap: true,
-                      crossAxisCount: buttonRowCount,
+                      crossAxisCount: 3,
                       childAspectRatio: 2,
                       children: List.generate(menuButtons.length, (index) {
                         return GestureDetector(
@@ -155,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Visibility(
-                visible: sideViewVisible,
+                visible: desktopMode,
                 child: Expanded(
                   flex: 2,
                   child: Container(
