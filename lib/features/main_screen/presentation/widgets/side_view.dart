@@ -27,7 +27,18 @@ class SideView extends StatelessWidget {
       );
     } else {
       return Container(
-        child: Text("Your selected task is: ${task?.taskName}"),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              task!.taskName,
+              overflow: TextOverflow.ellipsis,
+              style: kTaskTextStyle.copyWith(
+                  fontSize: 40, fontStyle: FontStyle.italic),
+            )
+          ],
+        ),
       );
     }
   }
