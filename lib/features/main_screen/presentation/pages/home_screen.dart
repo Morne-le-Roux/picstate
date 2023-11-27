@@ -37,11 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
       content: "Jobs to be done",
       color: LinearGradient(colors: []),
     ),
-    // const MenuButton(
-    //   heading: "Orders",
-    //   content: "Please Order",
-    //   color: LinearGradient(colors: []),
-    // ),
     const MenuButton(
       heading: "Whatsapp Dialer",
       content: "Open Whatsapp Chat",
