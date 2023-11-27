@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:picstate/config/constants.dart';
+import 'package:picstate/features/main_screen/state.dart';
 import 'package:picstate/features/todo_list/presentation/widgets/task_info.dart';
 import 'package:picstate/logic/logic.dart';
+import 'package:provider/provider.dart';
 
 // Every task has little widgets that display the task name and functions that you can perform. This is that.
 
@@ -89,21 +91,23 @@ class _TaskWidgetState extends State<TaskWidget> {
       visible: widget.visible,
       child: GestureDetector(
         onTap: () {
-          !desktopMode //not in desktopmode?
-              ? showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return TaskInfo(
-                        taskName: widget.taskName,
-                        description: widget.description,
-                        createdAt: widget.createdAt,
-                        createdBy: widget.createdBy,
-                        dueDate: widget.dueDate,
-                        state: widget.state);
-                  })
-
-              //in desktopMode
-              : ();
+          if (!desktopMode) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return TaskInfo(
+                    taskName: widget.taskName,
+                    description: widget.description,
+                    createdAt: widget.createdAt,
+                    createdBy: widget.createdBy,
+                    dueDate: widget.dueDate,
+                    state: widget.state);
+              },
+            );
+          } else {
+            var selectedTaskProvider = context.read<TaskSelectedProvider>();
+            selectedTaskProvider.setSelectedTask(widget);
+          }
         },
         child: Material(
           elevation: 5,
