@@ -6,12 +6,12 @@ class MenuButton extends StatefulWidget {
     super.key,
     required this.heading,
     required this.content,
-    required this.color,
+    required this.selected,
   });
 
   final String heading;
   final String content;
-  final Gradient color;
+  final bool selected;
 
   @override
   State<MenuButton> createState() => _MenuButtonState();
@@ -23,8 +23,14 @@ class _MenuButtonState extends State<MenuButton> {
     return FittedBox(
       fit: BoxFit.fitWidth,
       child: AnimatedContainer(
+        margin: const EdgeInsets.only(top: 20, left: 8, right: 8),
         padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(gradient: widget.color),
+        decoration: BoxDecoration(
+          color: widget.selected
+              ? const Color.fromARGB(255, 255, 232, 151)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
         width: 180,
         height: 100,
         duration: const Duration(milliseconds: 500),
@@ -37,7 +43,6 @@ class _MenuButtonState extends State<MenuButton> {
               widget.heading,
               style: kTaskTextStyle.copyWith(fontSize: 18),
             ),
-
             //content
             Text(
               widget.content,

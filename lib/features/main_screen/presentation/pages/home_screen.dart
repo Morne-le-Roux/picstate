@@ -37,17 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
     const MenuButton(
       heading: "Todo's",
       content: "Jobs to be done",
-      color: LinearGradient(colors: []),
+      selected: false,
     ),
     const MenuButton(
       heading: "Whatsapp Dialer",
       content: "Open Whatsapp Chat",
-      color: LinearGradient(colors: []),
+      selected: false,
     ),
     const MenuButton(
       heading: "Price Calculator",
       content: "Calculate Odd Pricing",
-      color: LinearGradient(colors: []),
+      selected: false,
     )
   ];
 
@@ -110,15 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: MenuButton(
                               heading: menuButtons[index].heading,
                               content: menuButtons[index].content,
-                              color: selectedButton == index //is selected?
-                                  ? kSelectedMenuButtonColor //color if selected
-                                  : const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                          Colors.white,
-                                          Colors.white
-                                        ]), //color if not selected
+                              selected: selectedButton == index, //is selected?
                             ),
                           );
                         })),
