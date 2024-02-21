@@ -6,7 +6,7 @@ class TaskSelectedProvider extends ChangeNotifier {
 
   setSelectedTask(TaskWidget task) {
     selectedTask = task;
-    print("Selected a task!");
+
     notifyListeners();
   }
 
