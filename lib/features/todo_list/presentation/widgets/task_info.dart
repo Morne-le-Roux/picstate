@@ -92,9 +92,14 @@ class TaskInfo extends StatelessWidget {
                   color: kBoxBackgroundColor,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: kBoxBorderColor)),
-              child: Text(
-                description,
+              child: TextField(
+                maxLines: 20,
+                decoration: const InputDecoration(border: InputBorder.none),
+                controller: _descriptionController,
                 style: kTaskTextStyle.copyWith(color: kBoxTextColor),
+                onSubmitted: (value) {
+                  _logic.updateTaskDescription(id, value);
+                },
               ),
             ),
 
