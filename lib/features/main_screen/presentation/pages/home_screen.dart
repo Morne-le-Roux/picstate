@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:picstate/features/main_screen/domain/usecases/needs_update.dart';
 import 'package:picstate/features/main_screen/presentation/widgets/side_view.dart';
 import 'package:picstate/features/main_screen/state.dart';
-import 'package:picstate/features/price_calc/presentation/widgets/price_calculator_list.dart';
 import 'package:picstate/features/whatsapp_dialing/whatsapp_chat.dart';
 import 'package:picstate/config/constants.dart';
-import 'package:picstate/features/main_screen/presentation/widgets/menu_button.dart';
 import 'package:picstate/features/todo_list/presentation/widgets/todo_stream.dart';
 import 'package:provider/provider.dart';
 
@@ -32,57 +30,37 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-//List of menu buttons to show on main screen
-  List<MenuButton> menuButtons = [
-    const MenuButton(
-      heading: "Todo's",
-      content: "Jobs to be done",
-      selected: false,
-    ),
-    const MenuButton(
-      heading: "Whatsapp Dialer",
-      content: "Open Whatsapp Chat",
-      selected: false,
-    ),
-    const MenuButton(
-      heading: "Price Calculator",
-      content: "Calculate Odd Pricing",
-      selected: false,
-    )
+//List of Destinations
+  List<BottomNavigationBarItem> destinations = [
+    const BottomNavigationBarItem(icon: Icon(Icons.check), label: "Job List"),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.phone), label: "Whatsapp Dialer")
   ];
 
 //currently selected button
-  int selectedButton = -1;
+  int _currentIndex = 0;
   int? selectedTask;
   bool desktopMode = false;
+  Widget _pageToView = const ToDoStream();
 
 //build
   @override
   Widget build(BuildContext context) {
-    //Checks selected Button
-    Widget widgetToshow = const SizedBox();
-
-    if (selectedButton == 0) {
-      widgetToshow = const ToDoStream();
-    }
-    if (selectedButton == 1) {
-      widgetToshow = const WhatsappChatDialer();
-    }
-    if (selectedButton == 2) {
-      widgetToshow = const PriceCalculatorList();
-    }
-
-    //gets screen width and ajusts columns
-    double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth >= 700) {
-      desktopMode = true;
-    }
-    if (screenWidth <= 699) {
-      desktopMode = false;
-    }
-
-    //return
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: destinations,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+            if (_currentIndex == 1) {
+              _pageToView = const WhatsappChatDialer();
+            } else {
+              _pageToView = const ToDoStream();
+            }
+          });
+        },
+      ),
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         top: false,
@@ -95,31 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 flex: MediaQuery.of(context).size.width > 1200 ? 1 : 2,
                 child: Column(
                   children: [
-                    //Menu Buttons
-                    GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 3,
-                        childAspectRatio: 2,
-                        children: List.generate(menuButtons.length, (index) {
-                          return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedButton = index;
-                              });
-                            },
-                            child: MenuButton(
-                              heading: menuButtons[index].heading,
-                              content: menuButtons[index].content,
-                              selected: selectedButton == index, //is selected?
-                            ),
-                          );
-                        })),
-
                     const SizedBox(
                       height: 20,
                     ),
-                    //Shows selected item
-                    widgetToshow,
+
+                    _pageToView,
 
                     //Update Notifier (If not updated, display "Your app needs an update!")
                     Visibility(

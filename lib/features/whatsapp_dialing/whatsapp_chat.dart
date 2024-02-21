@@ -28,9 +28,11 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
     _countryCode.text = 27.toString();
 
     return Container(
+      height: MediaQuery.of(context).size.height - 100,
 //BACKGROUND COLOR
       color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
             height: 20,
