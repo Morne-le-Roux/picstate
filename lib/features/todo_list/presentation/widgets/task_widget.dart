@@ -96,6 +96,7 @@ class _TaskWidgetState extends State<TaskWidget> {
               context: context,
               builder: (BuildContext context) {
                 return TaskInfo(
+                    id: widget.id,
                     taskName: widget.taskName,
                     description: widget.description,
                     createdAt: widget.createdAt,
@@ -260,7 +261,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                       //state BUTTON
                       PopupMenuButton(
                         onSelected: (value) =>
-                            Logic().updateTaskData(widget.id, value),
+                            Logic().updateTaskState(widget.id, value),
                         itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                           const PopupMenuItem(
                             value: "todo",

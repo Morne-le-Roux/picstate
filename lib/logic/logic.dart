@@ -29,24 +29,18 @@ class Logic {
     return _supabase.from("ordertable").stream(primaryKey: ["id"]);
   }
 
-  updateTaskData(int id, String statusValue) async {
+  updateTaskState(int id, String statusValue) async {
     await _supabase
         .from("tasktable")
         .update({"state": statusValue}).eq("id", id);
   }
 
-  updateOrderData(int id, String statusValue) async {
-    await _supabase
-        .from("ordertable")
-        .update({"state": statusValue}).eq("id", id);
+  updateTaskName(int id, String data) async {
+    await _supabase.from("tasktable").update({"task_name": data}).eq("id", id);
   }
 
   deleteTask(int id) async {
     await _supabase.from("tasktable").delete().eq("id", id);
-  }
-
-  deleteOrder(int id) async {
-    await _supabase.from("ordertable").delete().eq("id", id);
   }
 
   userLogin(String password, String email) async {
