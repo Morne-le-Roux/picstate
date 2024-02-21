@@ -20,11 +20,13 @@ TextStyle kHintTextStyle = GoogleFonts.roboto(
 Gradient kButtonColor =
     const LinearGradient(colors: [Colors.amber, Colors.amberAccent]);
 
-Gradient kMenuButtonColor =
-    const LinearGradient(colors: [Colors.amber, Colors.amberAccent]);
-
-Gradient kSelectedMenuButtonColor =
-    const LinearGradient(colors: [Colors.orange, Colors.redAccent]);
+Gradient kSelectedMenuButtonColor = const LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color.fromARGB(140, 255, 193, 7),
+      Color.fromARGB(0, 255, 255, 255)
+    ]);
 
 //Button Text Style
 
@@ -55,20 +57,26 @@ final String tomorrow =
 
 //Task Colors
 
-const List<Color> kColorTodo = [Colors.amber, Colors.amberAccent];
-const List<Color> kColorDone = [Colors.green, Colors.greenAccent];
+const List<Color> kColorTodo = [
+  Color.fromARGB(140, 255, 210, 11),
+  Color.fromARGB(0, 255, 255, 255)
+];
+const List<Color> kColorDone = [
+  Color.fromARGB(140, 0, 255, 8),
+  Color.fromARGB(0, 255, 255, 255)
+];
 const List<Color> kColorTodoToday = [
-  Color.fromARGB(255, 255, 98, 0),
-  Color.fromARGB(255, 255, 144, 64)
+  Color.fromARGB(140, 255, 98, 0),
+  Color.fromARGB(0, 255, 255, 255)
 ];
 const List<Color> kColorToOrder = [
-  Color.fromARGB(255, 0, 153, 255),
-  Color.fromARGB(255, 3, 208, 244)
+  Color.fromARGB(140, 0, 153, 255),
+  Color.fromARGB(0, 255, 255, 255)
 ];
 
 const List<Color> kColorWaiting = [
-  Color.fromARGB(103, 255, 255, 255),
-  Colors.grey,
+  Color.fromARGB(140, 255, 255, 255),
+  Color.fromARGB(0, 255, 255, 255)
 ];
 
 //Info Widgets

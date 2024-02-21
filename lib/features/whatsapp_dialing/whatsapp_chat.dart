@@ -28,9 +28,11 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
     _countryCode.text = 27.toString();
 
     return Container(
+      height: MediaQuery.of(context).size.height - 100,
 //BACKGROUND COLOR
       color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
             height: 20,
@@ -47,12 +49,6 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
               child: Container(
                 width: 150,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 3,
-                        //BORDER COLOR
-                        color: Colors.amber),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: TextField(
                   keyboardType: TextInputType.phone,
                   controller: _countryCode,
@@ -79,12 +75,6 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
               elevation: 3,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 3,
-                        //BORDER COLOR
-                        color: Colors.amber),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
                 child: TextField(
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(

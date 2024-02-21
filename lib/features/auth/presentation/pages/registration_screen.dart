@@ -186,6 +186,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                },
+                child: Text(
+                  "Already a user? Login Instead.",
+                  style: kButtonTextStyle.copyWith(color: Colors.amber),
+                ),
+              ),
             ],
           ),
         ),

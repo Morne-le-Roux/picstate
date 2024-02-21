@@ -16,6 +16,7 @@ class _ToDoStreamState extends State<ToDoStream> {
   List<TaskWidget> tasks = []; //list of tasks that the listView uses
   List<bool> tasksAnimated = []; //List to check if the task was animated before
   final Logic _logic = Logic();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -103,7 +104,7 @@ class _ToDoStreamState extends State<ToDoStream> {
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     final delay = Duration(
-                        milliseconds: index * 100); //delay between widgets
+                        milliseconds: index * 80); //delay between widgets
 
                     return FutureBuilder(
                       future: Future.delayed(tasksAnimated[
@@ -117,7 +118,8 @@ class _ToDoStreamState extends State<ToDoStream> {
                             return GenericSlideTransition(
                               initialOffset: const Offset(-5, 0),
                               curve: Curves.easeInOutCubicEmphasized,
-                              duration: const Duration(milliseconds: 1000),
+                              duration: const Duration(
+                                  milliseconds: 800), //animation load in speed
                               builder: (context) {
                                 tasksAnimated[index] =
                                     true; //Marks the widget as animated
