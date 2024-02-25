@@ -75,14 +75,6 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   @override
   Widget build(BuildContext context) {
-    //gets screen width and ajusts desktopMode
-    double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth >= 700) {
-      desktopMode = true;
-    }
-    if (screenWidth <= 699) {
-      desktopMode = false;
-    }
     return Visibility(
       //empty space at bottom of list
       replacement: const SizedBox(
@@ -111,6 +103,7 @@ class _TaskWidgetState extends State<TaskWidget> {
           }
         },
         child: Material(
+          color: Colors.transparent,
           elevation: 5,
           child: Dismissible(
             //Dismissible settings
@@ -143,11 +136,13 @@ class _TaskWidgetState extends State<TaskWidget> {
               ),
             ),
             child: AnimatedContainer(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               duration: const Duration(milliseconds: 1000),
               padding: const EdgeInsets.all(4), //BORDER WIDTH
               //height of the widget
               height: 60,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
                 //gradient settings
                 gradient: LinearGradient(
                     begin: Alignment.bottomLeft,

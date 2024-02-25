@@ -36,7 +36,7 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "New Task Name",
                 onChanged: (value) => _newTaskName = value,
                 obscureText: false,
-                fontColor: Colors.black,
+                fontColor: Colors.white,
               ),
 
 //SPACING
@@ -54,11 +54,11 @@ class _NewTaskState extends State<NewTask> {
               DatePicker(
                 DateTime.now(),
                 daysCount: 365,
-                dayTextStyle: const TextStyle(fontSize: 8, color: Colors.black),
+                dayTextStyle: const TextStyle(fontSize: 8, color: Colors.white),
                 monthTextStyle:
-                    const TextStyle(fontSize: 8, color: Colors.black),
+                    const TextStyle(fontSize: 8, color: Colors.white),
                 dateTextStyle:
-                    const TextStyle(fontSize: 24, color: Colors.black),
+                    const TextStyle(fontSize: 24, color: Colors.white),
                 selectionColor: Colors.yellow,
                 selectedTextColor: Colors.black,
                 onDateChange: (date) {
@@ -78,7 +78,7 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "Description",
                 onChanged: (value) => _description = value,
                 obscureText: false,
-                fontColor: Colors.black,
+                fontColor: Colors.white,
                 icon: Icons.description,
                 multiline: true,
               )
@@ -86,8 +86,8 @@ class _NewTaskState extends State<NewTask> {
           ),
 
 //TODO: ADD STATE OPTION WHEN CREATING TASK.
-          Row(
-            children: const [],
+          const Row(
+            children: [],
           ),
 
 //ADD TASK BUTTON

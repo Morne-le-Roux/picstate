@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picstate/config/constants.dart';
 import 'package:picstate/core/widgets/rounded_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,58 +31,68 @@ class _WhatsappChatDialerState extends State<WhatsappChatDialer> {
     return Container(
       height: MediaQuery.of(context).size.height - 100,
 //BACKGROUND COLOR
-      color: Colors.white,
+      color: kBackgroundColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
             height: 20,
           ),
-          const Text("Country Code"),
+          Text(
+            "Country Code",
+            style: kTaskTextStyle.copyWith(color: Colors.white),
+          ),
 
 //COUNTRY CODE TEXTFIELD
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Material(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              elevation: 3,
-              child: Container(
-                width: 150,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: TextField(
-                  keyboardType: TextInputType.phone,
-                  controller: _countryCode,
-                  decoration: const InputDecoration(
-                      icon: Icon(Icons.map_outlined),
-                      prefix: Text("+"),
-                      border: InputBorder.none),
-                  onChanged: (value) => _countryCode.text = value,
-                ),
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10)),
+              width: 100,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                style: kTaskTextStyle.copyWith(color: Colors.white),
+                keyboardType: TextInputType.phone,
+                controller: _countryCode,
+                decoration: const InputDecoration(
+                    icon: Icon(
+                      Icons.map_outlined,
+                      color: Colors.white,
+                    ),
+                    prefix: Text("+", style: TextStyle(color: Colors.white)),
+                    border: InputBorder.none),
+                onChanged: (value) => _countryCode.text = value,
               ),
             ),
           ),
           const SizedBox(
             height: 20,
           ),
-          const Text("Phone Number"),
+          Text("Phone Number",
+              style: kTaskTextStyle.copyWith(color: Colors.white)),
 
 //PHONE NUMBER TEXTFIELD
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: Material(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              elevation: 3,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: TextField(
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                      icon: Icon(Icons.phone_outlined),
-                      border: InputBorder.none),
-                  onChanged: (value) => phoneNumber = value,
-                ),
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10)),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                style: kTaskTextStyle.copyWith(color: Colors.white),
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(
+                    icon: Icon(
+                      Icons.phone_outlined,
+                      color: Colors.white,
+                    ),
+                    border: InputBorder.none),
+                onChanged: (value) => phoneNumber = value,
               ),
             ),
           ),

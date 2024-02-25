@@ -52,6 +52,17 @@ class TaskInfo extends StatelessWidget {
     _dueDateController.text = dueDate;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _logic.updateTaskName(id, _taskNameController.text);
+          _logic.updateTaskDescription(id, _descriptionController.text);
+          Navigator.pop(context);
+        },
+        backgroundColor: Colors.amber,
+        splashColor: kBackgroundColor,
+        child: const Icon(Icons.check),
+      ),
+      backgroundColor: Colors.transparent,
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
@@ -65,41 +76,33 @@ class TaskInfo extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
               decoration: BoxDecoration(
-                color: kBoxBackgroundColor,
+                color: kBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: TextField(
+                minLines: 1,
+                maxLines: 4,
                 decoration: const InputDecoration(border: InputBorder.none),
                 controller: _taskNameController,
                 style: kTaskTextStyle.copyWith(
-                  fontSize: 40,
-                  color: kBoxTextColor,
-                ),
-                onSubmitted: (value) {
-                  _logic.updateTaskName(id, value);
-                },
+                    fontSize: 40,
+                    color: const Color.fromARGB(223, 255, 255, 255)),
               ),
             ),
 
-            //SPACING
-            const SizedBox(height: 20),
-
             //DESCRIPTION
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               height: 200,
               decoration: BoxDecoration(
-                  color: kBoxBackgroundColor,
-                  borderRadius: BorderRadius.circular(20),
+                  color: kBackgroundColor,
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: kBoxBorderColor)),
               child: TextField(
                 maxLines: 20,
                 decoration: const InputDecoration(border: InputBorder.none),
                 controller: _descriptionController,
                 style: kTaskTextStyle.copyWith(color: kBoxTextColor),
-                onSubmitted: (value) {
-                  _logic.updateTaskDescription(id, value);
-                },
               ),
             ),
 

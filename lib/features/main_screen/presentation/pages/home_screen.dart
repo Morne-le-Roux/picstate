@@ -40,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
 //currently selected button
   int _currentIndex = 0;
   int? selectedTask;
-  bool desktopMode = false;
   Widget _pageToView = const ToDoStream();
 
 //build
@@ -48,6 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: kBackgroundColor,
+        unselectedItemColor: Colors.white,
         currentIndex: _currentIndex,
         selectedItemColor: Colors.amber,
         items: destinations,
@@ -88,13 +89,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
-                            height: 80,
-                            decoration: const BoxDecoration(color: Colors.red),
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(10)),
                             child: Text(
-                              "Your app needs an update!",
-                              style:
-                                  kTaskTextStyle.copyWith(color: Colors.white),
+                              "Your app needs an update! Ask Morné, he probably forgot.",
+                              style: kTaskTextStyle.copyWith(
+                                  color: Colors.black87),
                             ),
                           ),
                         ],
@@ -103,23 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Visibility(
-                  visible: desktopMode,
-                  child: Expanded(
-                    flex: 2,
-                    child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 0.1,
-                                color: const Color.fromARGB(255, 59, 59, 59))),
-                        child: Consumer<TaskSelectedProvider>(
-                          builder: (context, task, child) {
-                            return SideView(
-                              task: task.selectedTask,
-                            );
-                          },
-                        )),
-                  )),
             ],
           ),
         ),

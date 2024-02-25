@@ -40,7 +40,7 @@ class LoginTextInputState extends State<LoginTextInput> {
       padding: const EdgeInsets.only(left: 5, top: 5),
       //border decoration
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: const Color.fromARGB(255, 255, 255, 255)),
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: TextField(
@@ -53,7 +53,7 @@ class LoginTextInputState extends State<LoginTextInput> {
         decoration: InputDecoration(
             prefixIcon: Icon(
               widget.icon,
-              color: Colors.grey,
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
             border: InputBorder.none,
             hintText: widget.hintText,
